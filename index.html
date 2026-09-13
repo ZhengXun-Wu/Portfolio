@@ -49,24 +49,82 @@ section[data-screen-label]{transition:opacity .45s cubic-bezier(.2,.7,.2,1),filt
 section[data-focus="0"]{opacity:.12;filter:grayscale(1);transform:scale(.94);pointer-events:none}
 [data-type] .tw{opacity:0;transition:opacity .04s linear}
 [data-type="in"] .tw{opacity:1}
+@keyframes helloWiggle{0%,100%{transform:rotate(0)}25%{transform:rotate(-12deg)}75%{transform:rotate(12deg)}}
+[data-logo]{position:relative;display:inline-flex;cursor:pointer}
+[data-logo] [data-hello]{position:absolute;left:50%;bottom:calc(100% + 10px);transform:translate(-50%,6px) scale(.9);opacity:0;pointer-events:none;transition:opacity .18s,transform .18s cubic-bezier(.2,.7,.2,1);white-space:nowrap;z-index:5}
+[data-logo][data-pos="below"] [data-hello]{bottom:auto;top:calc(100% + 10px);transform:translate(-50%,-6px) scale(.9)}
+[data-logo][data-pos="left"] [data-hello]{left:auto;bottom:auto;right:calc(100% + 12px);top:50%;transform:translate(6px,-50%) scale(.9)}
+[data-logo]:hover [data-hello],[data-logo][data-on="1"] [data-hello]{opacity:1;transform:translate(-50%,0) scale(1)}
+[data-logo][data-pos="below"]:hover [data-hello],[data-logo][data-pos="below"][data-on="1"] [data-hello]{transform:translate(-50%,0) scale(1)}
+[data-logo][data-pos="left"]:hover [data-hello],[data-logo][data-pos="left"][data-on="1"] [data-hello]{transform:translate(0,-50%) scale(1)}
+[data-logo]:hover img,[data-logo][data-on="1"] img{animation:helloWiggle .5s ease}
+[data-pix]{filter:grayscale(1) contrast(1.08)}
+html[data-night="1"] [data-pix]{filter:grayscale(1) contrast(1.08) invert(1) hue-rotate(180deg)}
+@media (max-width:860px){
+html{scroll-snap-type:none}
+section[data-focus="0"]{opacity:1;filter:none;transform:none;pointer-events:auto}
+[data-m="hide"]{display:none!important}
+[data-m="nav"]{height:56px!important;font-size:11px!important;letter-spacing:.1em!important}
+[data-m="nav"] a,[data-m="nav"] button{padding:0 12px!important}
+[data-m="brand"]{display:none!important}
+[data-m="navLinks"]>a{flex:1 1 0!important;justify-content:center!important;padding:0 6px!important}
+[data-m="hero"]{height:100svh!important;min-height:600px!important}
+[data-m="heroPad"]{padding:76px 20px 28px!important}
+[data-m="heroTop"]{flex-direction:column!important;gap:14px!important}
+[data-m="tagline"]{text-align:left!important;font-size:16px!important;max-width:none!important}
+[data-m="heroBottom"]{flex-direction:column!important;align-items:stretch!important;gap:22px!important}
+[data-m="heroCard"]{box-shadow:6px 6px 0 rgba(242,242,242,.9)!important}
+[data-m="strip"]{flex-direction:column!important;overflow:visible!important}
+[data-m="strip"]>*{border-right:0!important;border-bottom:2px solid #0b0b0c!important;justify-content:space-between!important;padding:14px 20px!important;flex:none!important;white-space:normal!important;font-size:14px!important}
+[data-m="strip"]>*:last-child{border-bottom:0!important}
+[data-m="strip"] span>span{gap:12px!important;flex-wrap:wrap!important;justify-content:flex-end!important}
+[data-m="slide"]{height:auto!important;min-height:0!important;overflow:visible!important}
+[data-m="bar"]{padding:12px 20px!important;font-size:11px!important;flex-wrap:wrap!important;gap:6px 16px!important}
+[data-m="side"]{display:none!important}
+[data-m="slideGrid"]{flex:none!important;grid-template-columns:minmax(0,1fr)!important;grid-template-rows:auto!important}
+[data-m="fitBox"]{height:auto!important;overflow:visible!important}
+[data-m="fitInner"]{position:relative!important;width:100%!important;transform:none!important;left:0!important;top:0!important;transition:none!important;grid-template-columns:minmax(0,1fr)!important;padding:20px 16px 24px!important;gap:22px!important}
+[data-m="fitInner"]>div{display:contents!important}
+[data-m="photoRow"]{order:1;grid-template-columns:132px minmax(0,1fr)!important;gap:14px!important}
+[data-m="aboutText"]{order:2}
+[data-m="expBox"]{order:3;margin-top:0!important}
+[data-m="skillBox"]{order:4;margin-top:0!important}
+[data-m="skills"]{grid-template-columns:repeat(4,minmax(0,1fr))!important}
+[data-m="skills"]>*{border-bottom:1px solid rgba(11,11,12,.25)!important}
+[data-m="workPad"]{padding:16px 16px 24px!important;height:auto!important;overflow:visible!important}
+[data-m="workGrid"]{flex:none!important}
+[data-m="workGrid"] [data-card]{aspect-ratio:16/9}
+[data-m="filters"] button{padding:9px 10px!important;font-size:10px!important}
+[data-m="contactPad"]{flex:none!important;padding:32px 20px 28px!important;gap:28px!important;min-height:70svh}
+[data-m="contactH"]{font-size:clamp(34px,11vw,48px)!important}
+[data-m="links"]{align-self:stretch!important;flex-direction:column!important}
+[data-m="links"]>a{border-right:0!important;border-bottom:2px solid #0b0b0c!important;padding:14px 18px!important}
+[data-m="links"]>a:last-child{border-bottom:0!important}
+[data-m="introPad"]{padding:72px 20px 56px!important}
+[data-m="introGrid"]{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+[data-m="introTop"]{left:20px!important;right:20px!important;top:24px!important;font-size:9px!important}
+[data-m="introFoot"]{flex-direction:column!important;align-items:stretch!important}
+[data-m="introFoot"]>div:last-child{width:100%!important}
+[data-m="modalFoot"]{flex-wrap:wrap!important;padding:12px 14px!important}
+}
 </style>
 </helmet>
 <div ref="{{ rootRef }}" style="position:relative;z-index:0;min-height:100vh;overflow-x:hidden;background:#f4f4f4;color:#0b0b0c">
 
-<nav style="position:fixed;top:0;left:0;right:0;z-index:50;height:64px;display:flex;align-items:stretch;background:#0b0b0c;color:#f2f2f2;border-bottom:1px solid rgba(255,255,255,.18);font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.14em">
-  <a href="#top" style="display:flex;align-items:center;gap:12px;padding:0 20px;border-right:1px solid rgba(255,255,255,.18);font-family:'Chakra Petch',sans-serif;font-size:18px;font-weight:700;letter-spacing:.04em;color:#f2f2f2">
+<nav data-m="nav" style="position:fixed;top:0;left:0;right:0;z-index:50;height:64px;display:flex;align-items:stretch;background:#0b0b0c;color:#f2f2f2;border-bottom:1px solid rgba(255,255,255,.18);font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.14em">
+  <a href="#top" data-m="brand" style="display:flex;align-items:center;gap:12px;padding:0 20px;border-right:1px solid rgba(255,255,255,.18);font-family:'Chakra Petch',sans-serif;font-size:18px;font-weight:700;letter-spacing:.04em;color:#f2f2f2">
     WU ZHENG XUN
   </a>
-  <div style="display:flex;align-items:stretch;flex:1">
-    <a href="#about" style="display:flex;align-items:center;padding:0 18px;border-right:1px solid rgba(255,255,255,.18);color:#f2f2f2" style-hover="background:#f2f2f2;color:#0b0b0c">01 ABOUT</a>
-    <a href="#projects" style="display:flex;align-items:center;padding:0 18px;border-right:1px solid rgba(255,255,255,.18);color:#f2f2f2" style-hover="background:#f2f2f2;color:#0b0b0c">02 WORK <span style="margin-left:8px;color:var(--accent,#c6ff00)">{{ count }}</span></a>
-    <a href="#contact" style="display:flex;align-items:center;padding:0 18px;border-right:1px solid rgba(255,255,255,.18);color:#f2f2f2" style-hover="background:#f2f2f2;color:#0b0b0c">03 CONTACT</a>
+  <div data-m="navLinks" style="display:flex;align-items:stretch;flex:1">
+    <a href="#about" style="display:flex;align-items:center;padding:0 18px;border-right:1px solid rgba(255,255,255,.18);color:#f2f2f2" style-hover="background:#f2f2f2;color:#0b0b0c">01<span data-m="hideInline" style="margin-left:.6em">ABOUT</span></a>
+    <a href="#projects" style="display:flex;align-items:center;padding:0 18px;border-right:1px solid rgba(255,255,255,.18);color:#f2f2f2" style-hover="background:#f2f2f2;color:#0b0b0c">02<span data-m="hideInline" style="margin-left:.6em">WORK</span><span data-m="hide" style="margin-left:8px;color:var(--accent,#c6ff00)">{{ count }}</span></a>
+    <a href="#contact" style="display:flex;align-items:center;padding:0 18px;border-right:1px solid rgba(255,255,255,.18);color:#f2f2f2" style-hover="background:#f2f2f2;color:#0b0b0c">03<span data-m="hideInline" style="margin-left:.6em">CONTACT</span></a>
   </div>
-  <button onClick="{{ toggleNight }}" aria-label="切換夜間模式" style="cursor:pointer;display:flex;align-items:center;gap:8px;padding:0 16px;border:0;border-left:1px solid rgba(255,255,255,.18);background:transparent;color:#f2f2f2;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em" style-hover="background:#f2f2f2;color:#0b0b0c"><span style="font-size:14px;line-height:1">◐</span>{{ nightLabel }}</button>
+  <button onClick="{{ toggleNight }}" aria-label="切換夜間模式" style="cursor:pointer;display:flex;align-items:center;gap:8px;padding:0 16px;border:0;border-left:1px solid rgba(255,255,255,.18);background:transparent;color:#f2f2f2;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em" style-hover="background:#f2f2f2;color:#0b0b0c"><span style="font-size:14px;line-height:1">◐</span><span data-m="hide">{{ nightLabel }}</span></button>
   <a href="#contact" style="display:flex;align-items:center;padding:0 20px;background:var(--accent,#c6ff00);color:#0b0b0c;font-weight:700" style-hover="background:#f2f2f2;color:#0b0b0c">HIRE ME ↗</a>
 </nav>
 
-<section id="top" data-screen-label="Hero" style="position:relative;height:min(max(560px,56.25vw),100vh);overflow:hidden;background:#0b0b0c;color:#f2f2f2;scroll-snap-align:start">
+<section id="top" data-screen-label="Hero" data-m="hero" style="position:relative;height:min(max(560px,56.25vw),100vh);overflow:hidden;background:#0b0b0c;color:#f2f2f2;scroll-snap-align:start">
   <div style="position:absolute;inset:0;overflow:hidden;pointer-events:none">
     <img src="https://i.ytimg.com/vi/-WRZggrQ5Ks/maxresdefault.jpg" alt="" data-keep="1" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(.8)">
     <div ref="{{ ytWrapRef }}" style="position:absolute;top:50%;left:50%;width:max(100%,996px);height:100%;transform:translate(-50%,-50%);pointer-events:none;filter:saturate(.6) contrast(1.05);opacity:0;transition:opacity .6s">
@@ -81,17 +139,17 @@ section[data-focus="0"]{opacity:.12;filter:grayscale(1);transform:scale(.94);poi
   <div data-keep="1" style="position:absolute;bottom:24px;left:24px;width:18px;height:18px;border-left:2px solid #f2f2f2;border-bottom:2px solid #f2f2f2;pointer-events:none"></div>
   <div data-keep="1" style="position:absolute;bottom:24px;right:24px;width:18px;height:18px;border-right:2px solid #f2f2f2;border-bottom:2px solid #f2f2f2;pointer-events:none"></div>
 
-  <div style="position:absolute;inset:0;display:grid;grid-template-rows:auto 1fr auto;padding:92px 48px 44px;box-sizing:border-box;animation:fadeUp .9s cubic-bezier(.2,.7,.2,1) both">
-    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:32px;flex-wrap:wrap">
+  <div data-m="heroPad" style="position:absolute;inset:0;display:grid;grid-template-rows:auto 1fr auto;padding:92px 48px 44px;box-sizing:border-box;animation:fadeUp .9s cubic-bezier(.2,.7,.2,1) both">
+    <div data-m="heroTop" style="display:flex;justify-content:space-between;align-items:flex-start;gap:32px;flex-wrap:wrap">
       <div data-keep="1" style="display:flex;flex-direction:column;gap:4px;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.14em;color:rgba(242,242,242,.85)">
         <div>▮ UNREAL ENVIRONMENT</div>
         <div>▮ MATERIAL &amp; BLUEPRINT</div>
         <div>▮ TECHNICAL ART · PIPELINE</div>
       </div>
-      <p data-keep="1" style="margin:0;max-width:440px;text-align:right;font-size:clamp(18px,1.6vw,24px);line-height:1.4;font-weight:400;color:#f2f2f2">在畫面、技術與製程之間<br>尋找更有效率的製作方式</p>
+      <p data-keep="1" data-m="tagline" style="margin:0;max-width:440px;text-align:right;font-size:clamp(18px,1.6vw,24px);line-height:1.4;font-weight:400;color:#f2f2f2">在畫面、技術與製程之間<br>尋找更有效率的製作方式</p>
     </div>
     <div></div>
-    <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:32px;flex-wrap:wrap">
+    <div data-m="heroBottom" style="display:flex;justify-content:space-between;align-items:flex-end;gap:32px;flex-wrap:wrap">
       <div style="display:flex;flex-direction:column;gap:16px;min-width:0">
         <div style="display:inline-flex;align-self:flex-start;align-items:center;gap:10px;padding:6px 10px;background:#f2f2f2;color:#0b0b0c;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;font-weight:700">
           <span style="width: 6px; height: 6px; background: rgb(11, 11, 12); animation: 1.4s steps(1) 0s infinite normal none running blink;"></span>
@@ -100,7 +158,7 @@ section[data-focus="0"]{opacity:.12;filter:grayscale(1);transform:scale(.94);poi
         <h1 data-keep="1" style="margin:0;font-family:'Chakra Petch','Noto Sans TC',sans-serif;font-size:clamp(44px,6.4vw,100px);line-height:.95;font-weight:700;letter-spacing:-.01em;text-transform:uppercase">Realtime.<br>Technical.<br>Crafted.</h1>
         <div data-keep="1" style="display:flex;gap:14px;align-items:center;color:#f2f2f2"><svg data-shape="1" viewBox="0 0 100 100" width="18" height="18" fill="currentColor" aria-hidden="true" style="display:block"><circle cx="50" cy="26" r="26"></circle><circle cx="74" cy="50" r="26"></circle><circle cx="50" cy="74" r="26"></circle><circle cx="26" cy="50" r="26"></circle></svg><svg data-shape="1" viewBox="0 0 100 100" width="18" height="18" fill="currentColor" aria-hidden="true" style="display:block"><path d="M50 50 V0 A50 50 0 0 0 0 50 Z M50 50 H100 A50 50 0 0 1 50 100 Z"></path></svg><svg data-shape="1" viewBox="0 0 100 100" width="18" height="18" fill="currentColor" aria-hidden="true" style="display:block"><path d="M50 0 C52 35 65 48 100 50 C65 52 52 65 50 100 C48 65 35 52 0 50 C35 48 48 35 50 0 Z"></path></svg><svg data-shape="1" viewBox="0 0 100 100" width="16" height="16" fill="currentColor" aria-hidden="true" style="display:block"><path fill-rule="evenodd" d="M0 0 H100 V100 H0 Z M32 32 H68 V68 H32 Z"></path></svg><span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.16em;opacity:.6;margin-left:6px">MV · AD · VR · LIVE</span></div>
       </div>
-      <div style="display:flex;align-items:stretch;background:#ececec;color:#0b0b0c;border:2px solid #0b0b0c;box-shadow:8px 8px 0 rgba(242,242,242,.9)">
+      <div data-m="heroCard" style="display:flex;align-items:stretch;background:#ececec;color:#0b0b0c;border:2px solid #0b0b0c;box-shadow:8px 8px 0 rgba(242,242,242,.9)">
         <img src="uploads/6ab48ab5-d79b-4ebd-a07e-17af4660e511-1849a3e9.png" alt="吳政勲 WU ZHENG XUN" data-keep="1" draggable="{{ false }}" onContextMenu="{{ noCtx }}" style="pointer-events:none;width:96px;height:auto;object-fit:cover;object-position:50% 12%;display:block;background:#1a1a1e;filter:grayscale(1) contrast(1.1);border-right:2px solid #0b0b0c">
         <div style="display:flex;flex-direction:column;justify-content:space-between;gap:10px;padding:12px 14px">
           <div>
@@ -115,7 +173,7 @@ section[data-focus="0"]{opacity:.12;filter:grayscale(1);transform:scale(.94);poi
   </div>
 </section>
 
-<section data-screen-label="Strip" style="position:relative;background:#ececec;color:#0b0b0c;border-top:2px solid #0b0b0c;border-bottom:2px solid #0b0b0c;display:flex;overflow-x:auto">
+<section data-screen-label="Strip" data-m="strip" style="position:relative;background:#ececec;color:#0b0b0c;border-top:2px solid #0b0b0c;border-bottom:2px solid #0b0b0c;display:flex;overflow-x:auto">
   <div style="display:flex;align-items:center;justify-content:center;gap:12px;padding:16px 28px;min-width:0;flex:1 0 auto;transition:flex-grow .45s cubic-bezier(.2,.7,.2,1),padding .45s cubic-bezier(.2,.7,.2,1),background .25s,color .25s;font-family:'Chakra Petch',sans-serif;font-size:clamp(15px,1.2vw,20px);font-weight:700;letter-spacing:.06em;white-space:nowrap;color:inherit;text-decoration:none;border-right:2px solid #0b0b0c" style-hover="flex-grow:3;padding:16px 48px;background:#0b0b0c;color:#f2f2f2">
     WU ZHENG XUN
   </div>
@@ -130,7 +188,7 @@ section[data-focus="0"]{opacity:.12;filter:grayscale(1);transform:scale(.94);poi
   </a>
 </section>
 
-<section id="about" data-screen-label="About" style="position:relative;background:transparent;color:#0b0b0c;height:min(max(560px,56.25vw),calc(100vh - 64px));scroll-snap-align:start;scroll-margin-top:64px;display:flex;flex-direction:column;overflow:hidden;box-sizing:border-box">
+<section id="about" data-screen-label="About" data-m="slide" style="position:relative;background:transparent;color:#0b0b0c;height:min(max(560px,56.25vw),calc(100vh - 64px));scroll-snap-align:start;scroll-margin-top:64px;display:flex;flex-direction:column;overflow:hidden;box-sizing:border-box">
   <div aria-hidden="true" style="position:absolute;inset:0;pointer-events:none;overflow:hidden">
     <div style="position:absolute;left:0;right:0;top:0;height:22%;background:linear-gradient(180deg,transparent,rgba(11,11,12,.05) 50%,transparent);animation:scanband 14s linear infinite"></div>
     <div style="position:absolute;left:0;right:0;top:0;height:1px;background:rgba(11,11,12,.12);animation:scanband 14s linear infinite"></div>
@@ -138,13 +196,13 @@ section[data-focus="0"]{opacity:.12;filter:grayscale(1);transform:scale(.94);poi
     <div style="position:absolute;right:56px;bottom:56px;width:14px;height:14px;border-right:1px solid rgba(11,11,12,.35);border-bottom:1px solid rgba(11,11,12,.35)"></div>
   </div>
 
-  <div style="display:flex;justify-content:space-between;align-items:center;gap:16px;padding:16px 56px;background:#0b0b0c;color:#f2f2f2;font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.16em">
+  <div data-m="bar" style="display:flex;justify-content:space-between;align-items:center;gap:16px;padding:16px 56px;background:#0b0b0c;color:#f2f2f2;font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.16em">
     <div><span style="color:var(--accent,#c6ff00)">01</span> / ABOUT — 關於我</div>
     <div style="color:rgba(242,242,242,.5)">PROFILE · EXPERIENCE · SKILLS</div>
   </div>
-  <div style="position:relative;display:grid;grid-template-columns:auto minmax(0,1fr) auto;grid-template-rows:minmax(0,1fr);box-sizing:border-box;min-width:0;flex:1 1 0;min-height:0">
+  <div data-m="slideGrid" style="position:relative;display:grid;grid-template-columns:auto minmax(0,1fr) auto;grid-template-rows:minmax(0,1fr);box-sizing:border-box;min-width:0;flex:1 1 0;min-height:0">
 
-    <div style="position:relative;border-right:2px solid #0b0b0c;background:#ececec">
+    <div data-m="side" style="position:relative;border-right:2px solid #0b0b0c;background:#ececec">
       <div style="height:100%;display:flex;flex-direction:column;justify-content:space-between;align-items:center;gap:16px;padding:22px 18px;box-sizing:border-box;overflow:hidden">
         
         <div style="font-family:'JetBrains Mono',monospace;font-size:12px;line-height:1;flex:none">+</div>
@@ -155,25 +213,30 @@ section[data-focus="0"]{opacity:.12;filter:grayscale(1);transform:scale(.94);poi
       </div>
     </div>
 
-    <div ref="{{ aboutFitRef }}" style="position:relative;height:100%;min-width:0;min-height:0;overflow:hidden">
-    <div ref="{{ aboutInnerRef }}" style="position:absolute;left:0;top:0;width:1320px;transform-origin:0 0;transition:transform .5s cubic-bezier(.2,.7,.2,1),left .5s cubic-bezier(.2,.7,.2,1),top .5s cubic-bezier(.2,.7,.2,1);display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:0 40px;padding:32px 44px 36px;align-items:stretch;box-sizing:border-box">
+    <div ref="{{ aboutFitRef }}" data-m="fitBox" style="position:relative;height:100%;min-width:0;min-height:0;overflow:hidden">
+    <div ref="{{ aboutInnerRef }}" data-m="fitInner" style="position:absolute;left:0;top:0;width:1320px;transform-origin:0 0;transition:transform .5s cubic-bezier(.2,.7,.2,1),left .5s cubic-bezier(.2,.7,.2,1),top .5s cubic-bezier(.2,.7,.2,1);display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:0 40px;padding:32px 44px 36px;align-items:stretch;box-sizing:border-box">
 
       <div style="display:flex;flex-direction:column;gap:20px;min-width:0">
-        <div style="display:grid;grid-template-columns:170px minmax(0,1fr);gap:22px;align-items:start">
-          <div onMouseMove="{{ photoMove }}" onMouseLeave="{{ photoLeave }}" onContextMenu="{{ noCtx }}" style="user-select:none;-webkit-touch-callout:none;position:relative;width:100%;aspect-ratio:4/5;overflow:hidden;border:2px solid #0b0b0c;background:#d9d9d9;box-shadow:8px 8px 0 #0b0b0c;cursor:crosshair;box-sizing:border-box">
-            <img ref="{{ photoRef }}" src="uploads/6ab48ab5-d79b-4ebd-a07e-17af4660e511-1849a3e9.png" alt="吳政勲 WU ZHENG XUN" data-keep="1" draggable="{{ false }}" style="pointer-events:none;width:100%;height:100%;object-fit:cover;object-position:50% 20%;display:block;transform:scale(1.12);transition:transform .25s ease-out;will-change:transform;filter:grayscale(1) contrast(1.08)">
-            <img ref="{{ photoColorRef }}" src="uploads/6ab48ab5-d79b-4ebd-a07e-17af4660e511-1849a3e9.png" alt="" aria-hidden="true" data-keep="1" draggable="{{ false }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 20%;display:block;transform:scale(1.08);transition:transform .25s ease-out;will-change:transform;filter:saturate(1.25) contrast(1.05);clip-path:polygon(0 0,0 0,0 0);transition:transform .25s ease-out,clip-path .18s ease-out;pointer-events:none">
+        <div data-m="photoRow" style="display:grid;grid-template-columns:204px minmax(0,1fr);gap:22px;align-items:stretch">
+          <div onMouseMove="{{ photoMove }}" onMouseLeave="{{ photoLeave }}" onClick="{{ togglePix }}" onContextMenu="{{ noCtx }}" style="user-select:none;-webkit-touch-callout:none;position:relative;width:100%;aspect-ratio:4/5;overflow:hidden;clip-path:inset(0);isolation:isolate;border:2px solid #0b0b0c;background:#d9d9d9;box-shadow:8px 8px 0 #0b0b0c;cursor:crosshair;box-sizing:border-box">
+            <img ref="{{ photoRef }}" src="uploads/6ab48ab5-d79b-4ebd-a07e-17af4660e511-1849a3e9.png" alt="吳政勲 WU ZHENG XUN" data-keep="1" draggable="{{ false }}" style="pointer-events:none;width:100%;height:100%;object-fit:cover;object-position:50% 0%;display:block;transform:scale(1.35);transform-origin:50% 8%;transition:transform .25s ease-out;filter:grayscale(1) contrast(1.08)">
+            <canvas ref="{{ photoPixRef }}" data-pix="1" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;display:block;pointer-events:none;opacity:0;transition:opacity .2s"></canvas>
+            <img ref="{{ photoColorRef }}" src="uploads/6ab48ab5-d79b-4ebd-a07e-17af4660e511-1849a3e9.png" alt="" aria-hidden="true" data-keep="1" draggable="{{ false }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 0%;display:block;transform:scale(1.35);transform-origin:50% 8%;transition:transform .25s ease-out;filter:saturate(1.25) contrast(1.05);clip-path:polygon(0 0,0 0,0 0);transition:transform .25s ease-out,clip-path .18s ease-out;pointer-events:none">
             <div ref="{{ photoFrameRef }}" style="position:absolute;left:0;top:0;width:0;height:0;border:1px solid rgba(242,242,242,.9);box-shadow:0 0 0 1px rgba(11,11,12,.5);pointer-events:none;opacity:0;transition:opacity .2s"></div>
             <div ref="{{ photoFrame2Ref }}" style="position:absolute;left:0;top:0;width:0;height:0;border:1px solid rgba(242,242,242,.6);pointer-events:none;opacity:0;transition:opacity .2s"></div>
           </div>
-          <div style="display:flex;flex-direction:column;gap:10px;padding-top:2px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;color:rgba(11,11,12,.6);line-height:1.6">
-            <div style="font-family:'Chakra Petch','Noto Sans TC',sans-serif;font-size:34px;font-weight:700;letter-spacing:.08em;color:#0b0b0c;line-height:1;margin-bottom:6px">吳政勲</div>
-            <a href="mailto:ming590616@gmail.com" style="color:inherit;text-decoration:none;letter-spacing:.04em;overflow-wrap:anywhere">MING590616<wbr>@GMAIL.COM</a>
-            <a href="tel:0934333007" style="color:inherit;text-decoration:none">0934 333 007</a>
-            <div>NEW TAIPEI CITY · TW</div>
+          <div style="display:flex;flex-direction:column;min-width:0;border:2px solid #0b0b0c;background:#f4f4f4;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;color:#0b0b0c;line-height:1.5">
+            <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;padding:6px 12px;background:#0b0b0c;color:#f2f2f2;font-size:10px;letter-spacing:.16em"><span>ABOUT</span></div>
+            <div style="flex:1 1 auto;display:flex;flex-direction:column;justify-content:center;padding:12px 12px 10px;border-bottom:1px solid rgba(11,11,12,.25)">
+              <div style="font-family:'Chakra Petch','Noto Sans TC',sans-serif;font-size:30px;font-weight:700;letter-spacing:.06em;line-height:1">吳政勲</div>
+              <div style="margin-top:6px;font-size:10px;letter-spacing:.16em;color:rgba(11,11,12,.6)">WU ZHENG XUN · UNREAL CG LEADER</div>
+            </div>
+            <a href="mailto:ming590616@gmail.com" style="display:grid;grid-template-columns:38px minmax(0,1fr);gap:10px;padding:8px 12px;border-bottom:1px solid rgba(11,11,12,.25);color:inherit;text-decoration:none;overflow-wrap:anywhere;transition:background .2s,color .2s" style-hover="background:#0b0b0c;color:#f2f2f2"><span style="opacity:.5">MAIL</span><span>MING590616<wbr>@GMAIL.COM</span></a>
+            <a href="tel:0934333007" style="display:grid;grid-template-columns:38px minmax(0,1fr);gap:10px;padding:8px 12px;border-bottom:1px solid rgba(11,11,12,.25);color:inherit;text-decoration:none;transition:background .2s,color .2s" style-hover="background:#0b0b0c;color:#f2f2f2"><span style="opacity:.5">TEL</span><span>0934 333 007</span></a>
+            <div style="display:grid;grid-template-columns:38px minmax(0,1fr);gap:10px;padding:8px 12px"><span style="opacity:.5">LOC</span><span>NEW TAIPEI CITY · TW</span></div>
           </div>
         </div>
-        <div data-reveal-box="1" style="margin-top:auto;border:2px solid #0b0b0c;background:#f4f4f4">
+        <div data-reveal-box="1" data-m="expBox" style="margin-top:auto;border:2px solid #0b0b0c;background:#f4f4f4">
           <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;padding:9px 18px;border-bottom:2px solid #0b0b0c;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.16em;background:#0b0b0c;color:#f2f2f2"><span style="font-family:'Chakra Petch',sans-serif;font-size:18px;font-weight:700;letter-spacing:.1em">EXPERIENCE — 經歷</span><span style="color:rgba(242,242,242,.5);white-space:nowrap">2018 → NOW</span></div>
           <div style="padding:10px 18px;border-bottom:1px solid rgba(11,11,12,.25);display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap">
             <div style="font-family:'Chakra Petch',sans-serif;font-size:16px;font-weight:700">夢想動畫｜Moonshine Animation</div>
@@ -223,8 +286,8 @@ section[data-focus="0"]{opacity:.12;filter:grayscale(1);transform:scale(.94);poi
       </div>
 
       <div style="display:flex;flex-direction:column;gap:22px;min-width:0">
-        <div style="display:flex;flex-direction:column;gap:12px">
-          <p style="margin:0;font-size:20px;line-height:1.45;font-weight:500">目前任職於夢想動畫，擔任動畫部門 CG Leader。我的工作核心介於 CG 製作、Technical Art 與製程管理之間。</p>
+        <div data-m="aboutText" style="display:flex;flex-direction:column;gap:12px">
+          <div style="display:flex;flex-direction:column;gap:2px"><p style="margin:0;font-size:20px;line-height:1.45;font-weight:500">目前任職於夢想動畫，擔任動畫部門 CG Leader</p><p style="margin:0;font-size:20px;line-height:1.45;font-weight:500">我的工作核心介於 CG 製作、Technical Art 與製程管理之間</p></div>
           <div style="display:flex;flex-direction:column;gap:9px;font-size:15px;line-height:1.65;color:rgba(11,11,12,.75)">
             <p style="margin:0">主要負責 Unreal Engine 專案中的 Material、Blueprint 功能設計與技術整合，同時參與專案製程規劃、技術問題排除與畫面品質把關，並根據專案需求建立合適的製作流程，將創意方向轉化為團隊實際可執行的製作方式。</p>
             <p style="margin:0">過去我也曾擔任虛實部門美術組組長，負責專案製作方向規劃、團隊工作分配與人力調度，並依據不同專案的時程、技術需求與製作規模安排團隊資源。除了專案管理之外，我也參與公司內部教育訓練，目前已負責過兩屆夢想動畫 Unreal 實習培訓，協助實習生建立 Unreal Engine 的製作觀念、實務流程與專案經驗。</p>
@@ -235,11 +298,11 @@ section[data-focus="0"]{opacity:.12;filter:grayscale(1);transform:scale(.94);poi
           </div>
         </div>
 
-        <div data-reveal-box="1" style="margin-top:auto;border:2px solid #0b0b0c;background:#f4f4f4">
+        <div data-reveal-box="1" data-m="skillBox" style="margin-top:auto;border:2px solid #0b0b0c;background:#f4f4f4">
           <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;padding:9px 18px;border-bottom:2px solid #0b0b0c;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.16em;background:#0b0b0c;color:#f2f2f2"><span style="font-family:'Chakra Petch',sans-serif;font-size:18px;font-weight:700;letter-spacing:.1em">SKILLS — 技能</span><span style="color:rgba(242,242,242,.5);white-space:nowrap">{{ skillCount }} TOOLS</span></div>
           <div>
             <div style="min-width:0">
-              <div style="display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:0;border-bottom:1px solid rgba(11,11,12,.25)">
+              <div data-m="skills" style="display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:0;border-bottom:1px solid rgba(11,11,12,.25)">
               <sc-for list="{{ coreTools }}" as="t" hint-placeholder-count="7">
                 <div style="border:0;border-right:1px solid rgba(11,11,12,.25);border-bottom:1px solid rgba(11,11,12,.25);display:flex;flex-direction:column;align-items:center;gap:8px;padding:14px 8px 12px;text-align:center;transition:background .2s,color .2s;background:transparent;color:#0b0b0c" style-hover="background:#0b0b0c;color:#f2f2f2">
                   <div style="width:44px;height:44px;background:#0b0b0c;color:#f2f2f2;display:grid;place-items:center;font-family:'Chakra Petch',sans-serif;font-size:17px;font-weight:700;letter-spacing:-.02em;border:2px solid #0b0b0c;outline:1px solid rgba(242,242,242,.7);outline-offset:-5px">{{ t.mono }}</div>
@@ -247,7 +310,7 @@ section[data-focus="0"]{opacity:.12;filter:grayscale(1);transform:scale(.94);poi
                 </div>
               </sc-for>
               </div>
-              <div style="display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:0">
+              <div data-m="skills" style="display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:0">
               <sc-for list="{{ aiTools }}" as="t" hint-placeholder-count="7">
                 <div style="border:0;border-right:1px solid rgba(11,11,12,.25);display:flex;flex-direction:column;align-items:center;gap:8px;padding:14px 8px 12px;text-align:center;transition:background .2s,color .2s;background:transparent;color:#0b0b0c" style-hover="background:#0b0b0c;color:#f2f2f2">
                   <div style="width:44px;height:44px;background:#0b0b0c;color:#f2f2f2;display:grid;place-items:center;font-family:'Chakra Petch',sans-serif;font-size:17px;font-weight:700;letter-spacing:-.02em;border:2px solid #0b0b0c;outline:1px solid rgba(242,242,242,.7);outline-offset:-5px">{{ t.mono }}</div>
@@ -263,10 +326,10 @@ section[data-focus="0"]{opacity:.12;filter:grayscale(1);transform:scale(.94);poi
     </div>
 
 
-    <div style="position:relative;border-left:2px solid #0b0b0c;background:#ececec">
-      <div style="height:100%;display:flex;flex-direction:column;justify-content:space-between;align-items:center;gap:16px;padding:22px 18px;box-sizing:border-box;overflow:hidden">
+    <div data-m="side" style="position:relative;border-left:2px solid #0b0b0c;background:#ececec">
+      <div style="height:100%;display:flex;flex-direction:column;justify-content:space-between;align-items:center;gap:16px;padding:22px 18px;box-sizing:border-box;overflow:visible">
         
-        <img src="uploads/logo2.png" alt="logo" style="width:26px;height:auto;display:block;filter:invert(1);flex:none">
+        <span data-logo="1" data-pos="left" onClick="{{ sayHello }}" style="flex:none"><img src="uploads/logo2.png" alt="logo" style="width:26px;height:auto;display:block;filter:invert(1)"><span data-hello="1" style="background:#0b0b0c;color:#f2f2f2;border:1px solid #f2f2f2;box-shadow:0 0 0 1px #0b0b0c;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;font-weight:700;padding:5px 8px;line-height:1">HELLO!!!!</span></span>
         <div style="flex:none;width:14px;height:clamp(48px,12vh,120px);background:repeating-linear-gradient(180deg,#0b0b0c 0 3px,transparent 3px 5px,#0b0b0c 5px 6px,transparent 6px 10px,#0b0b0c 10px 14px,transparent 14px 16px)"></div>
         <div style="flex:0 1 auto;min-height:0;overflow:hidden;text-overflow:ellipsis;writing-mode:vertical-rl;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.16em;line-height:1.7;color:rgba(11,11,12,.7);white-space:nowrap">NEW TAIPEI CITY · TW</div>
         <div style="flex:none;writing-mode:vertical-rl;font-family:'Chakra Petch',sans-serif;font-size:clamp(14px,2.4vh,22px);font-weight:700;letter-spacing:.06em;line-height:1;white-space:nowrap">2018 → {{ nowYear }}</div>
@@ -292,10 +355,14 @@ section[data-focus="0"]{opacity:.12;filter:grayscale(1);transform:scale(.94);poi
     <div style="position:absolute;left:0;right:0;top:80%;height:10.2%;background:#f2f2f2;mix-blend-mode:difference;animation:slat .6s steps(3) 112ms both"></div>
     <div style="position:absolute;left:0;right:0;top:90%;height:10.2%;background:#f2f2f2;mix-blend-mode:difference;animation:slat .6s steps(3) 0ms both"></div>
     <div style="position:absolute;inset:0;background:#f2f2f2;mix-blend-mode:difference;animation:fxFlash .6s steps(1) both"></div>
-    <div style="position:absolute;inset:0;display:grid;place-items:center;color:#f2f2f2;mix-blend-mode:difference">
-      <div style="display:flex;flex-direction:column;gap:12px;align-items:center;animation:fxText .6s cubic-bezier(.2,.7,.2,1) both">
+    <div style="position:absolute;inset:0;display:grid;place-items:center;padding:24px;box-sizing:border-box">
+      <div style="position:relative;display:flex;flex-direction:column;gap:14px;align-items:center;padding:28px clamp(24px,5vw,56px) 30px;background:#0b0b0c;color:#f2f2f2;border:2px solid #f2f2f2;box-shadow:10px 10px 0 rgba(242,242,242,.35);max-width:100%;box-sizing:border-box;animation:fxText .6s cubic-bezier(.2,.7,.2,1) both">
+        <div style="position:absolute;top:6px;left:6px;width:10px;height:10px;border-left:2px solid #f2f2f2;border-top:2px solid #f2f2f2"></div>
+        <div style="position:absolute;top:6px;right:6px;width:10px;height:10px;border-right:2px solid #f2f2f2;border-top:2px solid #f2f2f2"></div>
+        <div style="position:absolute;bottom:6px;left:6px;width:10px;height:10px;border-left:2px solid #f2f2f2;border-bottom:2px solid #f2f2f2"></div>
+        <div style="position:absolute;bottom:6px;right:6px;width:10px;height:10px;border-right:2px solid #f2f2f2;border-bottom:2px solid #f2f2f2"></div>
         <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.24em;opacity:.7">INVERTING DISPLAY BUFFER</div>
-        <div style="font-family:'Chakra Petch',sans-serif;font-size:clamp(28px,4vw,56px);font-weight:700;letter-spacing:.08em;text-transform:uppercase">THEME // {{ themeNextLabel }}</div>
+        <div style="font-family:'Chakra Petch',sans-serif;font-size:clamp(24px,4vw,56px);font-weight:700;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap">THEME // {{ themeNextLabel }}</div>
         <div style="width:min(60vw,420px);height:3px;background:rgba(242,242,242,.25);overflow:hidden"><div style="height:100%;background:#f2f2f2;transform-origin:0 50%;animation:fxBar .6s cubic-bezier(.7,0,.2,1) both"></div></div>
       </div>
     </div>
@@ -315,17 +382,17 @@ section[data-focus="0"]{opacity:.12;filter:grayscale(1);transform:scale(.94);poi
     <div style="position:absolute;top:28px;right:28px;width:22px;height:22px;border-right:2px solid #f2f2f2;border-top:2px solid #f2f2f2;animation:introIn .4s ease .15s both"></div>
     <div style="position:absolute;bottom:28px;left:28px;width:22px;height:22px;border-left:2px solid #f2f2f2;border-bottom:2px solid #f2f2f2;animation:introIn .4s ease .2s both"></div>
     <div style="position:absolute;bottom:28px;right:28px;width:22px;height:22px;border-right:2px solid #f2f2f2;border-bottom:2px solid #f2f2f2;animation:introIn .4s ease .25s both"></div>
-    <div style="position:absolute;top:32px;left:64px;right:64px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.16em;color:rgba(242,242,242,.7);animation:introIn .4s ease .3s both">
-      <span style="display:flex;align-items:center;gap:12px"><img src="uploads/logo2.png" alt="WU ZHENG XUN" data-keep="1" draggable="{{ false }}" style="height:22px;width:auto;display:block;pointer-events:none"><span style="display:inline-block;width:7px;height:7px;background:var(--accent,#f2f2f2);animation:introTick 1s steps(1) infinite"></span>SYSTEM · PORTFOLIO v2026</span><span>WU ZHENG XUN / UNREAL TECHNICAL ARTIST</span>
+    <div data-m="introTop" style="position:absolute;top:32px;left:64px;right:64px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.16em;color:rgba(242,242,242,.7);animation:introIn .4s ease .3s both">
+      <span style="display:flex;align-items:center;gap:12px"><span data-logo="1" data-pos="below"><img src="uploads/logo2.png" alt="WU ZHENG XUN" data-keep="1" draggable="{{ false }}" style="height:22px;width:auto;display:block;pointer-events:none"><span data-hello="1" style="background:#0b0b0c;color:#f2f2f2;border:1px solid #f2f2f2;box-shadow:0 0 0 1px #0b0b0c;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;font-weight:700;padding:5px 8px;line-height:1">HELLO!!!!</span></span><span style="display:inline-block;width:7px;height:7px;background:var(--accent,#f2f2f2);animation:introTick 1s steps(1) infinite"></span>SYSTEM · PORTFOLIO v2026</span><span data-m="hide">WU ZHENG XUN / UNREAL TECHNICAL ARTIST</span>
     </div>
-    <div style="position:absolute;inset:0;display:grid;place-items:center;padding:80px 64px;box-sizing:border-box">
+    <div data-m="introPad" style="position:absolute;inset:0;display:grid;place-items:center;padding:80px 64px;box-sizing:border-box">
       <div style="width:min(100%,1080px);display:flex;flex-direction:column;gap:28px">
         <div style="display:flex;flex-direction:column;gap:6px">
           <div style="display:flex;align-items:center;gap:14px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.2em;color:rgba(242,242,242,.6);animation:introIn .4s ease .35s both"><span style="display:flex;gap:10px;color:#f2f2f2"><svg data-shape="1" viewBox="0 0 100 100" width="14" height="14" fill="currentColor" aria-hidden="true" style="display:block"><path d="M50 0 L57 43 L100 50 L57 57 L50 100 L43 57 L0 50 L43 43 Z"></path><path d="M50 0 L57 43 L100 50 L57 57 L50 100 L43 57 L0 50 L43 43 Z" transform="rotate(45 50 50)"></path></svg><svg data-shape="1" viewBox="0 0 100 100" width="14" height="14" fill="currentColor" aria-hidden="true" style="display:block"><path d="M50 50 V0 A50 50 0 0 0 0 50 Z M50 50 H100 A50 50 0 0 1 50 100 Z"></path></svg><svg data-shape="1" viewBox="0 0 100 100" width="14" height="14" fill="currentColor" aria-hidden="true" style="display:block"><circle cx="50" cy="26" r="26"></circle><circle cx="74" cy="50" r="26"></circle><circle cx="50" cy="74" r="26"></circle><circle cx="26" cy="50" r="26"></circle></svg></span>INITIALIZING INTERFACE</div>
-          <img src="uploads/logo2.png" alt="WU ZHENG XUN logo" data-keep="1" draggable="{{ false }}" style="height:clamp(40px,6vw,72px);width:auto;max-width:100%;object-fit:contain;align-self:flex-start;display:block;pointer-events:none;margin:6px 0 10px;animation:introIn .5s cubic-bezier(.2,.7,.2,1) .4s both">
+          <span data-logo="1" style="align-self:flex-start;margin:6px 0 10px;animation:introIn .5s cubic-bezier(.2,.7,.2,1) .4s both"><img src="uploads/logo2.png" alt="WU ZHENG XUN logo" data-keep="1" draggable="{{ false }}" style="height:clamp(40px,6vw,72px);width:auto;max-width:100%;object-fit:contain;display:block;pointer-events:none"><span data-hello="1" style="background:#0b0b0c;color:#f2f2f2;border:1px solid #f2f2f2;box-shadow:0 0 0 1px #0b0b0c;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;font-weight:700;padding:5px 8px;line-height:1">HELLO!!!!</span></span>
           <div style="font-family:'Chakra Petch',sans-serif;font-size:clamp(40px,6vw,92px);font-weight:700;line-height:.95;letter-spacing:-.01em;text-transform:uppercase;animation:introIn .5s cubic-bezier(.2,.7,.2,1) .45s both">Realtime.<br>Technical.<br>Crafted.</div>
         </div>
-        <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px">
+        <div data-m="introGrid" style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px">
       <div style="border:1px solid rgba(242,242,242,.35);padding:12px 14px;display:flex;flex-direction:column;gap:8px;min-width:0;opacity:0;animation:introIn .4s cubic-bezier(.2,.7,.2,1) 0.9s both">
         <div style="display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;color:rgba(242,242,242,.6)"><span>00 / HERO</span><span>■</span></div>
         <div style="aspect-ratio:16/9;border:1px solid rgba(242,242,242,.25);position:relative;overflow:hidden"><div style="position:absolute;left:0;top:0;bottom:0;right:0;background:var(--accent,#f2f2f2);transform-origin:0 50%;transform:scaleX(0);animation:introBar .5s cubic-bezier(.7,0,.2,1) 1.15s both;opacity:.9"></div></div>
@@ -351,7 +418,7 @@ section[data-focus="0"]{opacity:.12;filter:grayscale(1);transform:scale(.94);poi
         <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;color:rgba(242,242,242,.55);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">OPEN FOR PROJECTS</div>
       </div>
         </div>
-        <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:24px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;color:rgba(242,242,242,.7)">
+        <div data-m="introFoot" style="display:flex;justify-content:space-between;align-items:flex-end;gap:24px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;color:rgba(242,242,242,.7)">
           <div style="display:flex;flex-direction:column;gap:4px"><div style="opacity:0;animation:introIn .3s ease 1s both"><span style="color:var(--accent,#f2f2f2)">›</span> LOADING SHOWREEL … OK</div><div style="opacity:0;animation:introIn .3s ease 1.3s both"><span style="color:var(--accent,#f2f2f2)">›</span> MOUNTING PROFILE / EXPERIENCE … OK</div><div style="opacity:0;animation:introIn .3s ease 1.6s both"><span style="color:var(--accent,#f2f2f2)">›</span> INDEXING {{ count }} PROJECTS … OK</div><div style="opacity:0;animation:introIn .3s ease 2.2s both"><span style="color:var(--accent,#f2f2f2)">›</span> READY — CLICK TO SKIP</div></div>
           <div style="width:min(38%,320px);height:4px;background:rgba(242,242,242,.15);position:relative;overflow:hidden"><div style="position:absolute;inset:0;background:#f2f2f2;transform-origin:0 50%;animation:introBar 2.6s cubic-bezier(.5,0,.2,1) .4s both"></div></div>
         </div>
@@ -380,7 +447,7 @@ section[data-focus="0"]{opacity:.12;filter:grayscale(1);transform:scale(.94);poi
   <div style="position:absolute;right:-3px;bottom:-3px;width:6px;height:6px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor"></div>
 </div>
 
-<section id="projects" data-screen-label="Projects" style="position:relative;background:transparent;color:#0b0b0c;height:min(max(560px,56.25vw),calc(100vh - 64px));display:flex;flex-direction:column;overflow:hidden;box-sizing:border-box;scroll-snap-align:start;scroll-margin-top:64px">
+<section id="projects" data-screen-label="Projects" data-m="slide" style="position:relative;background:transparent;color:#0b0b0c;height:min(max(560px,56.25vw),calc(100vh - 64px));display:flex;flex-direction:column;overflow:hidden;box-sizing:border-box;scroll-snap-align:start;scroll-margin-top:64px">
   <div aria-hidden="true" style="position:absolute;inset:0;pointer-events:none;overflow:hidden">
     <div style="position:absolute;left:0;right:0;top:0;height:22%;background:linear-gradient(180deg,transparent,rgba(11,11,12,.05) 50%,transparent);animation:scanband 14s linear infinite"></div>
     <div style="position:absolute;left:0;right:0;top:0;height:1px;background:rgba(11,11,12,.12);animation:scanband 14s linear infinite"></div>
@@ -388,13 +455,13 @@ section[data-focus="0"]{opacity:.12;filter:grayscale(1);transform:scale(.94);poi
     <div style="position:absolute;right:56px;bottom:56px;width:14px;height:14px;border-right:1px solid rgba(11,11,12,.35);border-bottom:1px solid rgba(11,11,12,.35)"></div>
   </div>
 
-  <div style="display:flex;justify-content:space-between;align-items:center;gap:16px;padding:16px 56px;background:#0b0b0c;color:#f2f2f2;font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.16em">
+  <div data-m="bar" style="display:flex;justify-content:space-between;align-items:center;gap:16px;padding:16px 56px;background:#0b0b0c;color:#f2f2f2;font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.16em">
     <div><span style="color:var(--accent,#c6ff00)">02</span> / SELECTED WORK — 參與專案</div>
     <div style="color:rgba(242,242,242,.5)">{{ count }} PROJECTS · CLICK TO PLAY</div>
   </div>
-  <div style="position:relative;display:grid;grid-template-columns:auto minmax(0,1fr) auto;grid-template-rows:minmax(0,1fr);box-sizing:border-box;min-width:0;flex:1 1 0;min-height:0">
+  <div data-m="slideGrid" style="position:relative;display:grid;grid-template-columns:auto minmax(0,1fr) auto;grid-template-rows:minmax(0,1fr);box-sizing:border-box;min-width:0;flex:1 1 0;min-height:0">
 
-    <div style="position:relative;border-right:2px solid #0b0b0c;background:#ececec">
+    <div data-m="side" style="position:relative;border-right:2px solid #0b0b0c;background:#ececec">
       <div style="height:100%;display:flex;flex-direction:column;justify-content:space-between;align-items:center;gap:16px;padding:22px 18px;box-sizing:border-box;overflow:hidden">
         
         <div style="font-family:'JetBrains Mono',monospace;font-size:12px;line-height:1;flex:none">+</div>
@@ -405,16 +472,16 @@ section[data-focus="0"]{opacity:.12;filter:grayscale(1);transform:scale(.94);poi
       </div>
     </div>
 
-    <div style="padding:24px 44px 28px;box-sizing:border-box;min-width:0;min-height:0;height:100%;display:flex;flex-direction:column;gap:16px;overflow:hidden">
+    <div data-m="workPad" style="padding:24px 44px 28px;box-sizing:border-box;min-width:0;min-height:0;height:100%;display:flex;flex-direction:column;gap:16px;overflow:hidden">
       <div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:20px;flex:none">
         <h2 style="margin:0;font-family:'Chakra Petch','Noto Sans TC',sans-serif;font-size:clamp(28px,2.6vw,40px);line-height:1;font-weight:700;letter-spacing:-.02em;text-transform:uppercase">Selected Work</h2>
-        <div style="display:flex;flex-wrap:wrap;border:2px solid #0b0b0c">
+        <div data-m="filters" style="display:flex;flex-wrap:wrap;border:2px solid #0b0b0c;background:#f4f4f4">
           <sc-for list="{{ filters }}" as="f" hint-placeholder-count="6">
             <button onClick="{{ f.select }}" style="cursor:pointer;border:0;border-right:1px solid rgba(11,11,12,.3);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.12em;font-weight:500;padding:12px 16px;white-space:nowrap;transition:all .2s;background:{{ f.bg }};color:{{ f.color }}">{{ f.label }} <span style="opacity:.55;margin-left:4px">{{ f.n }}</span></button>
           </sc-for>
         </div>
       </div>
-      <div style="flex:1 1 0;min-height:0;display:grid;gap:0;border-top:2px solid #0b0b0c;border-left:2px solid #0b0b0c;box-sizing:border-box;grid-template-columns:{{ gridCols }};grid-template-rows:{{ gridRows }}">
+      <div data-m="workGrid" style="flex:1 1 0;min-height:0;display:grid;gap:0;border-top:2px solid #0b0b0c;border-left:2px solid #0b0b0c;box-sizing:border-box;grid-template-columns:{{ gridCols }};grid-template-rows:{{ gridRows }}">
         <sc-for list="{{ projects }}" as="p" hint-placeholder-count="0">
           <div onClick="{{ p.open }}" data-hot="1" data-card="1" style="cursor:pointer;position:relative;min-width:0;min-height:0;overflow:hidden;border-right:2px solid #0b0b0c;border-bottom:2px solid #0b0b0c;background-color:#d9d9d9;background-size:cover;background-position:center;color:#f2f2f2;background-image:{{ p.bg }}">
             <sc-if value="{{ p.isBili }}" hint-placeholder-val="{{ false }}">
@@ -438,10 +505,10 @@ section[data-focus="0"]{opacity:.12;filter:grayscale(1);transform:scale(.94);poi
     </div>
 
 
-    <div style="position:relative;border-left:2px solid #0b0b0c;background:#ececec">
-      <div style="height:100%;display:flex;flex-direction:column;justify-content:space-between;align-items:center;gap:16px;padding:22px 18px;box-sizing:border-box;overflow:hidden">
+    <div data-m="side" style="position:relative;border-left:2px solid #0b0b0c;background:#ececec">
+      <div style="height:100%;display:flex;flex-direction:column;justify-content:space-between;align-items:center;gap:16px;padding:22px 18px;box-sizing:border-box;overflow:visible">
         
-        <img src="uploads/logo2.png" alt="logo" style="width:26px;height:auto;display:block;filter:invert(1);flex:none">
+        <span data-logo="1" data-pos="left" onClick="{{ sayHello }}" style="flex:none"><img src="uploads/logo2.png" alt="logo" style="width:26px;height:auto;display:block;filter:invert(1)"><span data-hello="1" style="background:#0b0b0c;color:#f2f2f2;border:1px solid #f2f2f2;box-shadow:0 0 0 1px #0b0b0c;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;font-weight:700;padding:5px 8px;line-height:1">HELLO!!!!</span></span>
         <div style="flex:none;width:14px;height:clamp(48px,12vh,120px);background:repeating-linear-gradient(180deg,#0b0b0c 0 3px,transparent 3px 5px,#0b0b0c 5px 6px,transparent 6px 10px,#0b0b0c 10px 14px,transparent 14px 16px)"></div>
         <div style="flex:0 1 auto;min-height:0;overflow:hidden;text-overflow:ellipsis;writing-mode:vertical-rl;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.16em;line-height:1.7;color:rgba(11,11,12,.7);white-space:nowrap">CLICK TO PLAY</div>
         <div style="flex:none;writing-mode:vertical-rl;font-family:'Chakra Petch',sans-serif;font-size:clamp(14px,2.4vh,22px);font-weight:700;letter-spacing:.06em;line-height:1;white-space:nowrap">{{ count }} WORKS</div>
@@ -452,25 +519,25 @@ section[data-focus="0"]{opacity:.12;filter:grayscale(1);transform:scale(.94);poi
   </div>
 </section>
 
-<section id="contact" data-screen-label="Contact" style="position:relative;background:transparent;color:#0b0b0c;border-top:2px solid #0b0b0c;height:min(max(560px,56.25vw),calc(100vh - 64px));display:flex;flex-direction:column;overflow:hidden;box-sizing:border-box;scroll-snap-align:start;scroll-margin-top:64px">
+<section id="contact" data-screen-label="Contact" data-m="slide" style="position:relative;background:transparent;color:#0b0b0c;border-top:2px solid #0b0b0c;height:min(max(560px,56.25vw),calc(100vh - 64px));display:flex;flex-direction:column;overflow:hidden;box-sizing:border-box;scroll-snap-align:start;scroll-margin-top:64px">
   <canvas ref="{{ contactNodesRef }}" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;display:block;pointer-events:none"></canvas>
-  <div style="display:flex;justify-content:space-between;align-items:center;gap:16px;padding:16px 56px;background:#0b0b0c;color:#f2f2f2;font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.16em">
+  <div data-m="bar" style="display:flex;justify-content:space-between;align-items:center;gap:16px;padding:16px 56px;background:#0b0b0c;color:#f2f2f2;font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.16em">
     <div><span style="color:var(--accent,#c6ff00)">03</span> / CONTACT — 聯絡</div>
     <div style="color:rgba(242,242,242,.5)">OPEN FOR PROJECTS</div>
   </div>
-  <div style="position:relative;flex:1 1 0;min-height:0;width:100%;max-width:1320px;margin:0 auto;padding:clamp(32px,6vh,80px) 56px 36px;display:flex;flex-direction:column;justify-content:space-between;gap:24px;box-sizing:border-box">
+  <div data-m="contactPad" style="position:relative;flex:1 1 0;min-height:0;width:100%;max-width:1320px;margin:0 auto;padding:clamp(32px,6vh,80px) 56px 36px;display:flex;flex-direction:column;justify-content:space-between;gap:24px;box-sizing:border-box">
     <div style="position:relative">
       <div style="display:flex;align-items:center;gap:14px;margin-bottom:18px;color:#0b0b0c"><svg data-shape="1" viewBox="0 0 100 100" width="22" height="22" fill="currentColor" aria-hidden="true" style="display:block"><circle cx="50" cy="26" r="26"></circle><circle cx="74" cy="50" r="26"></circle><circle cx="50" cy="74" r="26"></circle><circle cx="26" cy="50" r="26"></circle></svg><svg data-shape="1" viewBox="0 0 100 100" width="22" height="22" fill="currentColor" aria-hidden="true" style="display:block"><path d="M50 50 V0 A50 50 0 0 0 0 50 Z M50 50 H100 A50 50 0 0 1 50 100 Z"></path></svg><svg data-shape="1" viewBox="0 0 100 100" width="18" height="18" fill="currentColor" aria-hidden="true" style="display:block"><path fill-rule="evenodd" d="M0 0 H100 V100 H0 Z M32 32 H68 V68 H32 Z"></path></svg><span style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.16em;opacity:.6">03 / CONTACT</span></div>
-      <h2 style="position:relative;margin:0;font-family:'Chakra Petch','Noto Sans TC',sans-serif;font-size:clamp(40px,6vw,96px);line-height:.98;font-weight:700;letter-spacing:-.02em;text-transform:uppercase">Let's build<br>the next world.</h2>
+      <h2 data-m="contactH" style="position:relative;margin:0;font-family:'Chakra Petch','Noto Sans TC',sans-serif;font-size:clamp(40px,6vw,96px);line-height:.98;font-weight:700;letter-spacing:-.02em;text-transform:uppercase">Let's build<br>the next world.</h2>
     </div>
-    <div style="position:relative;display:flex;flex-wrap:wrap;border:2px solid #0b0b0c;align-self:flex-start;background:#f4f4f4">
+    <div data-m="links" style="position:relative;display:flex;flex-wrap:wrap;border:2px solid #0b0b0c;align-self:flex-start;background:#f4f4f4">
       <a href="mailto:ming590616@gmail.com" style="font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.1em;font-weight:700;padding:18px 26px;background:#0b0b0c;color:#f2f2f2;border-right:2px solid #0b0b0c" style-hover="background:#6f6f72;color:#f2f2f2">MING590616@GMAIL.COM</a>
       <a href="https://www.linkedin.com/in/zheng-xun-wu-207ba5238/" target="_blank" rel="noreferrer" style="font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.1em;padding:18px 22px;border-right:2px solid #0b0b0c" style-hover="background:#0b0b0c;color:#f2f2f2">LINKEDIN ↗</a>
       <a href="https://www.artstation.com/zhengxun_wu" target="_blank" rel="noreferrer" style="font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.1em;padding:18px 22px;border-right:2px solid #0b0b0c" style-hover="background:#0b0b0c;color:#f2f2f2">ARTSTATION ↗</a>
       <a href="https://youtu.be/-WRZggrQ5Ks" target="_blank" rel="noreferrer" style="font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.1em;padding:18px 22px" style-hover="background:#0b0b0c;color:#f2f2f2">SHOWREEL ↗</a>
     </div>
     <div style="display:flex;align-items:center;gap:14px;padding-top:24px;border-top:2px solid #0b0b0c;font-family:'Chakra Petch',sans-serif;font-size:16px;font-weight:700;letter-spacing:.06em">
-      <img src="uploads/logo2.png" alt="logo" style="height:22px;width:auto;display:block;filter:invert(1)">WU ZHENG XUN
+      <span data-logo="1" onClick="{{ sayHello }}"><img src="uploads/logo2.png" alt="logo" style="height:22px;width:auto;display:block;filter:invert(1)"><span data-hello="1" style="background:#0b0b0c;color:#f2f2f2;border:1px solid #f2f2f2;box-shadow:0 0 0 1px #0b0b0c;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;font-weight:700;padding:5px 8px;line-height:1">HELLO!!!!</span></span>WU ZHENG XUN
     </div>
   </div>
 </section>
@@ -481,7 +548,7 @@ section[data-focus="0"]{opacity:.12;filter:grayscale(1);transform:scale(.94);poi
       <div style="position:relative;aspect-ratio:16/9;background:#000;min-width:0;border-bottom:2px solid #0b0b0c">
         <iframe src="{{ active.embed }}" title="{{ active.title }}" allow="autoplay; encrypted-media; picture-in-picture" allowFullScreen="{{ true }}" referrerPolicy="strict-origin-when-cross-origin" style="position:absolute;inset:0;width:100%;height:100%;border:0"></iframe>
       </div>
-      <div style="padding:16px 20px;display:flex;justify-content:space-between;align-items:center;gap:16px;min-width:0">
+      <div data-m="modalFoot" style="padding:16px 20px;display:flex;justify-content:space-between;align-items:center;gap:16px;min-width:0">
         <div style="display:flex;align-items:center;gap:14px;min-width:0">
           <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;padding:5px 8px;background:#0b0b0c;color:#f2f2f2;flex:none">{{ active.shortCat }}</div>
           <div style="font-size:clamp(16px,1.4vw,20px);font-weight:600;letter-spacing:-.01em;line-height:1.3;min-width:0">{{ active.title }}</div>
@@ -538,8 +605,7 @@ const PROJECTS = [
 const FILTERS = [
   { key: 'all', label: 'ALL', match: () => true },
   { key: 'MV', label: 'MV', match: p => p.cat === 'MV' },
-  { key: 'AD', label: 'AD', match: p => p.cat === 'AD' },
-  { key: 'AN', label: 'ANIM', match: p => p.cat === 'AN' },
+  { key: 'AD', label: 'AD / ANIM', match: p => p.cat === 'AD' || p.cat === 'AN' },
   { key: 'VR', label: 'VR', match: p => p.cat === 'VR' },
   { key: 'EXH', label: 'EXH / LIVE', match: p => p.cat === 'EXH' },
 ];
@@ -573,6 +639,7 @@ class Component extends DCLogic {
   aboutInnerRef = React.createRef();
   fitAbout = () => {
     const box = this.aboutFitRef.current, inner = this.aboutInnerRef.current; if (!box || !inner) return;
+    if (window.innerWidth < 860) { inner.style.transform = ''; inner.style.left = ''; inner.style.top = ''; return; }
     const W = 1320, h = inner.offsetHeight || 1;
     const s = Math.min(box.clientWidth / W, box.clientHeight / h);
     inner.style.transform = `scale(${s})`;
@@ -705,7 +772,7 @@ class Component extends DCLogic {
     const collectZones = () => {
       zones = [];
       if (!root) return;
-      root.querySelectorAll('nav,section[data-screen-label="Strip"],#top [data-keep],#top h1,#about [data-reveal-box],#about p,#about img,#about a,#about h2,#projects h2,#projects button,#projects [style*="grid-template-rows"],#contact h2,#contact a,#contact p').forEach(el => {
+      root.querySelectorAll('nav,section[data-screen-label="Strip"],#top [data-keep],#top h1,#about [data-reveal-box],#about p,#about img,#about a,#about h2,#projects h2,#projects button,[data-m="workGrid"],#contact h2,#contact a,#contact p').forEach(el => {
         const r = el.getBoundingClientRect(); if (r.width && r.height && r.bottom > 0 && r.top < H) zones.push({ l: r.left - 6, t: r.top - 6, r: r.right + 6, b: r.bottom + 6 });
       });
     };
@@ -837,6 +904,58 @@ class Component extends DCLogic {
       if (!document.querySelector('script[src*="iframe_api"]')) { const s = document.createElement('script'); s.src = 'https://www.youtube.com/iframe_api'; document.head.appendChild(s); }
     }
   }
+  selectFilter = key => {
+    if (key === this.state.filter || this._filterBusy) return;
+    const root = this.rootRef.current, grid = root && root.querySelector('[data-m="workGrid"]');
+    if (!grid) { this.setState({ filter: key }); return; }
+    this._filterBusy = true;
+    const out = [...grid.children]; const n = out.length;
+    out.forEach((c, i) => { c.setAttribute('data-reveal', ''); c.style.transitionDelay = Math.min((n - 1 - i) * 10, 240) + 'ms'; });
+    setTimeout(() => {
+      this.setState({ filter: key }, () => {
+        const cards = [...grid.children];
+        cards.forEach(c => { c.style.transition = 'none'; c.style.transitionDelay = '0ms'; c.setAttribute('data-reveal', ''); });
+        void grid.offsetHeight;
+        requestAnimationFrame(() => requestAnimationFrame(() => {
+          cards.forEach((c, i) => { c.style.transition = ''; c.style.transitionDelay = Math.min(i * 28, 1000) + 'ms'; c.setAttribute('data-reveal', 'in'); });
+          this._filterBusy = false;
+        }));
+      });
+    }, 300 + Math.min((n - 1) * 10, 240));
+  };
+  photoPixRef = React.createRef();
+  sayHello = e => { const el = e.currentTarget; el.setAttribute('data-on', '1'); clearTimeout(el._helloT); el._helloT = setTimeout(() => el.removeAttribute('data-on'), 1400); };
+  togglePix = () => {
+    const cv = this.photoPixRef.current, img = this.photoRef.current; if (!cv || !img || !img.naturalWidth) return;
+    const to = this._pix ? 0 : 1; this._pix = !this._pix;
+    const from = this._pixT || 0, t0 = performance.now(), dur = 1200;
+    cancelAnimationFrame(this._pixRaf);
+    const step = () => {
+      const k = Math.min(1, (performance.now() - t0) / dur), e = k < .5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2;
+      const t = from + (to - from) * e; this._pixT = t;
+      this.drawPix(cv, img, t);
+      if (k < 1) this._pixRaf = requestAnimationFrame(step);
+    };
+    step();
+  };
+  drawPix(cv, img, t) {
+    const box = cv.parentElement, W = box.clientWidth, H = box.clientHeight; if (!W || !H) return;
+    if (t <= .002) { cv.style.opacity = '0'; return; }
+    cv.style.opacity = '1';
+    const p = Math.max(1, Math.round(1 + t * 26));
+    const sw = Math.max(1, Math.round(W / p)), sh = Math.max(1, Math.round(H / p));
+    const tmp = this._pixTmp || (this._pixTmp = document.createElement('canvas'));
+    tmp.width = sw; tmp.height = sh; const tc = tmp.getContext('2d');
+    tc.setTransform(sw / W, 0, 0, sh / H, 0, 0);
+    const iw = img.naturalWidth, ih = img.naturalHeight, s0 = Math.max(W / iw, H / ih), dw = iw * s0, dh = ih * s0;
+    const ox = W / 2, oy = H * .08, sc = 1.35;
+    tc.translate(ox, oy); tc.scale(sc, sc); tc.translate(-ox, -oy);
+    tc.drawImage(img, (W - dw) / 2, 0, dw, dh);
+    const dpr = Math.min(2, window.devicePixelRatio || 1), cw = Math.round(W * dpr), ch = Math.round(H * dpr);
+    if (cv.width !== cw || cv.height !== ch) { cv.width = cw; cv.height = ch; }
+    const c = cv.getContext('2d'); c.setTransform(1, 0, 0, 1, 0, 0); c.imageSmoothingEnabled = false; c.clearRect(0, 0, cw, ch);
+    c.drawImage(tmp, 0, 0, cw, ch);
+  }
   photoMove = e => {
     if (this._pmRaf) return; const ev = { clientX: e.clientX, clientY: e.clientY, currentTarget: e.currentTarget };
     this._pmRaf = requestAnimationFrame(() => { this._pmRaf = 0; this.photoMoveNow(ev); });
@@ -860,12 +979,12 @@ class Component extends DCLogic {
       f2.style.cssText += `;left:${x2}px;top:${y2}px;width:${w2}px;height:${h2}px;opacity:1`;
     }
     const nx = (e.clientX - r.left) / r.width - .5, ny = (e.clientY - r.top) / r.height - .5;
-    const tf = `scale(1.22) translate(${-nx * 14}px, ${-ny * 16}px)`;
+    const tf = `scale(1.42) translate(${-nx * 12}px, ${-ny * 12}px)`;
     img.style.transform = tf; if (this.photoColorRef.current) this.photoColorRef.current.style.transform = tf;
   };
   photoLeave = () => {
-    const img = this.photoRef.current; if (img) img.style.transform = 'scale(1.12)';
-    const col = this.photoColorRef.current; if (col) { col.style.transform = 'scale(1.12)'; col.style.clipPath = 'polygon(0 0,0 0,0 0)'; }
+    const img = this.photoRef.current; if (img) img.style.transform = 'scale(1.35)';
+    const col = this.photoColorRef.current; if (col) { col.style.transform = 'scale(1.35)'; col.style.clipPath = 'polygon(0 0,0 0,0 0)'; }
     [this.photoFrameRef, this.photoFrame2Ref].forEach(r => { if (r.current) r.current.style.opacity = '0'; });
   };
   componentDidMount() {
@@ -943,7 +1062,7 @@ class Component extends DCLogic {
     const secs = [...root.querySelectorAll('section[data-screen-label]')].filter(s => s.getAttribute('data-screen-label') !== 'Strip');
     const NAV = 64; let t = 0, lock = 0, lastY = window.scrollY;
     const snap = () => {
-      if (this.state.introOn || this.state.activeId) return;
+      if (this.state.introOn || this.state.activeId || window.innerWidth < 860) return;
       const H = window.innerHeight, y = window.scrollY;
       let best = null, bestF = 0;
       secs.forEach(s => {
@@ -1010,8 +1129,8 @@ class Component extends DCLogic {
       root.querySelectorAll(sel).forEach((el, i) => { if (el.hasAttribute('data-reveal') || el.hasAttribute('data-reveal-fade') || el.closest('[data-reveal]') || el.hasAttribute('aria-hidden') || getComputedStyle(el).position === 'absolute') return; const st = el.getAttribute('style') || ''; if (/^(P|H2|LI)$/.test(el.tagName)) typeify(el); const rot = st.includes('rotate') || st.includes('writing-mode'); el.setAttribute(rot ? 'data-reveal-fade' : 'data-reveal', ''); el.style.transitionDelay = (i % 6) * 30 + 'ms'; io.observe(el); });
       root.querySelectorAll('#about [style*="font-size:20px;font-weight:700;line-height:1.2"],#about [style*="font-size:18px;font-weight:700"]').forEach(el => { if (el.hasAttribute('data-reveal') || el.closest('[data-reveal]')) return; typeify(el); el.setAttribute('data-reveal', ''); io.observe(el); });
       // section boxes & cards
-      root.querySelectorAll('#about [data-reveal-box], #projects [style*="grid-template-rows"] > div').forEach((el, i) => { if (el.hasAttribute('data-reveal') || el.closest('[data-reveal]')) return; el.setAttribute('data-reveal', ''); const isCard = el.closest('#projects'); el.style.transitionDelay = isCard ? '0ms' : (i % 8) * 30 + 'ms'; if (!isCard) io.observe(el); });
-      const grid = root.querySelector('#projects [style*="grid-template-rows"]');
+      root.querySelectorAll('#about [data-reveal-box], [data-m="workGrid"] > div').forEach((el, i) => { if (el.hasAttribute('data-reveal') || el.closest('[data-reveal]')) return; el.setAttribute('data-reveal', ''); const isCard = el.closest('#projects'); el.style.transitionDelay = isCard ? '0ms' : (i % 8) * 30 + 'ms'; if (!isCard) io.observe(el); });
+      const grid = root.querySelector('[data-m="workGrid"]');
       if (grid && !grid._seqIO) {
         grid._seqIO = new IntersectionObserver(es => es.forEach(x => {
           const cards = [...grid.children].filter(c => c.hasAttribute('data-reveal'));
@@ -1095,7 +1214,8 @@ class Component extends DCLogic {
     const sorted = PROJECTS.filter(f.match).slice().sort((a, b) => (parseInt(b.year) || 0) - (parseInt(a.year) || 0));
     const n = sorted.length || 1;
     const vw = typeof window !== 'undefined' ? window.innerWidth : 1440;
-    const cols = vw < 720 ? Math.min(3, n) : Math.min(n, Math.max(3, Math.ceil(Math.sqrt(n * 1.6))));
+    const mobile = vw < 860;
+    const cols = mobile ? Math.min(2, n) : Math.min(n, Math.max(3, Math.ceil(Math.sqrt(n * 1.6))));
     const rows = Math.ceil(n / cols);
     const decorate = p => ({
       ...p,
@@ -1128,19 +1248,22 @@ class Component extends DCLogic {
       aboutTabs: TABS.map(([k, label]) => ({ label, select: () => this.setState({ aboutTab: k }), bg: k === aboutTab ? '#0b0b0c' : 'transparent', color: k === aboutTab ? '#f2f2f2' : '#0b0b0c' })),
       tabProfile: aboutTab === 'profile', tabSkills: aboutTab === 'skills', tabExp: aboutTab === 'exp',
       photoMove: this.photoMove,
+      photoPixRef: this.photoPixRef,
+      togglePix: this.togglePix,
+      sayHello: this.sayHello,
       photoLeave: this.photoLeave,
       count: PROJECTS.length,
       skillCount: CORE.length + AI.length,
       filters: FILTERS.map(x => ({
         label: x.label,
         n: PROJECTS.filter(x.match).length,
-        select: () => this.setState({ filter: x.key }),
+        select: () => this.selectFilter(x.key),
         bg: x.key === filter ? '#0b0b0c' : 'transparent',
         color: x.key === filter ? '#f2f2f2' : '#0b0b0c',
       })),
       projects: sorted.map(decorate),
       gridCols: `repeat(${cols}, minmax(0,1fr))`,
-      gridRows: `repeat(${rows}, minmax(0,1fr))`,
+      gridRows: mobile ? 'auto' : `repeat(${rows}, minmax(0,1fr))`,
       hasActive: !!activeRaw,
       active: activeRaw ? decorate(activeRaw) : {},
       close: () => this.setState({ activeId: null }),
