@@ -12,14 +12,22 @@
 <style>
 html{scroll-behavior:smooth;scroll-snap-type:y proximity;scroll-padding-top:64px}
 body{margin:0;background:#0b0b0c;color:#0b0b0c;font-family:-apple-system,"SF Pro Display","PingFang TC","Noto Sans TC",system-ui,sans-serif;-webkit-font-smoothing:antialiased;text-wrap:pretty}
-a{color:inherit;text-decoration:none}a:hover{color:var(--accent,#c6ff00)}
+a{color:inherit;text-decoration:none}a:hover{color:var(--accent,#3d94bf)}
 button{font-family:inherit}
 @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
 @keyframes scanband{0%{transform:translateY(-30%)}100%{transform:translateY(130%)}}
 @keyframes gridDrift{0%{background-position:0 0,0 0}100%{background-position:0 48px,48px 0}}
 html[data-night="1"]{filter:invert(1) hue-rotate(180deg);background:#f4f4f4}
-html[data-night="1"] iframe,html[data-night="1"] video,html[data-night="1"] canvas,html[data-night="1"] img:not([data-keep]),html[data-night="1"] [data-keep]:not(img),html[data-night="1"] [data-card]{filter:invert(1) hue-rotate(180deg)}
+html[data-night="1"] iframe,html[data-night="1"] video,html[data-night="1"] canvas,html[data-night="1"] img:not([data-keep]),html[data-night="1"] [data-keep]:not(img){filter:invert(1) hue-rotate(180deg)}
+html[data-night="1"] body{background:transparent}
+html[data-night="1"] #contact canvas,html[data-night="1"] [data-bg-canvas]{filter:none}
+html[data-night="1"] [data-m="workGrid"]{filter:invert(1) hue-rotate(180deg)}
+html[data-night="1"] #top{filter:invert(1) hue-rotate(180deg)}
+html[data-night="1"] [data-intro] img{filter:none}
+html[data-night="1"] #top video,html[data-night="1"] #top canvas,html[data-night="1"] #top iframe,html[data-night="1"] #top img:not([data-keep]),html[data-night="1"] #top [data-keep]:not(img){filter:none}
+html[data-night="1"] [data-m="workGrid"] [data-card]:hover{box-shadow:0 18px 40px rgba(242,242,242,.35)}
+html[data-night="1"] [data-m="modalMedia"]{filter:invert(1) hue-rotate(180deg)}
 html{transition:none}
 @keyframes introIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 @keyframes introBar{from{transform:scaleX(0)}to{transform:scaleX(1)}}
@@ -41,6 +49,8 @@ section[data-focus="1"] svg[data-shape]:nth-child(3n),[data-intro] svg[data-shap
 @keyframes glitchShift{0%{clip-path:inset(0 0 82% 0);transform:translateX(-14px)}15%{clip-path:inset(30% 0 40% 0);transform:translateX(10px)}30%{clip-path:inset(60% 0 10% 0);transform:translateX(-6px)}45%{clip-path:inset(10% 0 70% 0);transform:translateX(8px)}60%{clip-path:inset(45% 0 30% 0);transform:translateX(-3px)}75%{clip-path:inset(0 0 0 0);transform:none}100%{clip-path:inset(0 0 0 0);transform:none}}
 [data-glitch="1"]{animation:glitchShift .55s steps(1) both}
 img{-webkit-user-drag:none;user-select:none;-webkit-touch-callout:none}
+body{-webkit-user-select:none;user-select:none}
+input,textarea,[contenteditable="true"]{-webkit-user-select:text;user-select:text}
 [data-reveal]{opacity:0;transform:translateY(16px) scaleY(.97);transform-origin:50% 0;transition:opacity .35s cubic-bezier(.2,.7,.2,1),transform .35s cubic-bezier(.2,.7,.2,1)}
 [data-reveal="in"]{opacity:1;transform:none;transition-duration:.5s}
 [data-reveal-fade]{opacity:0;transition:opacity .35s cubic-bezier(.2,.7,.2,1)}
@@ -49,6 +59,29 @@ section[data-screen-label]{transition:opacity .45s cubic-bezier(.2,.7,.2,1),filt
 section[data-focus="0"]{opacity:.12;filter:grayscale(1);transform:scale(.94);pointer-events:none}
 [data-type] .tw{opacity:0;transition:opacity .04s linear}
 [data-type="in"] .tw{opacity:1}
+[data-card]{outline:2px solid transparent;outline-offset:-2px}
+[data-card][data-reveal="in"]{transition:transform .22s cubic-bezier(.2,.7,.2,1),box-shadow .22s,outline-color .22s,opacity .5s}
+[data-card][data-reveal="in"]:hover{transform:scale(1.06);z-index:5;box-shadow:0 18px 40px rgba(11,11,12,.45);outline-color:var(--accent,#3d94bf)}
+[data-card]:hover [data-cover]{transform:scale(1.03)}
+[data-cover-style="mono"] [data-cover]{filter:grayscale(1) contrast(1.15) brightness(.95)}
+[data-cover-style="mono"] [data-card]:hover [data-cover]{filter:grayscale(0) contrast(1.05)}
+[data-cover-style="duotone"] [data-cover]{filter:grayscale(1) contrast(1.25) brightness(.9)}
+[data-cover-style="duotone"] [data-tint]{background:var(--accent,#3d94bf);mix-blend-mode:multiply;opacity:.85}
+[data-cover-style="duotone"] [data-card]:hover [data-cover]{filter:grayscale(0) contrast(1.05) brightness(1)}
+[data-cover-style="duotone"] [data-card]:hover [data-tint]{opacity:0}
+[data-cover-style="film"] [data-cover]{filter:saturate(.55) contrast(1.15) brightness(.9)}
+[data-cover-style="film"] [data-tint]{background:radial-gradient(120% 90% at 50% 40%,transparent 45%,rgba(11,11,12,.55) 100%);opacity:1}
+[data-cover-style="film"] [data-card]:hover [data-cover]{filter:saturate(1) contrast(1.05) brightness(1)}
+@keyframes mdBack{from{opacity:0}to{opacity:1}}
+@keyframes mdPanel{0%{clip-path:inset(0 100% 0 0);transform:translateX(-14px)}55%{clip-path:inset(0 0 0 0)}100%{clip-path:inset(0 0 0 0);transform:none}}
+@keyframes mdRow{from{opacity:0;transform:translateX(18px)}to{opacity:1;transform:none}}
+@keyframes mdScan{0%{transform:translateY(-100%);opacity:1}100%{transform:translateY(100%);opacity:0}}
+@keyframes galR{0%{clip-path:inset(0 0 0 100%);transform:translateX(24px) scale(1.04)}60%{clip-path:inset(0 0 0 0)}100%{clip-path:inset(0);transform:none}}
+@keyframes galL{0%{clip-path:inset(0 100% 0 0);transform:translateX(-24px) scale(1.04)}60%{clip-path:inset(0 0 0 0)}100%{clip-path:inset(0);transform:none}}
+@keyframes galBar{0%{transform:translateX(-101%)}100%{transform:translateX(101%)}}
+@keyframes galGlitch{0%{clip-path:inset(20% 0 70% 0);transform:translateX(-10px)}25%{clip-path:inset(60% 0 25% 0);transform:translateX(8px)}50%{clip-path:inset(5% 0 85% 0);transform:translateX(-5px)}75%{clip-path:inset(75% 0 10% 0);transform:translateX(6px)}100%{clip-path:inset(0 0 100% 0);transform:none}}
+[data-m="modalInfo"]>*{animation:mdRow .45s cubic-bezier(.2,.7,.2,1) both}
+[data-m="modalInfo"]>*:nth-child(1){animation-delay:.22s}[data-m="modalInfo"]>*:nth-child(2){animation-delay:.3s}[data-m="modalInfo"]>*:nth-child(3){animation-delay:.38s}[data-m="modalInfo"]>*:nth-child(4){animation-delay:.46s}[data-m="modalInfo"]>*:nth-child(5){animation-delay:.54s}
 @keyframes helloWiggle{0%,100%{transform:rotate(0)}25%{transform:rotate(-12deg)}75%{transform:rotate(12deg)}}
 [data-logo]{position:relative;display:inline-flex;cursor:pointer}
 [data-logo] [data-hello]{position:absolute;left:50%;bottom:calc(100% + 10px);transform:translate(-50%,6px) scale(.9);opacity:0;pointer-events:none;transition:opacity .18s,transform .18s cubic-bezier(.2,.7,.2,1);white-space:nowrap;z-index:5}
@@ -58,8 +91,7 @@ section[data-focus="0"]{opacity:.12;filter:grayscale(1);transform:scale(.94);poi
 [data-logo][data-pos="below"]:hover [data-hello],[data-logo][data-pos="below"][data-on="1"] [data-hello]{transform:translate(-50%,0) scale(1)}
 [data-logo][data-pos="left"]:hover [data-hello],[data-logo][data-pos="left"][data-on="1"] [data-hello]{transform:translate(0,-50%) scale(1)}
 [data-logo]:hover img,[data-logo][data-on="1"] img{animation:helloWiggle .5s ease}
-[data-pix]{filter:grayscale(1) contrast(1.08)}
-html[data-night="1"] [data-pix]{filter:grayscale(1) contrast(1.08) invert(1) hue-rotate(180deg)}
+[data-pix]{image-rendering:auto}
 @media (max-width:860px){
 html{scroll-snap-type:none}
 section[data-focus="0"]{opacity:1;filter:none;transform:none;pointer-events:auto}
@@ -75,9 +107,11 @@ section[data-focus="0"]{opacity:1;filter:none;transform:none;pointer-events:auto
 [data-m="heroBottom"]{flex-direction:column!important;align-items:stretch!important;gap:22px!important}
 [data-m="heroCard"]{box-shadow:6px 6px 0 rgba(242,242,242,.9)!important}
 [data-m="strip"]{flex-direction:column!important;overflow:visible!important}
-[data-m="strip"]>*{border-right:0!important;border-bottom:2px solid #0b0b0c!important;justify-content:space-between!important;padding:14px 20px!important;flex:none!important;white-space:normal!important;font-size:14px!important}
+[data-m="strip"]>*{border-right:0!important;border-bottom:2px solid #0b0b0c!important;justify-content:space-between!important;padding:14px 20px!important;flex:none!important;white-space:normal!important;font-size:14px!important;min-width:0!important;overflow:visible!important;transform:none!important}
 [data-m="strip"]>*:last-child{border-bottom:0!important}
-[data-m="strip"] span>span{gap:12px!important;flex-wrap:wrap!important;justify-content:flex-end!important}
+[data-m="strip"]>*>span{min-width:0!important;overflow-wrap:anywhere!important}
+[data-m="strip"] [data-tools]{display:flex!important;flex-wrap:wrap!important;justify-content:flex-end!important;gap:6px 14px!important;font-size:12px!important;min-width:0!important}
+[data-m="strip"] [data-tools]>*{white-space:nowrap!important}
 [data-m="slide"]{height:auto!important;min-height:0!important;overflow:visible!important}
 [data-m="bar"]{padding:12px 20px!important;font-size:11px!important;flex-wrap:wrap!important;gap:6px 16px!important}
 [data-m="side"]{display:none!important}
@@ -105,7 +139,8 @@ section[data-focus="0"]{opacity:1;filter:none;transform:none;pointer-events:auto
 [data-m="introTop"]{left:20px!important;right:20px!important;top:24px!important;font-size:9px!important}
 [data-m="introFoot"]{flex-direction:column!important;align-items:stretch!important}
 [data-m="introFoot"]>div:last-child{width:100%!important}
-[data-m="modalFoot"]{flex-wrap:wrap!important;padding:12px 14px!important}
+[data-m="modal"]{grid-template-columns:minmax(0,1fr)!important}
+[data-m="modal"]>div:first-child{border-right:0!important;border-bottom:2px solid #0b0b0c!important}
 }
 </style>
 </helmet>
@@ -117,18 +152,18 @@ section[data-focus="0"]{opacity:1;filter:none;transform:none;pointer-events:auto
   </a>
   <div data-m="navLinks" style="display:flex;align-items:stretch;flex:1">
     <a href="#about" style="display:flex;align-items:center;padding:0 18px;border-right:1px solid rgba(255,255,255,.18);color:#f2f2f2" style-hover="background:#f2f2f2;color:#0b0b0c">01<span data-m="hideInline" style="margin-left:.6em">ABOUT</span></a>
-    <a href="#projects" style="display:flex;align-items:center;padding:0 18px;border-right:1px solid rgba(255,255,255,.18);color:#f2f2f2" style-hover="background:#f2f2f2;color:#0b0b0c">02<span data-m="hideInline" style="margin-left:.6em">WORK</span><span data-m="hide" style="margin-left:8px;color:var(--accent,#c6ff00)">{{ count }}</span></a>
+    <a href="#projects" style="display:flex;align-items:center;padding:0 18px;border-right:1px solid rgba(255,255,255,.18);color:#f2f2f2" style-hover="background:#f2f2f2;color:#0b0b0c">02<span data-m="hideInline" style="margin-left:.6em">WORK</span><span data-m="hide" style="margin-left:8px;color:var(--accent,#3d94bf)">{{ count }}</span></a>
     <a href="#contact" style="display:flex;align-items:center;padding:0 18px;border-right:1px solid rgba(255,255,255,.18);color:#f2f2f2" style-hover="background:#f2f2f2;color:#0b0b0c">03<span data-m="hideInline" style="margin-left:.6em">CONTACT</span></a>
   </div>
   <button onClick="{{ toggleNight }}" aria-label="切換夜間模式" style="cursor:pointer;display:flex;align-items:center;gap:8px;padding:0 16px;border:0;border-left:1px solid rgba(255,255,255,.18);background:transparent;color:#f2f2f2;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em" style-hover="background:#f2f2f2;color:#0b0b0c"><span style="font-size:14px;line-height:1">◐</span><span data-m="hide">{{ nightLabel }}</span></button>
-  <a href="#contact" style="display:flex;align-items:center;padding:0 20px;background:var(--accent,#c6ff00);color:#0b0b0c;font-weight:700" style-hover="background:#f2f2f2;color:#0b0b0c">HIRE ME ↗</a>
+  <a href="#contact" style="display:flex;align-items:center;padding:0 20px;background:var(--accent,#3d94bf);color:#f2f2f2;font-weight:700" style-hover="background:#f2f2f2;color:#0b0b0c">HIRE ME ↗</a>
 </nav>
 
 <section id="top" data-screen-label="Hero" data-m="hero" style="position:relative;height:min(max(560px,56.25vw),100vh);overflow:hidden;background:#0b0b0c;color:#f2f2f2;scroll-snap-align:start">
   <div style="position:absolute;inset:0;overflow:hidden;pointer-events:none">
     <img src="https://i.ytimg.com/vi/-WRZggrQ5Ks/maxresdefault.jpg" alt="" data-keep="1" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(.8)">
-    <div ref="{{ ytWrapRef }}" style="position:absolute;top:50%;left:50%;width:max(100%,996px);height:100%;transform:translate(-50%,-50%);pointer-events:none;filter:saturate(.6) contrast(1.05);opacity:0;transition:opacity .6s">
-      <div ref="{{ ytRef }}" style="width:100%;height:100%"></div>
+    <div ref="{{ heroVidWrapRef }}" style="position:absolute;inset:0;background:#0b0b0c;opacity:0;transition:opacity .6s;filter:saturate(.6) contrast(1.05)">
+      <video ref="{{ heroVideoRef }}" src="uploads/video-1789489419981-3o78.mp4" autoPlay="{{ true }}" muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" preload="auto" onPlaying="{{ heroVideoReady }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;pointer-events:none"></video>
     </div>
     <div data-keep="1" style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,11,12,.55) 0%,rgba(11,11,12,0) 22%,rgba(11,11,12,0) 70%,rgba(11,11,12,.75) 100%)"></div>
   </div>
@@ -164,7 +199,7 @@ section[data-focus="0"]{opacity:1;filter:none;transform:none;pointer-events:auto
           <div>
             <div style="font-family:'Chakra Petch',sans-serif;font-size:20px;font-weight:700;line-height:1">吳政勲</div>
             <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;margin-top:6px">WU ZHENG XUN</div>
-            <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;color:rgba(11,11,12,.55);margin-top:2px">Unreal CG Leader</div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;color:rgba(11,11,12,.55);margin-top:2px">Unreal CG Lead</div>
           </div>
           <a href="#projects" style="align-self:flex-start;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;font-weight:700;padding:8px 12px;background:#0b0b0c;color:#f2f2f2" style-hover="background:#6f6f72;color:#f2f2f2">VIEW WORK →</a>
         </div>
@@ -178,7 +213,7 @@ section[data-focus="0"]{opacity:1;filter:none;transform:none;pointer-events:auto
     WU ZHENG XUN
   </div>
   <div style="display:flex;align-items:center;justify-content:center;gap:12px;padding:16px 28px;min-width:0;flex:2 0 auto;transition:flex-grow .45s cubic-bezier(.2,.7,.2,1),padding .45s cubic-bezier(.2,.7,.2,1),background .25s,color .25s;font-family:'Chakra Petch',sans-serif;font-size:clamp(15px,1.2vw,20px);font-weight:700;letter-spacing:.06em;white-space:nowrap;color:inherit;text-decoration:none;border-right:2px solid #0b0b0c" style-hover="flex-grow:4;padding:16px 48px;background:#0b0b0c;color:#f2f2f2">
-    <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;opacity:.5">TOOLKIT</span><span style="display:flex;gap:clamp(28px,3.2vw,56px);white-space:nowrap"><span>UNREAL ENGINE</span><span>AFTER EFFECT</span><span>MAYA</span><span>AI</span></span>
+    <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;opacity:.5">TOOLKIT</span><span data-tools="1" style="display:flex;gap:clamp(28px,3.2vw,56px);white-space:nowrap"><span>UNREAL ENGINE</span><span>AFTER EFFECT</span><span>MAYA</span><span>AI</span></span>
   </div>
   <a href="mailto:ming590616@gmail.com" style="display:flex;align-items:center;justify-content:center;gap:12px;padding:16px 28px;min-width:0;flex:1 0 auto;transition:flex-grow .45s cubic-bezier(.2,.7,.2,1),padding .45s cubic-bezier(.2,.7,.2,1),background .25s,color .25s;font-family:'Chakra Petch',sans-serif;font-size:clamp(15px,1.2vw,20px);font-weight:700;letter-spacing:.06em;white-space:nowrap;color:inherit;text-decoration:none;border-right:2px solid #0b0b0c" style-hover="flex-grow:3;padding:16px 48px;background:#0b0b0c;color:#f2f2f2">
     <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;opacity:.5">MAIL</span>MING590616@GMAIL.COM
@@ -197,7 +232,7 @@ section[data-focus="0"]{opacity:1;filter:none;transform:none;pointer-events:auto
   </div>
 
   <div data-m="bar" style="display:flex;justify-content:space-between;align-items:center;gap:16px;padding:16px 56px;background:#0b0b0c;color:#f2f2f2;font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.16em">
-    <div><span style="color:var(--accent,#c6ff00)">01</span> / ABOUT — 關於我</div>
+    <div><span style="color:var(--accent,#3d94bf)">01</span> / ABOUT — 關於我</div>
     <div style="color:rgba(242,242,242,.5)">PROFILE · EXPERIENCE · SKILLS</div>
   </div>
   <div data-m="slideGrid" style="position:relative;display:grid;grid-template-columns:auto minmax(0,1fr) auto;grid-template-rows:minmax(0,1fr);box-sizing:border-box;min-width:0;flex:1 1 0;min-height:0">
@@ -229,7 +264,7 @@ section[data-focus="0"]{opacity:1;filter:none;transform:none;pointer-events:auto
             <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;padding:6px 12px;background:#0b0b0c;color:#f2f2f2;font-size:10px;letter-spacing:.16em"><span>ABOUT</span></div>
             <div style="flex:1 1 auto;display:flex;flex-direction:column;justify-content:center;padding:12px 12px 10px;border-bottom:1px solid rgba(11,11,12,.25)">
               <div style="font-family:'Chakra Petch','Noto Sans TC',sans-serif;font-size:30px;font-weight:700;letter-spacing:.06em;line-height:1">吳政勲</div>
-              <div style="margin-top:6px;font-size:10px;letter-spacing:.16em;color:rgba(11,11,12,.6)">WU ZHENG XUN · UNREAL CG LEADER</div>
+              <div style="margin-top:6px;font-size:10px;letter-spacing:.16em;color:rgba(11,11,12,.6)">WU ZHENG XUN · UNREAL CG LEAD</div>
             </div>
             <a href="mailto:ming590616@gmail.com" style="display:grid;grid-template-columns:38px minmax(0,1fr);gap:10px;padding:8px 12px;border-bottom:1px solid rgba(11,11,12,.25);color:inherit;text-decoration:none;overflow-wrap:anywhere;transition:background .2s,color .2s" style-hover="background:#0b0b0c;color:#f2f2f2"><span style="opacity:.5">MAIL</span><span>MING590616<wbr>@GMAIL.COM</span></a>
             <a href="tel:0934333007" style="display:grid;grid-template-columns:38px minmax(0,1fr);gap:10px;padding:8px 12px;border-bottom:1px solid rgba(11,11,12,.25);color:inherit;text-decoration:none;transition:background .2s,color .2s" style-hover="background:#0b0b0c;color:#f2f2f2"><span style="opacity:.5">TEL</span><span>0934 333 007</span></a>
@@ -246,7 +281,7 @@ section[data-focus="0"]{opacity:1;filter:none;transform:none;pointer-events:auto
           <div style="display:grid;grid-template-columns:minmax(72px,92px) minmax(0,1fr);border-bottom:1px solid rgba(11,11,12,.25)">
             <div style="padding:14px 10px;border-right:1px solid rgba(11,11,12,.25);font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.04em;line-height:1.6;background:#0b0b0c;color:#f2f2f2">2026/01<br>— 至今</div>
             <div style="padding:14px 18px;display:flex;flex-direction:column;gap:6px;min-width:0">
-              <div style="font-family:'Chakra Petch',sans-serif;font-size:17px;font-weight:700;line-height:1.2">動畫部門｜CG Leader</div>
+              <div style="font-family:'Chakra Petch',sans-serif;font-size:17px;font-weight:700;line-height:1.2">動畫部門｜CG Lead</div>
               <ul style="margin:2px 0 0;padding-left:16px;font-size:13px;line-height:1.6;color:rgba(11,11,12,.78);display:flex;flex-direction:column;gap:2px;text-wrap:pretty"><li>Unreal Engine 專案 Material、Blueprint 功能設計與技術整合</li><li>規劃專案製程，處理技術問題並控管畫面品質</li><li>依專案需求建立製作流程，將視覺需求轉化為可執行方案</li><li>導入 AI Coding、MCP 與自動化工具，開發 Unreal / AE / AI 影像內部工具</li></ul>
             </div>
           </div>
@@ -287,9 +322,10 @@ section[data-focus="0"]{opacity:1;filter:none;transform:none;pointer-events:auto
 
       <div style="display:flex;flex-direction:column;gap:22px;min-width:0">
         <div data-m="aboutText" style="display:flex;flex-direction:column;gap:12px">
-          <div style="display:flex;flex-direction:column;gap:2px"><p style="margin:0;font-size:20px;line-height:1.45;font-weight:500">目前任職於夢想動畫，擔任動畫部門 CG Leader</p><p style="margin:0;font-size:20px;line-height:1.45;font-weight:500">我的工作核心介於 CG 製作、Technical Art 與製程管理之間</p></div>
+          <div style="display:flex;flex-direction:column;gap:2px"><p style="margin:0;font-size:20px;line-height:1.45;font-weight:500">目前任職於夢想動畫，擔任動畫部門 CG Lead</p><p style="margin:0;font-size:20px;line-height:1.45;font-weight:500">我的工作核心介於 CG 製作、Technical Art 與製程管理之間</p></div>
           <div style="display:flex;flex-direction:column;gap:9px;font-size:15px;line-height:1.65;color:rgba(11,11,12,.75)">
             <p style="margin:0">主要負責 Unreal Engine 專案中的 Material、Blueprint 功能設計與技術整合，同時參與專案製程規劃、技術問題排除與畫面品質把關，並根據專案需求建立合適的製作流程，將創意方向轉化為團隊實際可執行的製作方式。</p>
+            <p style="margin:0">此外，我也建立並維護 <span onMouseEnter="{{ khEnter }}" onMouseMove="{{ khMove }}" onMouseLeave="{{ khLeave }}" onClick="{{ khClick }}" style="color:inherit;cursor:default">Unreal 技術知識庫</span>，整理專案中遇到的技術問題、排查流程與解決方案，讓團隊能快速查找類似案例、重複利用既有經驗，降低重複排查與處理的時間，並將實務經驗逐步累積為團隊可持續使用的技術資產。</p>
             <p style="margin:0">過去我也曾擔任虛實部門美術組組長，負責專案製作方向規劃、團隊工作分配與人力調度，並依據不同專案的時程、技術需求與製作規模安排團隊資源。除了專案管理之外，我也參與公司內部教育訓練，目前已負責過兩屆夢想動畫 Unreal 實習培訓，協助實習生建立 Unreal Engine 的製作觀念、實務流程與專案經驗。</p>
             <p style="margin:0">在涉及虛擬製作、拍攝或即時影像的專案中，我也會直接參與片場工作，與導演、客戶及製作團隊進行溝通，了解實際拍攝需求與視覺方向，並從 Unreal 製作與技術執行的角度協助判斷可行性，讓前期創意、現場拍攝與後端 CG 製作能夠更順利銜接。</p>
             <p style="margin:0">除了專案製作與團隊管理，我也持續將 AI 與程式工具導入 CG Pipeline。目前會透過 Vibe Coding、MCP 等方式開發與優化製程工具，例如色彩轉換、Unreal 材質與節點處理、After Effects 自動化腳本，以及 Blender 模型製作與流程串接。</p>
@@ -427,7 +463,7 @@ section[data-focus="0"]{opacity:1;filter:none;transform:none;pointer-events:auto
   </div>
 </sc-if>
 
-<canvas ref="{{ bgRef }}" style="position:fixed;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none;mix-blend-mode:difference"></canvas>
+<canvas ref="{{ bgRef }}" data-bg-canvas="1" style="position:fixed;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none;mix-blend-mode:difference"></canvas>
 
 <div ref="{{ cursorRef }}" style="position:fixed;left:0;top:0;z-index:300;width:36px;height:36px;margin:-18px 0 0 -18px;pointer-events:none;mix-blend-mode:difference;color:#f2f2f2;opacity:0;transition:opacity .2s,width .18s,height .18s,margin .18s">
   <div style="position:absolute;inset:0;border:1.5px solid currentColor"></div>
@@ -447,7 +483,7 @@ section[data-focus="0"]{opacity:1;filter:none;transform:none;pointer-events:auto
   <div style="position:absolute;right:-3px;bottom:-3px;width:6px;height:6px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor"></div>
 </div>
 
-<section id="projects" data-screen-label="Projects" data-m="slide" style="position:relative;background:transparent;color:#0b0b0c;height:min(max(560px,56.25vw),calc(100vh - 64px));display:flex;flex-direction:column;overflow:hidden;box-sizing:border-box;scroll-snap-align:start;scroll-margin-top:64px">
+<section id="projects" data-screen-label="Projects" data-m="slide" data-cover-style="{{ coverStyle }}" style="position:relative;background:transparent;color:#0b0b0c;height:min(max(560px,56.25vw),calc(100vh - 64px));display:flex;flex-direction:column;overflow:hidden;box-sizing:border-box;scroll-snap-align:start;scroll-margin-top:64px">
   <div aria-hidden="true" style="position:absolute;inset:0;pointer-events:none;overflow:hidden">
     <div style="position:absolute;left:0;right:0;top:0;height:22%;background:linear-gradient(180deg,transparent,rgba(11,11,12,.05) 50%,transparent);animation:scanband 14s linear infinite"></div>
     <div style="position:absolute;left:0;right:0;top:0;height:1px;background:rgba(11,11,12,.12);animation:scanband 14s linear infinite"></div>
@@ -456,7 +492,7 @@ section[data-focus="0"]{opacity:1;filter:none;transform:none;pointer-events:auto
   </div>
 
   <div data-m="bar" style="display:flex;justify-content:space-between;align-items:center;gap:16px;padding:16px 56px;background:#0b0b0c;color:#f2f2f2;font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.16em">
-    <div><span style="color:var(--accent,#c6ff00)">02</span> / SELECTED WORK — 參與專案</div>
+    <div><span style="color:var(--accent,#3d94bf)">02</span> / SELECTED WORK — 參與專案</div>
     <div style="color:rgba(242,242,242,.5)">{{ count }} PROJECTS · CLICK TO PLAY</div>
   </div>
   <div data-m="slideGrid" style="position:relative;display:grid;grid-template-columns:auto minmax(0,1fr) auto;grid-template-rows:minmax(0,1fr);box-sizing:border-box;min-width:0;flex:1 1 0;min-height:0">
@@ -483,13 +519,15 @@ section[data-focus="0"]{opacity:1;filter:none;transform:none;pointer-events:auto
       </div>
       <div data-m="workGrid" style="flex:1 1 0;min-height:0;display:grid;gap:0;border-top:2px solid #0b0b0c;border-left:2px solid #0b0b0c;box-sizing:border-box;grid-template-columns:{{ gridCols }};grid-template-rows:{{ gridRows }}">
         <sc-for list="{{ projects }}" as="p" hint-placeholder-count="0">
-          <div onClick="{{ p.open }}" data-hot="1" data-card="1" style="cursor:pointer;position:relative;min-width:0;min-height:0;overflow:hidden;border-right:2px solid #0b0b0c;border-bottom:2px solid #0b0b0c;background-color:#d9d9d9;background-size:cover;background-position:center;color:#f2f2f2;background-image:{{ p.bg }}">
-            <sc-if value="{{ p.isBili }}" hint-placeholder-val="{{ false }}">
+          <div onClick="{{ p.open }}" onMouseEnter="{{ p.warm }}" data-hot="1" data-card="1" style="cursor:pointer;position:relative;min-width:0;min-height:0;overflow:hidden;border-right:2px solid #0b0b0c;border-bottom:2px solid #0b0b0c;background-color:#0b0b0c;color:#f2f2f2">
+            <div data-cover="1" style="position:absolute;inset:0;background-size:cover;background-position:center;background-image:{{ p.bg }};transition:filter .35s,transform .45s cubic-bezier(.2,.7,.2,1)"></div>
+            <div data-tint="1" style="position:absolute;inset:0;pointer-events:none;transition:opacity .35s"></div>
+            <sc-if value="{{ p.noThumb }}" hint-placeholder-val="{{ false }}">
               <div style="position:absolute;inset:0;display:grid;place-items:center;background:repeating-linear-gradient(135deg,#1a1a1c 0 2px,#0b0b0c 2px 14px)">
                 <div style="width:22%;aspect-ratio:1;border:2px solid rgba(242,242,242,.7);display:grid;place-items:center;margin-bottom:12%"><div style="width:0;height:0;border-left:10px solid rgba(242,242,242,.85);border-top:6px solid transparent;border-bottom:6px solid transparent;margin-left:2px"></div></div>
               </div>
             </sc-if>
-            <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,11,12,.15) 0%,rgba(11,11,12,0) 35%,rgba(11,11,12,.85) 100%);transition:background .25s" style-hover="background:rgba(11,11,12,.82)"></div>
+            <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,11,12,.15) 0%,rgba(11,11,12,0) 35%,rgba(11,11,12,.85) 100%)"></div>
             <div style="position:absolute;top:6px;left:6px;right:6px;display:flex;justify-content:space-between;align-items:flex-start;gap:6px;min-width:0">
               <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;padding:3px 6px;background:#0b0b0c;color:#f2f2f2;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ p.shortCat }}</div>
               <sc-if value="{{ p.year }}" hint-placeholder-val="{{ false }}">
@@ -522,7 +560,7 @@ section[data-focus="0"]{opacity:1;filter:none;transform:none;pointer-events:auto
 <section id="contact" data-screen-label="Contact" data-m="slide" style="position:relative;background:transparent;color:#0b0b0c;border-top:2px solid #0b0b0c;height:min(max(560px,56.25vw),calc(100vh - 64px));display:flex;flex-direction:column;overflow:hidden;box-sizing:border-box;scroll-snap-align:start;scroll-margin-top:64px">
   <canvas ref="{{ contactNodesRef }}" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;display:block;pointer-events:none"></canvas>
   <div data-m="bar" style="display:flex;justify-content:space-between;align-items:center;gap:16px;padding:16px 56px;background:#0b0b0c;color:#f2f2f2;font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.16em">
-    <div><span style="color:var(--accent,#c6ff00)">03</span> / CONTACT — 聯絡</div>
+    <div><span style="color:var(--accent,#3d94bf)">03</span> / CONTACT — 聯絡</div>
     <div style="color:rgba(242,242,242,.5)">OPEN FOR PROJECTS</div>
   </div>
   <div data-m="contactPad" style="position:relative;flex:1 1 0;min-height:0;width:100%;max-width:1320px;margin:0 auto;padding:clamp(32px,6vh,80px) 56px 36px;display:flex;flex-direction:column;justify-content:space-between;gap:24px;box-sizing:border-box">
@@ -543,64 +581,90 @@ section[data-focus="0"]{opacity:1;filter:none;transform:none;pointer-events:auto
 </section>
 
 <sc-if value="{{ hasActive }}" hint-placeholder-val="{{ false }}">
-  <div onClick="{{ close }}" style="position:fixed;inset:0;z-index:100;display:grid;place-items:center;padding:24px;background:rgba(11,11,12,.86);animation:fadeUp .3s cubic-bezier(.2,.7,.2,1) both">
-    <div onClick="{{ stop }}" style="width:100%;max-width:1180px;max-height:calc(100vh - 48px);overflow:auto;background:#f4f4f4;color:#0b0b0c;border:2px solid #0b0b0c;box-shadow:12px 12px 0 rgba(242,242,242,.25);display:flex;flex-direction:column">
-      <div style="position:relative;aspect-ratio:16/9;background:#000;min-width:0;border-bottom:2px solid #0b0b0c">
-        <iframe src="{{ active.embed }}" title="{{ active.title }}" allow="autoplay; encrypted-media; picture-in-picture" allowFullScreen="{{ true }}" referrerPolicy="strict-origin-when-cross-origin" style="position:absolute;inset:0;width:100%;height:100%;border:0"></iframe>
+  <div onClick="{{ close }}" style="position:fixed;inset:0;z-index:100;display:grid;place-items:center;padding:24px;background:rgba(11,11,12,.86);animation:mdBack .25s ease both">
+    <div aria-hidden="true" style="position:absolute;inset:0;pointer-events:none;overflow:hidden"><div style="position:absolute;left:0;right:0;top:0;height:100%;background:linear-gradient(180deg,transparent 0%,rgba(242,242,242,.06) 48%,var(--accent,#3d94bf) 50%,rgba(242,242,242,.06) 52%,transparent 100%);animation:mdScan .6s cubic-bezier(.2,.7,.2,1) both"></div></div>
+    <div onClick="{{ stop }}" data-m="modal" style="position:relative;width:100%;max-width:1534px;max-height:calc(100vh - 48px);overflow:hidden;background:#f4f4f4;color:#0b0b0c;border:2px solid #0b0b0c;box-shadow:12px 12px 0 rgba(242,242,242,.25);display:grid;grid-template-columns:minmax(0,1.6fr) minmax(280px,1fr);width:min(100%,calc((100vh - 48px) * 2.89));animation:mdPanel .55s cubic-bezier(.2,.7,.2,1) both">
+      <div data-m="modalMedia" style="position:relative;aspect-ratio:16/9;background:#0b0b0c;min-width:0;border-right:2px solid #0b0b0c;overflow:hidden">
+        <sc-if value="{{ activeVideoOn }}" hint-placeholder-val="{{ false }}"><video src="{{ activeVideoSrc }}" autoPlay="{{ true }}" muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" controls="{{ true }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block;background:#000"></video></sc-if>
+        <sc-if value="{{ activeStillOn }}" hint-placeholder-val="{{ false }}"><div key="{{ galKey }}" style="position:absolute;inset:0">
+          <div role="img" aria-label="{{ active.title }}" style="position:absolute;inset:0;background-size:contain;background-repeat:no-repeat;background-position:center;background-image:{{ activeStillBg }};animation:{{ galAnim }} .5s cubic-bezier(.2,.7,.2,1) both"></div>
+          <div aria-hidden="true" style="position:absolute;inset:0;background-size:contain;background-repeat:no-repeat;background-position:center;background-image:{{ activeStillBg }};filter:invert(1) hue-rotate(180deg);mix-blend-mode:screen;opacity:.7;animation:galGlitch .32s steps(1) both;pointer-events:none"></div>
+          <div aria-hidden="true" style="position:absolute;top:0;bottom:0;left:0;width:100%;background:linear-gradient(90deg,transparent 0%,rgba(242,242,242,.08) 45%,var(--accent,#3d94bf) 50%,rgba(242,242,242,.08) 55%,transparent 100%);animation:galBar .5s cubic-bezier(.2,.7,.2,1) both;pointer-events:none"></div>
+        </div></sc-if>
+        <sc-if value="{{ activeEmpty }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;inset:0;display:grid;place-items:center;color:rgba(242,242,242,.5);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.16em">IMAGE COMING SOON</div></sc-if>
+        <sc-if value="{{ galleryMulti }}" hint-placeholder-val="{{ false }}">
+          <button onClick="{{ galPrev }}" aria-label="上一張" style="position:absolute;left:12px;top:50%;transform:translateY(-50%);cursor:pointer;width:38px;height:38px;border:2px solid #f2f2f2;background:rgba(11,11,12,.7);color:#f2f2f2;font-family:'JetBrains Mono',monospace;font-size:16px;line-height:1;display:grid;place-items:center;transition:background .2s,color .2s" style-hover="background:#f2f2f2;color:#0b0b0c">‹</button>
+          <button onClick="{{ galNext }}" aria-label="下一張" style="position:absolute;right:12px;top:50%;transform:translateY(-50%);cursor:pointer;width:38px;height:38px;border:2px solid #f2f2f2;background:rgba(11,11,12,.7);color:#f2f2f2;font-family:'JetBrains Mono',monospace;font-size:16px;line-height:1;display:grid;place-items:center;transition:background .2s,color .2s" style-hover="background:#f2f2f2;color:#0b0b0c">›</button>
+          <div key="{{ galKey }}" aria-hidden="true" style="position:absolute;right:12px;bottom:12px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.16em;color:#f2f2f2;background:rgba(11,11,12,.7);border:1px solid #f2f2f2;padding:4px 8px;animation:mdRow .3s cubic-bezier(.2,.7,.2,1) both">{{ galReadout }}</div>
+          <div style="position:absolute;left:12px;bottom:12px;display:flex;gap:6px">
+            <sc-for list="{{ gallery }}" as="g" hint-placeholder-count="2"><button onClick="{{ g.go }}" aria-label="{{ g.label }}" style="cursor:pointer;min-width:26px;height:22px;padding:0 6px;border:1px solid #f2f2f2;background:{{ g.bg }};color:{{ g.fg }};font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;font-weight:700;line-height:1;display:grid;place-items:center">{{ g.label }}</button></sc-for>
+          </div>
+        </sc-if>
       </div>
-      <div data-m="modalFoot" style="padding:16px 20px;display:flex;justify-content:space-between;align-items:center;gap:16px;min-width:0">
-        <div style="display:flex;align-items:center;gap:14px;min-width:0">
-          <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;padding:5px 8px;background:#0b0b0c;color:#f2f2f2;flex:none">{{ active.shortCat }}</div>
-          <div style="font-size:clamp(16px,1.4vw,20px);font-weight:600;letter-spacing:-.01em;line-height:1.3;min-width:0">{{ active.title }}</div>
-          <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.08em;color:rgba(11,11,12,.55);flex:none">{{ active.year }}</div>
+      <div data-m="modalInfo" style="display:flex;flex-direction:column;min-width:0;min-height:0;overflow-y:auto;overflow-x:hidden;scrollbar-width:none">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;padding:8px 10px 8px 16px;background:#0b0b0c;color:#f2f2f2;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.16em">
+          <span style="display:flex;align-items:center;gap:10px"><span style="padding:3px 6px;border:1px solid #f2f2f2">{{ active.shortCat }}</span><span style="color:rgba(242,242,242,.6)">{{ active.catLabel }}</span></span>
+          <button onClick="{{ close }}" aria-label="關閉" style="cursor:pointer;width:30px;height:30px;border:1px solid #f2f2f2;background:transparent;color:#f2f2f2;font-size:16px;line-height:1;display:grid;place-items:center" style-hover="background:#f2f2f2;color:#0b0b0c">×</button>
         </div>
-        <div style="display:flex;align-items:center;gap:10px;flex:none">
-          <a href="{{ active.url }}" target="_blank" rel="noreferrer" style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;font-weight:700;padding:10px 14px;background:#0b0b0c;color:#f2f2f2" style-hover="background:#6f6f72;color:#f2f2f2">{{ active.platform }}</a>
-          <button onClick="{{ close }}" aria-label="關閉" style="cursor:pointer;width:36px;height:36px;border:2px solid #0b0b0c;background:#f4f4f4;color:#0b0b0c;font-size:18px;line-height:1;display:grid;place-items:center" style-hover="background:#0b0b0c;color:#f2f2f2">×</button>
+        <div style="padding:18px 18px 16px;border-bottom:1px solid rgba(11,11,12,.25);display:flex;flex-direction:column;gap:6px">
+          <div style="font-family:'Chakra Petch','Noto Sans TC',sans-serif;font-size:clamp(18px,1.6vw,24px);font-weight:700;letter-spacing:.02em;line-height:1.25;text-wrap:pretty">{{ active.title }}</div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;color:rgba(11,11,12,.6)">{{ active.client }} · {{ active.year }}</div>
         </div>
+        <div style="padding:16px 18px;border-bottom:1px solid rgba(11,11,12,.25);font-size:14px;line-height:1.7;color:#0b0b0c;text-wrap:pretty;flex:1 1 auto;display:flex;flex-direction:column;gap:10px"><div>{{ activeDesc }}</div></div>
+        <div style="display:grid;grid-template-columns:52px minmax(0,1fr);gap:8px 12px;padding:14px 18px;border-bottom:1px solid rgba(11,11,12,.25);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.08em;line-height:1.5">
+          <span style="opacity:.5">ROLE</span><span>{{ active.role }}</span>
+          <span style="opacity:.5">TOOLS</span><span>{{ activeTools }}</span>
+        </div>
+        <sc-if value="{{ activeHasVideo }}" hint-placeholder-val="{{ true }}"><div style="display:flex;justify-content:flex-end;padding:14px 18px">
+          <a href="{{ active.url }}" target="_blank" rel="noreferrer" style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;font-weight:700;padding:11px 16px;border:2px solid #0b0b0c;background:#0b0b0c;color:#f2f2f2;text-decoration:none;transition:background .2s,color .2s" style-hover="background:var(--accent,#3d94bf);color:#0b0b0c">{{ active.platform }}</a>
+        </div></sc-if>
       </div>
     </div>
   </div>
 </sc-if>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;accent&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#f2f2f2&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;options&quot;:[&quot;#f2f2f2&quot;,&quot;#9a9a9c&quot;,&quot;#5ac8fa&quot;,&quot;#c6ff00&quot;],&quot;section&quot;:&quot;主題&quot;},&quot;particleDensity&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:1,&quot;min&quot;:0,&quot;max&quot;:2,&quot;step&quot;:0.25,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;首屏&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;accent&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#2f7fa3&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;options&quot;:[&quot;#3d94bf&quot;,&quot;#5ab0d6&quot;,&quot;#2f7fa3&quot;,&quot;#1b3a4b&quot;],&quot;section&quot;:&quot;主題&quot;},&quot;coverStyle&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;film&quot;,&quot;options&quot;:[&quot;none&quot;,&quot;mono&quot;,&quot;duotone&quot;,&quot;film&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;作品&quot;},&quot;particleDensity&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:1,&quot;min&quot;:0,&quot;max&quot;:2,&quot;step&quot;:0.25,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;首屏&quot;}}">
 const UE = 'Unreal · Material / Blueprint · 技術整合';
 const PROJECTS = [
-  { id: 'Y9zvFpd1Etw', cat: 'EXH', sub: 'CONCERT', title: '60+ 巡迴演唱會 香港站 — 分手總要在雨天', client: '張學友 Jacky Cheung', year: '2023', role: UE, tools: ['Unreal', 'After Effects'] },
-  { id: '8lINMspqVDo', cat: 'AD', sub: 'AD · OPENING TITLE', title: 'Opening Title — 2025 League of Legends Pacific Championship', client: 'LoL Pacific Championship', year: '2025', role: UE, tools: ['Unreal', 'Maya', 'After Effects'] },
-  { id: 'Bmqoc-wYEHM', cat: 'AD', sub: 'AD · EVENT', title: 'Into the Future — MSI Virtual Premiere Event 2025', client: 'MSI', year: '2025', role: UE, tools: ['Unreal', 'Maya', 'After Effects'] },
-  { id: 'sD51lsOyflY', cat: 'AD', sub: 'AD · EVENT', title: 'MSIology 2025 發表會', client: 'MSI', year: '2025', role: UE, tools: ['Unreal', 'After Effects'] },
-  { id: 'uFo_JZRcGLk', cat: 'EXH', sub: 'EXHIBITION', title: '佛陀足跡沉浸式劇場', client: '慈濟中正靜思堂', year: '2026', role: UE, tools: ['Unreal', 'Maya', 'After Effects'] },
-  { id: 'u8K2Sx4LflM', cat: 'EXH', sub: 'EXHIBITION', title: '高雄追光季「城市光流」', client: '高雄市政府', year: '2019', role: UE, tools: ['Unreal', 'After Effects'] },
-  { id: 'Ev_9AEj4Ifw', cat: 'EXH', sub: 'EXHIBITION', title: '台中海洋館', client: '台中海洋館', year: '2025', role: UE, tools: ['Unreal', 'Maya'] },
-  { bili: 'BV118bX6eExv', cat: 'EXH', sub: 'CONCERT', title: 'R.E.D 广州站 — Higher', client: 'R.E.D', year: '2026', role: UE, tools: ['Unreal', 'After Effects'] },
-  { bili: 'BV1tuLzzyEES', cat: 'EXH', sub: 'CONCERT', title: '像你这样的朋友 2.0', client: '陆虎 Lu Hu', year: '2025', role: UE, tools: ['Unreal', 'After Effects'] },
-  { bili: 'BV1Bg336sEu8', cat: 'EXH', sub: 'CONCERT', title: '像你这样的朋友 3.0', client: '陆虎 Lu Hu', year: '2026', role: UE, tools: ['Unreal', 'After Effects'] },
-  { id: 'tLcXPxvZNtY', cat: 'MV', sub: 'MV', title: '輪迴 Reincarnation', client: 'InFission', year: '2025', role: UE, tools: ['Unreal', 'Maya'] },
-  { id: 'sdghbAEl0-o', cat: 'MV', sub: 'MV', title: '10000次 Ten Thousand Times', client: '陳零九 Nine Chen', year: '2022', role: UE, tools: ['Unreal', 'Maya'] },
-  { id: 'vbBIB7EHGJ4', cat: 'AD', sub: 'AD', title: 'The All-New Ford Kuga', client: 'Ford Taiwan', year: '2024', role: UE, tools: ['Unreal', 'Maya', 'Substance'] },
-  { id: 'TnSrz4Dk5-U', cat: 'AD', sub: 'AD', title: 'Claw A1M – Grip and Game', client: 'MSI', year: '2024', role: UE, tools: ['Unreal', 'Maya', 'Substance'] },
-  { id: 'irSC_9r3td4', cat: 'VR', sub: 'VR', title: '一起下地獄 TO HELL WITH ME', client: '夢想創造 Moonshine Creation', year: '2026', role: UE, tools: ['Unreal', 'Maya'] },
-  { id: 'rTBCdeZGgkI', cat: 'AD', sub: 'AD', title: '麥當勞 40 週年【簡單的快樂篇】× 蕭雅全', client: "McDonald's", year: '2023', role: UE, tools: ['Unreal', 'Maya', 'Substance'] },
-  { id: 'x1J6ukR3Qrs', cat: 'MV', sub: 'MV', title: '半晴天', client: '陶喆 David Tao', year: '2025', role: UE, tools: ['Unreal', 'Maya', 'Substance'] },
-  { id: 'lxmVTHLcQ84', cat: 'AD', sub: 'AD', title: '光之呼吸', client: '新光保全', year: '2026', role: UE, tools: ['Unreal', 'Maya', 'Substance'] },
-  { id: 'H1PGMDA6C6A', cat: 'AD', sub: 'AD', title: 'Cyborg 15 A13V – Cyber-Up!', client: 'MSI', year: '2023', role: UE, tools: ['Unreal', 'Maya', 'Substance'] },
-  { id: 'JjHpWTDkrCg', cat: 'AD', sub: 'AD', title: 'Cyborg 14 A13V – Cyber-Up!', client: 'MSI', year: '2024', role: UE, tools: ['Unreal', 'Maya', 'Substance'] },
-  { id: 'td2f1qpJxLg', cat: 'AN', sub: 'ANIMATION', title: 'Voice of the Rebels – EP01 Heroes', client: 'ROG', year: '2023', role: UE, tools: ['Unreal', 'Maya', 'Substance', 'After Effects'] },
-  { id: 'NuexSRa2x_s', cat: 'AN', sub: 'ANIMATION', title: 'Get TUF. Game Tough', client: 'ASUS TUF Gaming', year: '2022', role: UE, tools: ['Unreal', 'Maya', 'Substance', 'After Effects'] },
-  { id: 'P9WFkstVlZ4', cat: 'VR', sub: 'VR', title: '重返第一法庭．噍吧哖世紀大審判', client: 'VR 體驗', year: '2024', role: UE, tools: ['Unreal', 'Maya'] },
-  { id: 'ykl3faOyhPo', cat: 'EXH', sub: 'EXHIBITION', title: 'Le Carnaval des animaux immersif', client: 'OASIS immersion', year: '2025', role: UE, tools: ['Unreal', 'After Effects'] },
-  { id: 'bTLm4Tbckiw', cat: 'AD', sub: 'AD', title: '虎利《Hoory》同名單曲', client: '萬事全支付', year: '2026', role: UE, tools: ['Unreal', 'Maya'] },
-  { id: 'OuQhHiKZwAw', cat: 'AD', sub: 'AD · LIVE', title: 'SAKURA AI NOW 線上新品發佈記者會', client: 'SAKURA', year: '2025', role: UE, tools: ['Unreal', 'After Effects'] },
-  { id: '0sNtPlK5DuI', cat: 'AN', sub: 'ANIMATION', title: 'Adata Ask Mera Anything', client: '產品動畫', year: '2022', role: UE, tools: ['Unreal', 'Maya', 'After Effects'] },
-  { id: 'Nk1FoNw7G2g', cat: 'MV', sub: 'MV · VP', title: '虛華的夢想是一支刀', client: '黃奇斌 Ng KiPin', year: '2026', role: UE, tools: ['Unreal', 'Substance', 'Maya'] },
-  { id: 'z2pjdyw7fKg', cat: 'MV', sub: 'MV · VP', title: 'Every Single Time', client: '姜濤 Keung To', year: '2024', role: UE, tools: ['Unreal', 'Substance', 'Maya'] },
-  { id: '0aqjO51VeMg', cat: 'MV', sub: 'MV · VP', title: '從未見過的海 Beyond The Sea', client: '告五人 Accusefive', year: '2025', role: UE, tools: ['Unreal', 'Substance', 'Maya'] },
-  { id: '--0WcmsGQ8I', cat: 'AD', sub: 'AD · VP', title: '回到未來', client: '福斯商旅 Volkswagen', start: 571, year: '2024', role: UE, tools: ['Unreal', 'Substance', 'Maya'] },
-  { id: 'o1le3cqBjfg', cat: 'AD', sub: 'AD · VJ', title: 'The Best Christmas Gifts Have Landed', client: 'STARLUX Airlines', year: '2025', role: 'Unreal 即時視覺 · VJ 內容', tools: ['Unreal', 'After Effects'] },
-  { id: 'IO95TCWpTSg', cat: 'AN', sub: 'ANIMATION', title: 'MEG, MPG & MAG Series', client: 'MSI', year: '2024', role: UE, tools: ['Unreal', 'Substance', 'Maya', 'After Effects'] },
-  { id: 'gX3xJbY_U3U', cat: 'VR', sub: 'VR · ANIMATION', title: "hongu' Utax 彩虹", client: 'VR 動畫', year: '2025', role: UE, tools: ['Unreal', 'Maya'] },
+  { id: 'c7p3kj6PfvY', cover: 'uploads/files-1789657678265-bgy9.jpg', still: 'uploads/files-1789657678265-bgy9.jpg', images: ['uploads/files-1789657678346-ttmr.jpg', 'uploads/files-1789657678450-slmx.jpg'], cat: 'AN', sub: 'ANIMATION', title: '傳說對決十週年特別演唱會', client: 'Garena 傳說對決', year: '2026', desc: '帶領團隊完成演唱會動畫，統籌分工、方向調整與團隊管理，並負責材質開發、流程規劃與技術問題排除。以 AI 工具產生模型、EmberGen 製作特效，並在 Unreal 端完成整合，成品於演唱會現場播放。', role: '專案主導 / 團隊帶領', tools: ['Unreal', 'Maya', 'Substance 3D Painter', 'RizomUV', 'EmberGen', 'Git Extensions', 'ChatGPT', 'Claude', 'Flow', 'Moonland'] },
+  { id: 'Y9zvFpd1Etw', cover: 'uploads/batch-1789406986121-524c-w-s.jpg', still: 'uploads/batch-1789406986968-htty-m.jpg', cat: 'EXH', sub: 'CONCERT', title: '張學友 60+ 巡迴演唱會', client: '張學友 Jacky Cheung', year: '2023', desc: '制定 Maya 與 Unreal 的資產交接規則，並開發一組參數化材質，美術調整場景色彩或線框效果時直接改參數，不需重做材質。', role: '製程整合 / 材質開發', tools: ['Unreal', 'Maya', 'Substance 3D Painter', 'RizomUV', 'Git Extensions'] },
+  { id: '8lINMspqVDo', cover: 'uploads/batch-1789405452165-rs49-w-s.jpg', still: 'uploads/batch-1789405452201-sf3u-w-m.jpg', cat: 'AD', sub: 'AD · OPENING TITLE', title: 'Opening Title — 2025 League of Legends Pacific Championship', client: 'LoL Pacific Championship', year: '2025', desc: '以 Houdini Labs VAT 建立人群動畫流程，測出穩定上限後訂成團隊標準；改用 Niagara 以 instance 方式撒點取代 Blueprint 生成模型，同一畫面 2 萬人穩定 40fps 以上，可在虛擬攝影棚即時投播。另處理多機同步：以 Switchboard 同步各機，動畫時間透過 Material Parameter Collection 統一，Blueprint 狀態以存 cache 對齊。', role: '技術美術', tools: ['Unreal', 'Houdini', 'Maya', 'Perforce', 'ChatGPT'] },
+  { id: 'Bmqoc-wYEHM', cover: 'uploads/batch-1789405452255-v7aj-w-s.jpg', still: 'uploads/batch-1789405452277-0ter-w-m.jpg', cat: 'AD', sub: 'AD · EVENT', title: 'Into the Future — MSI Virtual Premiere Event 2025', client: 'MSI', year: '2025', desc: '主導專案規劃並帶領 5 人團隊執行，自己負責環境場景與 Blueprint 系統開發，直播拍攝期間在現場處理技術問題。', role: '專案主導 / 團隊帶領', tools: ['Unreal', 'Maya', 'Substance 3D Painter', 'After Effects', 'Substance 3D Designer', 'Photoshop', 'RizomUV', 'Perforce', 'Flow', 'Moonland'] },
+  { id: 'sD51lsOyflY', cover: 'uploads/batch-1789405452903-uv2d-w-s.jpg', still: 'uploads/batch-1789405452699-3ucz-w-m.jpg', cat: 'AD', sub: 'AD · EVENT', title: 'MSIology 2025 發表會', client: 'MSI', year: '2025', desc: '負責龍的動畫段落，以及前期的環境概念設計，在正式製作前定下場景風格。', role: '動畫製作 / 前期視覺', tools: ['Unreal', 'Maya', 'Git Extensions', 'Perforce', 'ChatGPT'] },
+  { id: 'uFo_JZRcGLk', cover: 'uploads/batch-1789405642229-dlop-w-s.jpg', still: 'uploads/batch-1789405642590-p238-w-m.jpg', cat: 'EXH', sub: 'EXHIBITION', title: '佛陀足跡沉浸式劇場', client: '慈濟中正靜思堂', year: '2026', desc: '建置 nDisplay 虛擬展場投影，讓內容能先在虛擬展場中從最佳觀賞位置檢視身歷其境的效果，並負責超寬幅展場內容製作與畫面合成。', role: '系統開發 / 內容製作', tools: ['Unreal', 'Maya', 'Substance 3D Painter', 'After Effects', 'Substance 3D Designer', 'ZBrush', 'RizomUV', 'Photoshop', 'Git Extensions', 'Claude'] },
+  { id: 'u8K2Sx4LflM', cover: 'uploads/batch-1789405642096-jl5j-s.jpg', still: 'uploads/batch-1789405642107-r8r4-w-m.jpg', cat: 'EXH', sub: 'EXHIBITION', title: '高雄追光季「城市光流」', client: '高雄市政府', year: '2019', desc: '負責動態視覺設計與製作，投影設備進場時也在現場參與安裝與調校。', role: '動態設計 / 現場執行', tools: ['Unreal', 'After Effects', 'Photoshop'] },
+  { id: 'Ev_9AEj4Ifw', cover: 'uploads/batch-1789405642008-olnh-w-s.jpg', still: 'uploads/batch-1789405642010-podj-w-m.jpg', cat: 'EXH', sub: 'EXHIBITION', title: '台中海洋館－海洋學園', client: '台中海洋館', year: '2025', desc: '負責 Unreal 端角色動畫整合與效能優化。場景原先未考慮互動需求，30 多個動態資產不到 10fps 且畫面閃爍；重新調整材質與模型、合併貼圖通道、將模型分區塊生成 LOD，並重整燈光做法，穩定在 50fps。海洋生物是視覺重點，透明表現改以 ray tracing 處理，在視覺與效能之間取得平衡。另借助 AI 工具批次轉換大量貼圖的色彩空間。', role: '動畫整合 / 效能優化', tools: ['Unreal', 'Maya', 'Photoshop', 'Git Extensions'] },
+  { bili: 'BV118bX6eExv', cover: 'uploads/batch-1789405524130-pri7-w-s.jpg', still: 'uploads/batch-1789405523705-39zc-m.jpg', cat: 'EXH', sub: 'CONCERT', title: 'R.E.D 廣州站 — Higher', client: 'R.E.D', year: '2026', desc: '建置演唱會環境場景，並製作 4 段動態影像供現場剪接使用。', role: '環境美術 / 動態設計', tools: ['Unreal', 'Maya', 'After Effects', 'RizomUV', 'Tripo AI'] },
+  { bili: 'BV1tuLzzyEES', cover: 'uploads/batch-1789405642069-z14h-w-s.jpg', still: 'uploads/batch-1789405642083-vkrg-m.jpg', images: ['uploads/batch-1789405642770-p3nl.mp4'], cat: 'EXH', sub: 'CONCERT', title: '2025 陸虎［像你這樣的朋友 2.0］', client: '陆虎 Lu Hu', year: '2025', desc: '負責演唱會影像的視覺開發，並將動態做成參數化控制，客戶可直接調整參數改變動態表現，不需回頭找製作端修改。', role: '視覺開發 / 工具設計', tools: ['Unreal', 'After Effects', 'Git Extensions'] },
+  { bili: 'BV1Bg336sEu8', cover: 'uploads/batch-1789405642093-43c4-s.jpg', cat: 'EXH', sub: 'CONCERT', title: '2026 陸虎［像你這樣的朋友 3.0］', client: '陆虎 Lu Hu', year: '2026', desc: '主導前期規劃，帶領 8 人團隊製作演唱會動態。前期以 AI 影像生成快速確立視覺方向與分鏡，團隊進入製作前就有一致的畫面目標。', role: '專案主導 / 團隊帶領', tools: ['Unreal', 'After Effects', 'Photoshop', 'Git Extensions', 'Moonland', 'Flow', 'ChatGPT'] },
+  { id: 'tLcXPxvZNtY', cover: 'uploads/batch-1789405642261-o7m5-s.jpg', still: 'uploads/batch-1789405642679-mw2o-m.jpg', cat: 'MV', sub: 'MV', title: '輪迴 Reincarnation', client: 'InFission', year: '2025', desc: '負責 Unreal 場景建置與最終合成。', role: '環境美術 / 合成', tools: ['Unreal', 'Maya', 'Substance 3D Painter', 'Photoshop', 'RizomUV'] },
+  { id: 'sdghbAEl0-o', cover: 'uploads/batch-1789405642134-ey9l-c-s.jpg', still: 'uploads/batch-1789405642170-kb1o-m.jpg', cat: 'MV', sub: 'MV', title: '10000次 Ten Thousand Times', client: '陳零九 Nine Chen', year: '2022', desc: '與客戶開會對焦視覺方向，帶領 8 人團隊完成 MV 虛擬場景製作與效能優化，同時負責環境設計、材質開發與特效。', role: '團隊帶領 / 環境美術', tools: ['Unreal', 'Maya', 'Substance 3D Painter', 'Photoshop', 'After Effects', 'Substance 3D Designer', 'Git Extensions'] },
+  { id: 'vbBIB7EHGJ4', cover: 'uploads/batch-1789405523797-400a-c-s.jpg', still: 'uploads/batch-1789405523814-wf2a-m.jpg', cat: 'AD', sub: 'AD', title: 'The All-New Ford Kuga', client: 'Ford Taiwan', year: '2024', desc: '負責 3 人團隊的人力調度與進度控管。此為虛擬攝影棚案，同時負責場景製作與即時渲染效能優化。', role: '專案調度 / 環境美術', tools: ['Unreal', 'Maya', 'Perforce'] },
+  { id: 'TnSrz4Dk5-U', cover: 'uploads/thumbs-1789404942434-2hxb-s.jpg', still: 'uploads/thumbs-1789404941864-oiam-m.jpg', cat: 'AD', sub: 'AD', title: 'Claw A1M – Grip and Game', client: 'MSI', year: '2024', desc: '修正主要產品模型的結構與檔案轉換問題，並完成骨架綁定。', role: '資產修正 / 角色綁定', tools: ['Unreal', 'Maya', 'Substance 3D Painter', 'RizomUV', 'Substance 3D Designer', 'Git Extensions'] },
+  { id: 'irSC_9r3td4', cover: 'uploads/batch-1789405452060-y4ct-c-s.jpg', still: 'uploads/batch-1789405452094-vysy-m.jpg', cat: 'VR', sub: 'VR', title: '一起下地獄 TO HELL WITH ME', client: '夢想創造 Moonshine Creation', year: '2026', desc: '帶領虛實部美術組 5 人完成 VR 場景，目標裝置 Vive，需維持 60fps 以上。前期先建好第一版主材質給團隊沿用調整，包括岩漿、Triplanar 與邊框材質。', role: '美術組帶領 / 材質開發', tools: ['Unreal', 'Maya', 'Substance 3D Painter', 'Substance 3D Designer', 'RizomUV', 'Perforce'] },
+  { id: 'rTBCdeZGgkI', cover: 'uploads/batch-1789405642189-scih-c-s.jpg', still: 'uploads/batch-1789405642214-vb6p-m.jpg', images: ['uploads/files-1789655001287-ri6y.mp4', 'uploads/files-1789655001859-8yg5.mp4'], cat: 'AD', sub: 'AD', title: '麥當勞 40 週年【簡單的快樂篇】× 蕭雅全', client: "McDonald's", year: '2023', desc: '製作虛擬攝影棚的主要環境「眷村」，並開發區域隨機消失／出現的 Blueprint 與消失轉場效果。', role: '環境美術 / Blueprint 開發', tools: ['Unreal', 'Maya', 'Substance 3D Painter', 'Substance 3D Designer', 'Photoshop', 'RizomUV', 'ZBrush', 'Perforce'] },
+  { id: 'x1J6ukR3Qrs', cover: 'uploads/batch-1789405641968-h112-c-s.jpg', still: 'uploads/batch-1789405642001-mtwx-m.jpg', cat: 'MV', sub: 'MV', title: '半晴天', client: '陶喆 David Tao', year: '2025', desc: '製作 5 種不同類型的虛擬攝影棚環境，並負責現場即時渲染的效能優化。', role: '環境美術 / 效能優化', tools: ['Unreal', 'Maya', 'Perforce', 'Moonland', 'Flow'] },
+  { id: 'lxmVTHLcQ84', cover: 'uploads/batch-1789405523716-mtnc-s.jpg', still: 'uploads/batch-1789405524203-f5yn-m.jpg', cat: 'AD', sub: 'AD', title: '光之呼吸', client: '新光保全', year: '2026', desc: '帶領新人共同建置大型城市場景，負責分工、訂定資產規格與最後的場景整合，過程中同步輔導。', role: '團隊帶領 / 環境美術', tools: ['Unreal', 'Maya', 'Substance 3D Painter', 'Substance 3D Designer', 'RizomUV', 'Git Extensions', 'ChatGPT'] },
+  { id: 'H1PGMDA6C6A', cover: 'uploads/thumbs-1789404941929-6wgf-s.jpg', still: 'uploads/thumbs-1789404941955-x8qb-m.jpg', cat: 'AD', sub: 'AD', title: 'Cyborg 15 A13V – Cyber-Up!', client: 'MSI', year: '2023', desc: '負責進度管理與材質開發，排除三個算圖問題：Alembic 算圖殘影，改 MRQ 取樣與抽格方式解決；毛髮閃爍，追到 Maya 輸出 cache 的流程問題，重測後交付正確流程；半透明排序，以 depth cull 調整深度。並在此案制定 Maya 與 Unreal 的檔案交換標準，後續專案沿用。', role: '進度管理 / 材質開發 / 技術排除', tools: ['Unreal', 'Maya', 'Substance 3D Painter', 'RizomUV', 'Substance 3D Designer', 'Git Extensions'] },
+  { id: 'JjHpWTDkrCg', cover: 'uploads/thumbs-1789404942179-06zt-s.jpg', still: 'uploads/thumbs-1789404941897-gq91-m.jpg', images: ['uploads/files-1789656235315-gakn.jpg', 'uploads/files-1789656235853-ys8n.jpg', 'uploads/files-1789656235504-qfwu.jpg', 'uploads/files-1789656235710-8bn4.jpg', 'uploads/files-1789656235428-tr9y.jpg', 'uploads/files-1789656235375-bbir.jpg'], cat: 'AD', sub: 'AD', title: 'Cyborg 14 A13V – Cyber-Up!', client: 'MSI', year: '2024', desc: '前期建立標準化的產品 Blueprint，讓產品在每一卡的呈現一致，各部件材質與補光強度都能系統化調整。另負責材質開發、特效與技術排除。', role: '專案規劃 / 材質開發 / 特效', tools: ['Unreal', 'Maya', 'Substance 3D Designer', 'Substance 3D Painter', 'After Effects', 'RizomUV', 'Git Extensions'] },
+  { id: 'td2f1qpJxLg', cover: 'uploads/batch-1789405523952-cqu8-s.jpg', still: 'uploads/batch-1789405523974-onn8-m.jpg', cat: 'AN', sub: 'ANIMATION', title: 'Voice of the Rebels – EP01 Heroes', client: 'ROG', year: '2023', desc: '負責材質開發與 Blueprint 規劃。全案共 3 集，因此自建管理系統，使用者在 Details 面板選擇卡號 enum 即可切換 Level 資訊，讓團隊集中管理場景資產；另解決骨架資訊無法匯入的問題。', role: '材質開發 / 系統設計', tools: ['Unreal', 'Maya', 'Git Extensions'] },
+  { id: 'NuexSRa2x_s', cover: 'uploads/thumbs-1789404942062-sjz5-s.jpg', still: 'uploads/thumbs-1789404955750-tav9-m.jpg', cat: 'AN', sub: 'ANIMATION', title: 'Get TUF. Game Tough', client: 'ASUS TUF Gaming', year: '2022', desc: '製作 Unreal 場景，並處理 Alembic 無法匯入與材質修正等技術問題。', role: '環境美術 / 技術排除', tools: ['Unreal', 'Maya', 'Substance 3D Painter', 'Substance 3D Designer', 'Photoshop', 'RizomUV', 'Git Extensions'] },
+  { id: 'P9WFkstVlZ4', images: ['uploads/batch-1789406989398-ntlx-m.jpg', 'uploads/batch-1789406991130-9dxi-m.jpg', 'uploads/batch-1789406991971-3spq-m.jpg'], cover: 'uploads/thumbs-1789404941979-am28-s.jpg', still: 'uploads/thumbs-1789404941992-er6l-m.jpg', cat: 'VR', sub: 'VR', title: '重返第一法庭．噍吧哖世紀大審判', client: 'VR 體驗', year: '2024', desc: '負責材質開發與技術問題排除。大量角色動畫匯入後位置偏移，追查出流程問題並修正，把方法交給各部門；場景轉換以 PPV 材質做筆觸式過場、用 stencil 保留主角，並在各美術的角色材質統一加入 material function，讓每段轉場平順可控；另將部分骨架動畫以 AnimToTexture 烘成 Bone Animation Texture，改由材質驅動靜態網格播放，減輕骨架運算壓力。', role: '材質開發 / 技術排除 / 專案整合', tools: ['Unreal', 'Maya', 'Substance 3D Painter', 'RizomUV', 'Git Extensions'] },
+  { id: 'ykl3faOyhPo', images: ['uploads/batch-1789406987976-og27-m.jpg', 'uploads/batch-1789406990156-9k53-m.jpg'], cover: 'uploads/batch-1789405523640-47rb-s.jpg', still: 'uploads/batch-1789405524052-qerl-w-m.jpg', cat: 'EXH', sub: 'EXHIBITION', title: 'Le Carnaval des animaux immersif', client: 'OASIS immersion', year: '2025', desc: '規劃投影製程，帶領 8 人團隊完成 Unreal 投影場景，共 3 個房間、每間 4 面牆環繞投影，超高解析度輸出；並負責材質開發、技術排除、專案檔案架構與版本控制。海外沉浸式展演案。', role: '製程規劃 / 團隊帶領', tools: ['Unreal', 'Maya', 'Substance 3D Painter', 'After Effects', 'Substance 3D Designer', 'RizomUV', 'Git Extensions', 'ChatGPT'] },
+  { id: 'bTLm4Tbckiw', cover: 'uploads/batch-1789405523665-kwz1-c-s.jpg', still: 'uploads/batch-1789405523688-4luf-m.jpg', cat: 'AD', sub: 'AD', title: '虎利《Hoory》同名單曲', client: '萬事全支付', year: '2026', desc: '處理 Maya 到 Unreal 的資產轉換問題與特效修改。', role: '技術排除 / 特效', tools: ['Unreal', 'Maya', 'Git Extensions'] },
+  { id: 'OuQhHiKZwAw', cover: 'uploads/thumbs-1789404942005-orxu-s.jpg', still: 'uploads/thumbs-1789404942018-dct6-m.jpg', cat: 'AD', sub: 'AD · LIVE', title: 'SAKURA AI NOW 線上新品發佈記者會', client: 'SAKURA', year: '2025', desc: '帶領 5 人團隊完成線上發表會的視覺開發與動態製作，並統籌整體製作規劃與時程。', role: '團隊帶領 / 視覺開發', tools: ['Unreal', 'Maya', 'Substance 3D Painter', 'After Effects', 'RizomUV', 'Substance 3D Designer', 'Git Extensions', 'Moonland'] },
+  { id: '0sNtPlK5DuI', cover: 'uploads/thumbs-1789404942034-ws5i-s.jpg', still: 'uploads/thumbs-1789404942051-y6ae-m.jpg', cat: 'AN', sub: 'ANIMATION', title: 'Adata Ask Mera Anything', client: '產品動畫', year: '2022', desc: '負責材質開發，並解決即時渲染的燈光閃爍與骨架動畫損壞問題。', role: '材質開發 / 技術排除', tools: ['Unreal', 'Substance 3D Painter', 'Maya', 'Git Extensions'] },
+  { id: 'Nk1FoNw7G2g', cover: 'uploads/batch-1789405523605-bjhm-c-s.jpg', still: 'uploads/batch-1789405523615-bk9s-m.jpg', cat: 'MV', sub: 'MV · VP', title: '虛華的夢想是一支刀', client: '黃奇斌 Ng KiPin', year: '2026', desc: '帶領 2 位美術一起完成虛擬攝影棚場景，邊做邊輔導，讓兩位藉這個案子成長；自己負責與拍攝端的技術對接與效能優化。', role: '團隊帶領 / 技術對接', tools: ['Unreal', 'Maya', 'Substance 3D Painter', 'After Effects', 'Substance 3D Designer', 'Photoshop', 'RizomUV', 'Perforce', 'ChatGPT'] },
+  { id: 'z2pjdyw7fKg', cover: 'uploads/batch-1789405452000-s0zk-c-s.jpg', still: 'uploads/batch-1789405452024-1zh9-m.jpg', cat: 'MV', sub: 'MV · VP', title: 'Every Single Time', client: '姜濤 Keung To', year: '2024', desc: '前期與客戶對焦視覺並負責規劃，帶領 2 人完成 3 個虛擬攝影棚場景與材質開發；拍攝當天在現場操作虛擬攝影棚、提供技術支援，並處理版本控制問題。', role: '專案規劃 / 團隊帶領 / 現場執行', tools: ['Unreal', 'Maya', 'Substance 3D Painter', 'After Effects', 'Substance 3D Designer', 'RizomUV', 'Perforce'] },
+  { id: '0aqjO51VeMg', images: ['uploads/batch-1789406985384-r5yo-m.jpg'], cover: 'uploads/thumbs-1789404941826-mvr3-s.jpg', still: 'uploads/thumbs-1789404941846-ps92-m.jpg', cat: 'MV', sub: 'MV · VP', title: '從未見過的海 Beyond The Sea', client: '告五人 Accusefive', year: '2025', desc: '帶領並輔導 1 位美術完成虛擬攝影棚場景，主要負責場景製作與優化；拍攝期間處理現場的技術排除。', role: '團隊帶領 / 技術排除', tools: ['Unreal', 'Maya', 'Substance 3D Painter', 'After Effects', 'Perforce'] },
+  { id: '--0WcmsGQ8I', cover: 'uploads/batch-1789405642023-9idu-w-c-s.jpg', still: 'uploads/batch-1789405642036-3l2q-w-m.jpg', cat: 'AD', sub: 'AD · VP', title: 'VW ID. Buzz「Good Time Machine」', client: '福斯商旅 Volkswagen', start: 571, year: '2024', desc: '製作虛擬攝影棚美術場景，並修正專案材質。', role: '環境美術', tools: ['Unreal', 'Maya', 'Substance 3D Painter', 'RizomUV', 'Perforce'] },
+  { id: 'o1le3cqBjfg', cover: 'uploads/batch-1789405523849-uyw4-s.jpg', still: 'uploads/batch-1789405524393-5lt4-m.jpg', cat: 'AD', sub: 'AD · VJ', title: 'The Best Christmas Gifts Have Landed', client: 'STARLUX Airlines', year: '2025', desc: '以 Flow、Kling、Magnific 建立 AI 影像生成流程，產出虛擬攝影棚用的動態背景素材，取代部分傳統場景建置。', role: 'AI 影像製程', tools: ['Unreal', 'Flow', 'Magnific', 'After Effects', 'ChatGPT', 'Moonland', 'Photoshop', 'Kling'] },
+  { id: 'IO95TCWpTSg', cover: 'uploads/batch-1789405452221-k398-s.jpg', still: 'uploads/batch-1789405452235-0tr8-m.jpg', cat: 'AN', sub: 'ANIMATION', title: 'MEG, MPG & MAG Series', client: 'MSI', year: '2024', desc: '帶領 5 人團隊的美術製作，主要負責 MAG 系列的環境設計與動畫，並統一 MEG、MPG、MAG 三條產品線在同一支影片中的視覺調性。', role: '美術主導 / 環境設計 / 動畫', tools: ['Unreal', 'Maya', 'Substance 3D Painter', 'Substance 3D Designer', 'RizomUV', 'Git Extensions'] },
+  { id: 'gX3xJbY_U3U', images: ['uploads/batch-1789406982101-x5mi-m.jpg'], cover: 'uploads/batch-1789405452118-bo8s-s.jpg', still: 'uploads/batch-1789405452149-uz0y-m.jpg', cat: 'VR', sub: 'VR · ANIMATION', title: "hongu' Utax 彩虹", client: 'VR 動畫', year: '2025', desc: '以 SpeedTree 建置自然環境，在 Unreal 材質中撰寫風吹效果，讓整個山谷的蘆葦隨風擺動；近景約 1 萬株實體植物，遠景改以撒點呈現以省效能，PC VR 實機穩定 50fps 以上。植物動態與材質皆自行開發。', role: '材質開發 / 自然環境', tools: ['Unreal', 'SpeedTree', 'Substance 3D Painter', 'Maya', 'Substance 3D Designer', 'Git Extensions'] },
+  { id: '3K5tE6IWUpg', cover: 'uploads/batch-1789405523885-7bh8-c-s.jpg', still: 'uploads/batch-1789405523924-krm4-m.jpg', cat: 'AN', sub: 'ANIMATION', title: 'Uncharted Maple Forest', client: 'Unreal Engine 4.27', year: '2022', desc: '個人作品。以楓林場景練習 Unreal 材質開發與大範圍自然環境的資產配置。', role: '材質開發 / 環境美術', tools: ['Unreal', 'Substance 3D Designer', 'Substance 3D Painter', 'Maya', 'After Effects', 'Photoshop', 'RizomUV'] },
+  { id: '', key: 'sphere-meta', cover: 'uploads/batch-1789405523751-e4nx-w-s.jpg', still: 'uploads/batch-1789405523777-bkc9-w-m.jpg', cat: 'AN', sub: 'ANIMATION', title: 'Sphere-Meta', client: '動畫', year: '2023', desc: '負責 Groom 毛髮系統導入與 LookDev，涵蓋環境、特效與材質開發，並修正專案間的檔案交換問題。', role: 'LookDev / Groom / 材質開發', tools: ['Unreal', 'Substance 3D Painter', 'Substance 3D Designer', 'RizomUV', 'Git Extensions'] },
+  { id: '', key: 'downcity', cover: 'uploads/batch-1789405452750-0igx-w-s.jpg', still: 'uploads/batch-1789405452804-9qv7-w-m.jpg', images: ['uploads/batch-1789405451909-2sda-w-m.jpg', 'uploads/batch-1789405451950-6wgp-w-m.jpg', 'uploads/batch-1789405451984-6wks-w-m.jpg'], cat: 'AN', sub: 'ANIMATION', title: 'DownCity', client: 'Unreal Engine 5.1', year: '2024', desc: '個人作品。從概念開始做一座都市場景，含美術規劃、材質開發與 Blueprint 設計，重點放在找出省時又不犧牲畫面品質的材質做法。', role: '概念發想 / 美術規劃 / 材質開發', tools: ['Unreal', 'Maya', 'Substance 3D Designer', 'Substance 3D Painter', 'After Effects', 'Photoshop', 'RizomUV', 'ZBrush', 'Git Extensions', 'ChatGPT'] },
 ];
 const FILTERS = [
   { key: 'all', label: 'ALL', match: () => true },
@@ -820,6 +884,7 @@ class Component extends DCLogic {
   applyNight(on) {
     document.documentElement.setAttribute('data-night', on ? '1' : '0');
     const root = this.rootRef.current; if (root) root.querySelectorAll('img[data-keep]').forEach(img => {
+      if (img.closest('#top') || img.closest('[data-intro]')) { img.style.filter = img.dataset.baseFilter || ''; return; }
       const base = img.dataset.baseFilter || (img.dataset.baseFilter = img.style.filter || 'none');
       img.style.filter = on ? `${base === 'none' ? '' : base} invert(1) hue-rotate(180deg)` : base;
     });
@@ -865,44 +930,20 @@ class Component extends DCLogic {
   photoColorRef = React.createRef();
   photoFrameRef = React.createRef();
   photoFrame2Ref = React.createRef();
-  ytRef = React.createRef();
-  ytWrapRef = React.createRef();
+  heroVideoRef = React.createRef();
+  heroVidWrapRef = React.createRef();
+  heroVideoReady = () => { const w = this.heroVidWrapRef.current; if (w) w.style.opacity = '1'; };
+  toggleSound = () => { const v = this.heroVideoRef.current; if (!v) return; v.muted = !v.muted; if (!v.muted) v.play().catch(() => {}); this.setState({ sound: !v.muted }); };
   initVideo() {
-    const host = this.ytRef.current, wrap = this.ytWrapRef.current; if (!host) return;
-    const VID = '-WRZggrQ5Ks';
-    const make = () => {
-      this._yt = new YT.Player(host, {
-        videoId: VID, host: 'https://www.youtube-nocookie.com',
-        playerVars: { autoplay: 1, mute: 1, controls: 0, rel: 0, modestbranding: 1, playsinline: 1, iv_load_policy: 3, disablekb: 1, fs: 0, loop: 1, playlist: VID },
-        events: {
-          onReady: e => {
-            e.target.mute(); e.target.playVideo();
-            const readyAt = Date.now();
-            // watchdog: restart just before the end so YT never reaches ENDED (no end-screen / replay button)
-            this._tick = setInterval(() => {
-              const p = this._yt; if (!p || !p.getDuration) return;
-              if (this._restarting || Date.now() - readyAt < 3000) return;
-              const S = YT.PlayerState, st = p.getPlayerState(), d = p.getDuration(), t = p.getCurrentTime();
-              if (st === S.PLAYING && d > 0 && d - t < 1.2) {
-                this._restarting = true; wrap.style.opacity = '0';
-                setTimeout(() => { p.seekTo(0, true); p.playVideo(); setTimeout(() => { wrap.style.opacity = '1'; this._restarting = false; }, 500); }, 150);
-              } else if (st === S.ENDED || st === S.PAUSED) {
-                this._restarting = true; wrap.style.opacity = '0';
-                p.mute(); p.seekTo(0, true); p.playVideo();
-                setTimeout(() => { if (p.getPlayerState() !== S.PLAYING) { p.loadVideoById({ videoId: VID, startSeconds: 0 }); p.mute(); } this._restarting = false; }, 1200);
-              }
-            }, 250);
-          },
-          onStateChange: e => { if (e.data === YT.PlayerState.PLAYING && !this._restarting) wrap.style.opacity = '1'; },
-        },
-      });
-    };
-    if (window.YT && window.YT.Player) make();
-    else {
-      const prev = window.onYouTubeIframeAPIReady;
-      window.onYouTubeIframeAPIReady = () => { if (prev) prev(); make(); };
-      if (!document.querySelector('script[src*="iframe_api"]')) { const s = document.createElement('script'); s.src = 'https://www.youtube.com/iframe_api'; document.head.appendChild(s); }
-    }
+    const v = this.heroVideoRef.current; if (!v) return;
+    v.muted = true; v.play().catch(() => {});
+    if ('IntersectionObserver' in window) { this._heroVidIO = new IntersectionObserver(es => { es[0].isIntersecting ? v.play().catch(() => {}) : v.pause(); }, { threshold: .05 }); this._heroVidIO.observe(v); }
+    this._heroVidVis = () => { if (document.hidden) v.pause(); else if (this._heroVisible !== false) v.play().catch(() => {}); };
+    document.addEventListener('visibilitychange', this._heroVidVis);
+  }
+  preload(p) {
+    this._pre = this._pre || new Set();
+    [p.cover, p.still, ...(p.images || [])].filter(s => s && !/\.(mp4|webm|mov)$/i.test(s) && !this._pre.has(s)).forEach(s => { this._pre.add(s); const im = new Image(); im.decoding = 'async'; im.src = s; });
   }
   selectFilter = key => {
     if (key === this.state.filter || this._filterBusy) return;
@@ -918,6 +959,7 @@ class Component extends DCLogic {
         void grid.offsetHeight;
         requestAnimationFrame(() => requestAnimationFrame(() => {
           cards.forEach((c, i) => { c.style.transition = ''; c.style.transitionDelay = Math.min(i * 28, 1000) + 'ms'; c.setAttribute('data-reveal', 'in'); });
+          setTimeout(() => cards.forEach(c => { c.style.transitionDelay = ''; }), Math.min((cards.length - 1) * 28, 1000) + 520);
           this._filterBusy = false;
         }));
       });
@@ -927,8 +969,8 @@ class Component extends DCLogic {
   sayHello = e => { const el = e.currentTarget; el.setAttribute('data-on', '1'); clearTimeout(el._helloT); el._helloT = setTimeout(() => el.removeAttribute('data-on'), 1400); };
   togglePix = () => {
     const cv = this.photoPixRef.current, img = this.photoRef.current; if (!cv || !img || !img.naturalWidth) return;
-    const to = this._pix ? 0 : 1; this._pix = !this._pix;
-    const from = this._pixT || 0, t0 = performance.now(), dur = 1200;
+    const to = this._pix ? 0 : 1; this._pix = !this._pix; if (to) this._pixData = null;
+    const from = this._pixT || 0, t0 = performance.now(), dur = to ? 2200 : 900;
     cancelAnimationFrame(this._pixRaf);
     const step = () => {
       const k = Math.min(1, (performance.now() - t0) / dur), e = k < .5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2;
@@ -942,19 +984,53 @@ class Component extends DCLogic {
     const box = cv.parentElement, W = box.clientWidth, H = box.clientHeight; if (!W || !H) return;
     if (t <= .002) { cv.style.opacity = '0'; return; }
     cv.style.opacity = '1';
-    const p = Math.max(1, Math.round(1 + t * 26));
-    const sw = Math.max(1, Math.round(W / p)), sh = Math.max(1, Math.round(H / p));
-    const tmp = this._pixTmp || (this._pixTmp = document.createElement('canvas'));
-    tmp.width = sw; tmp.height = sh; const tc = tmp.getContext('2d');
-    tc.setTransform(sw / W, 0, 0, sh / H, 0, 0);
-    const iw = img.naturalWidth, ih = img.naturalHeight, s0 = Math.max(W / iw, H / ih), dw = iw * s0, dh = ih * s0;
-    const ox = W / 2, oy = H * .08, sc = 1.35;
-    tc.translate(ox, oy); tc.scale(sc, sc); tc.translate(-ox, -oy);
-    tc.drawImage(img, (W - dw) / 2, 0, dw, dh);
     const dpr = Math.min(2, window.devicePixelRatio || 1), cw = Math.round(W * dpr), ch = Math.round(H * dpr);
     if (cv.width !== cw || cv.height !== ch) { cv.width = cw; cv.height = ch; }
-    const c = cv.getContext('2d'); c.setTransform(1, 0, 0, 1, 0, 0); c.imageSmoothingEnabled = false; c.clearRect(0, 0, cw, ch);
-    c.drawImage(tmp, 0, 0, cw, ch);
+    const c = cv.getContext('2d'); c.setTransform(dpr, 0, 0, dpr, 0, 0);
+    const accent = getComputedStyle(document.documentElement).getPropertyValue('--accent').trim() || '#3d94bf';
+    // phase 1 (0–.1): white flash
+    if (t < .1) { const a = 1 - t / .1; c.fillStyle = `rgba(11,11,12,${Math.min(1, t * 20)})`; c.fillRect(0, 0, W, H); c.fillStyle = `rgba(242,242,242,${a})`; c.fillRect(0, 0, W, H); return; }
+    const cell = 4.2, lh = cell * 1.12;
+    const cols = Math.ceil(W / cell), rows = Math.ceil(H / lh);
+    const tmp = this._pixTmp || (this._pixTmp = document.createElement('canvas'));
+    if (tmp.width !== cols || tmp.height !== rows || !this._pixData) {
+      tmp.width = cols; tmp.height = rows; const tc = tmp.getContext('2d');
+      tc.setTransform(cols / W, 0, 0, rows / H, 0, 0);
+      const iw = img.naturalWidth, ih = img.naturalHeight, s0 = Math.max(W / iw, H / ih), dw = iw * s0, dh = ih * s0;
+      const ox = W / 2, oy = H * .08, sc = 1.35;
+      tc.translate(ox, oy); tc.scale(sc, sc); tc.translate(-ox, -oy);
+      tc.drawImage(img, (W - dw) / 2, 0, dw, dh);
+      this._pixData = tc.getImageData(0, 0, cols, rows).data;
+      // per-cell random threshold: when each cell "locks" from noise into its true glyph
+      this._pixLock = Float32Array.from({ length: cols * rows }, () => Math.random());
+    }
+    const d = this._pixData, lock = this._pixLock;
+    const RAMP = ' .\'`^",:;Il!i><~+_-?][}{1)(|\\/tfjrxnuvczXYUJCLQ0OZmwqpdbkhao*#MW&8%B@$';
+    const NOISE = '01<>/\\|{}[]#%&*+=-_:;';
+    const p = (t - .1) / .9; // 0..1 after flash
+    c.fillStyle = '#0b0b0c'; c.fillRect(0, 0, W, H);
+    c.font = `600 ${cell * 1.15}px "JetBrains Mono", monospace`; c.textBaseline = 'top';
+    const frame = Math.floor(performance.now() / 45);
+    for (let y = 0; y < rows; y++) for (let x = 0; x < cols; x++) {
+      const i = (y * cols + x) * 4, l = (d[i] * .299 + d[i + 1] * .587 + d[i + 2] * .114) / 255;
+      const idx = y * cols + x, locked = lock[idx] < p * 1.15 - .1;
+      if (!locked) {
+        if (p > .05 && ((x * 7 + y * 13 + frame) % 3 === 0 || Math.random() < .2)) {
+          c.fillStyle = `rgba(242,242,242,${.15 + Math.random() * .5})`;
+          c.fillText(NOISE[(x * 31 + y * 17 + frame * 7) % NOISE.length], x * cell, y * lh);
+        }
+        continue;
+      }
+      const k = Math.min(RAMP.length - 1, Math.round(l * (RAMP.length - 1)));
+      if (k === 0) continue;
+      c.fillStyle = `rgba(242,242,242,${.28 + l * .72})`;
+      c.fillText(RAMP[k], x * cell, y * lh);
+    }
+    // scanline sweep + glitch bands during resolve
+    if (p < 1) {
+      const sy = p * H; c.fillStyle = '#f2f2f2'; c.globalAlpha = .9; c.fillRect(0, sy, W, 1.5); c.globalAlpha = 1;
+      if (Math.random() < .3) { const gy = Math.random() * H, gh = 6 + Math.random() * 30, gx = (Math.random() - .5) * 24; const seg = c.getImageData(0, gy * dpr, cw, gh * dpr); c.putImageData(seg, gx * dpr, gy * dpr); }
+    }
   }
   photoMove = e => {
     if (this._pmRaf) return; const ev = { clientX: e.clientX, clientY: e.clientY, currentTarget: e.currentTarget };
@@ -987,6 +1063,36 @@ class Component extends DCLogic {
     const col = this.photoColorRef.current; if (col) { col.style.transform = 'scale(1.35)'; col.style.clipPath = 'polygon(0 0,0 0,0 0)'; }
     [this.photoFrameRef, this.photoFrame2Ref].forEach(r => { if (r.current) r.current.style.opacity = '0'; });
   };
+  khEl = () => {
+    if (this._kh) return this._kh;
+    const el = document.createElement('img');
+    el.src = 'uploads/Knowhow.png'; el.alt = ''; el.draggable = false;
+    el.style.cssText = 'position:fixed;left:0;top:0;width:260px;max-width:70vw;height:auto;border:2px solid #0b0b0c;box-shadow:0 8px 24px rgba(0,0,0,.35);pointer-events:none;opacity:0;transform:scale(.96);transition:opacity .15s,transform .15s;z-index:99999;display:block';
+    document.body.appendChild(el);
+    this._kh = el; return el;
+  };
+  khTouch = () => window.matchMedia('(hover: none)').matches;
+  khPos = (e) => {
+    const el = this.khEl();
+    const w = el.offsetWidth || 260, h = el.offsetHeight || 150;
+    let x = e.clientX + 18, y = e.clientY + 18;
+    if (x + w > window.innerWidth - 8) x = Math.max(8, e.clientX - w - 18);
+    if (y + h > window.innerHeight - 8) y = Math.max(8, e.clientY - h - 18);
+    el.style.left = x + 'px'; el.style.top = y + 'px';
+  };
+  khShow = () => { const el = this.khEl(); el.style.opacity = '1'; el.style.transform = 'scale(1)'; };
+  khHide = () => { const el = this.khEl(); el.style.opacity = '0'; el.style.transform = 'scale(.96)'; this._khOpen = false; };
+  khEnter = (e) => { if (this.khTouch()) return; this.khPos(e); this.khShow(); };
+  khMove = (e) => { if (this.khTouch()) return; this.khPos(e); };
+  khLeave = () => { if (this.khTouch()) return; this.khHide(); };
+  khClick = (e) => {
+    if (!this.khTouch()) return;
+    e.stopPropagation();
+    if (this._khOpen) { this.khHide(); return; }
+    this.khPos(e); this.khShow(); this._khOpen = true;
+    const off = (ev) => { document.removeEventListener('click', off, true); this.khHide(); };
+    setTimeout(() => document.addEventListener('click', off, true), 0);
+  };
   componentDidMount() {
     this.applyAccent();
     this.initCanvas();
@@ -1004,7 +1110,7 @@ class Component extends DCLogic {
     this._introNodesStop = this.nodeField(this.introNodesRef.current, a => `rgba(242,242,242,${a * .8})`, { count: 2, spots: [[.8, .28], [.6, .12]], avoid: () => { const s = document.querySelector('[data-intro]'); return s ? [...s.querySelectorAll('img, [style*="font-size:clamp(40px"], [style*="grid-template-columns:repeat(4"]')].map(el => el.getBoundingClientRect()) : []; } });
     this.fitAbout();
     if ('ResizeObserver' in window) { this._aboutRO = new ResizeObserver(() => this.fitAbout()); if (this.aboutFitRef.current) this._aboutRO.observe(this.aboutFitRef.current); if (this.aboutInnerRef.current) this._aboutRO.observe(this.aboutInnerRef.current); }
-    this._onKey = e => { if (e.key === 'Escape') this.setState({ activeId: null }); };
+    this._onKey = e => { if (e.key === 'Escape') this.setState({ activeId: null, gal: 0 }); if (this.state.activeId && (e.key === 'ArrowLeft' || e.key === 'ArrowRight')) this.setState(s => ({ gal: (s.gal || 0) + (e.key === 'ArrowRight' ? 1 : -1), galDir: e.key === 'ArrowRight' ? 1 : -1 })); };
     window.addEventListener('keydown', this._onKey);
   }
   componentDidUpdate(prev) {
@@ -1134,7 +1240,7 @@ class Component extends DCLogic {
       if (grid && !grid._seqIO) {
         grid._seqIO = new IntersectionObserver(es => es.forEach(x => {
           const cards = [...grid.children].filter(c => c.hasAttribute('data-reveal'));
-          if (x.isIntersecting) cards.forEach((c, i) => { c.style.transitionDelay = Math.min(i * 28, 1000) + 'ms'; c.setAttribute('data-reveal', 'in'); });
+          if (x.isIntersecting) { cards.forEach((c, i) => { c.style.transitionDelay = Math.min(i * 28, 1000) + 'ms'; c.setAttribute('data-reveal', 'in'); }); clearTimeout(grid._clr); grid._clr = setTimeout(() => cards.forEach(c => { c.style.transitionDelay = ''; }), Math.min((cards.length - 1) * 28, 1000) + 520); }
           else cards.forEach(c => { c.style.transitionDelay = '0ms'; c.setAttribute('data-reveal', ''); });
         }), { threshold: .05 });
         grid._seqIO.observe(grid);
@@ -1156,12 +1262,12 @@ class Component extends DCLogic {
     clearTimeout(this._introT1); clearTimeout(this._introT2); clearTimeout(this._fx1); clearTimeout(this._fx2); document.body.style.overflow = '';
     if (this._tick) clearInterval(this._tick);
     if (this._cursorCleanup) this._cursorCleanup();
-    if (this._yt && this._yt.destroy) this._yt.destroy();
+    if (this._heroVidIO) this._heroVidIO.disconnect(); if (this._heroVidVis) document.removeEventListener('visibilitychange', this._heroVidVis);
     window.removeEventListener('keydown', this._onKey);
     if (this._cleanup) this._cleanup();
   }
   applyAccent() {
-    if (this.rootRef.current) this.rootRef.current.style.setProperty('--accent', this.props.accent ?? '#f2f2f2');
+    if (this.rootRef.current) this.rootRef.current.style.setProperty('--accent', this.props.accent ?? '#3d94bf');
   }
   initCanvas() {
     const c = this.canvasRef.current; if (!c) return;
@@ -1210,7 +1316,7 @@ class Component extends DCLogic {
     const { filter, activeId, aboutTab } = this.state;
     const TABS = [['profile', 'PROFILE'], ['skills', 'SKILLS'], ['exp', 'EXPERIENCE']];
     const f = FILTERS.find(x => x.key === filter) || FILTERS[0];
-    const key = p => p.id || p.bili;
+    const key = p => p.id || p.bili || p.key;
     const sorted = PROJECTS.filter(f.match).slice().sort((a, b) => (parseInt(b.year) || 0) - (parseInt(a.year) || 0));
     const n = sorted.length || 1;
     const vw = typeof window !== 'undefined' ? window.innerWidth : 1440;
@@ -1221,24 +1327,48 @@ class Component extends DCLogic {
       ...p,
       catLabel: p.sub,
       shortCat: ({ MV: 'MV', AD: 'AD', AN: 'ANIM', VR: 'VR', EXH: p.sub === 'CONCERT' ? 'LIVE' : 'EXH' })[p.cat] || p.cat,
-      thumb: p.id ? `https://i.ytimg.com/vi/${p.id}/hqdefault.jpg` : '',
-      bg: p.id ? `url(https://i.ytimg.com/vi/${p.id}/hqdefault.jpg)` : 'none',
+      thumb: p.cover || (p.id ? `https://i.ytimg.com/vi/${p.id}/hqdefault.jpg` : ''),
+      bg: p.cover ? `url(${p.cover})` : p.id ? `url(https://i.ytimg.com/vi/${p.id}/hqdefault.jpg)` : 'none',
+      hasVideo: !!(p.id || p.bili),
+      still: p.still || p.cover || '',
       isBili: !!p.bili,
+      noThumb: !p.cover && !p.id,
       url: p.bili ? `https://www.bilibili.com/video/${p.bili}/` : `https://youtu.be/${p.id}${p.start ? '?t=' + p.start : ''}`,
       embed: p.bili ? `https://player.bilibili.com/player.html?bvid=${p.bili}&high_quality=1&autoplay=1` : `https://www.youtube-nocookie.com/embed/${p.id}?autoplay=1&rel=0${p.start ? '&start=' + p.start : ''}`,
-      platform: p.bili ? 'OPEN ON BILIBILI ↗' : 'OPEN ON YOUTUBE ↗',
-      open: () => this.setState({ activeId: key(p) }),
+      platform: p.bili ? 'OPEN ON BILIBILI ↗' : p.id ? 'OPEN ON YOUTUBE ↗' : '',
+      warm: () => this.preload(p),
+      open: () => { this.preload(p); this.setState({ activeId: key(p), gal: 0 }); },
     });
     const activeRaw = PROJECTS.find(p => key(p) === activeId);
+    const activeHasVideo = !!(activeRaw && (activeRaw.id || activeRaw.bili));
+    const activeDeco = activeRaw ? decorate(activeRaw) : null;
+    const imgs = activeRaw ? [activeRaw.cover, activeRaw.still, ...(activeRaw.images || [])].filter(Boolean) : [];
+    if (activeRaw && !imgs.length && activeDeco.thumb) imgs.push(activeDeco.thumb);
+    const gi = imgs.length ? (((this.state.gal || 0) % imgs.length) + imgs.length) % imgs.length : 0;
+    const cur = imgs[gi] || '';
+    const curIsVideo = /\.(mp4|webm|mov)$/i.test(cur);
+    const gallery = imgs.map((src, i) => ({ src, label: String.fromCharCode(65 + i), bg: i === gi ? '#f2f2f2' : 'rgba(11,11,12,.7)', fg: i === gi ? '#0b0b0c' : '#f2f2f2', go: e => { e.stopPropagation(); this.setState({ gal: i, galDir: i > gi ? 1 : -1 }); } }));
+    const galKey = activeId + ':' + gi, galAnim = (this.state.galDir || 1) < 0 ? 'galL' : 'galR';
+    const galReadout = imgs.length ? `${String(gi + 1).padStart(2, '0')} / ${String(imgs.length).padStart(2, '0')}` : '';
     return {
       rootRef: this.rootRef,
+      coverStyle: this.props.coverStyle ?? 'film',
+      activeHasVideo,
+      activeStillBg: cur && !curIsVideo ? `url(${cur})` : 'none',
+      activeStillOn: !!cur && !curIsVideo,
+      activeVideoOn: curIsVideo, activeVideoSrc: curIsVideo ? cur : '',
+      activeEmpty: !!activeRaw && !cur,
+      activeDesc: (activeRaw && activeRaw.desc) || '作品說明待補。',
+      activeTools: activeRaw ? (activeRaw.tools || []).join(' · ') : '',
       canvasRef: this.canvasRef,
       photoRef: this.photoRef,
       photoColorRef: this.photoColorRef,
       photoFrameRef: this.photoFrameRef,
       photoFrame2Ref: this.photoFrame2Ref,
-      ytRef: this.ytRef,
-      ytWrapRef: this.ytWrapRef,
+      heroVideoRef: this.heroVideoRef,
+      heroVidWrapRef: this.heroVidWrapRef,
+      toggleSound: this.toggleSound, soundLabel: this.state.sound ? 'SOUND ON' : 'SOUND OFF', soundIcon: this.state.sound ? '◉' : '○',
+      heroVideoReady: this.heroVideoReady,
       cursorRef: this.cursorRef,
       cursorLabelRef: this.cursorLabelRef,
       cursorHotRef: this.cursorHotRef,
@@ -1248,6 +1378,7 @@ class Component extends DCLogic {
       aboutTabs: TABS.map(([k, label]) => ({ label, select: () => this.setState({ aboutTab: k }), bg: k === aboutTab ? '#0b0b0c' : 'transparent', color: k === aboutTab ? '#f2f2f2' : '#0b0b0c' })),
       tabProfile: aboutTab === 'profile', tabSkills: aboutTab === 'skills', tabExp: aboutTab === 'exp',
       photoMove: this.photoMove,
+      khEnter: this.khEnter, khMove: this.khMove, khLeave: this.khLeave, khClick: this.khClick,
       photoPixRef: this.photoPixRef,
       togglePix: this.togglePix,
       sayHello: this.sayHello,
@@ -1266,7 +1397,11 @@ class Component extends DCLogic {
       gridRows: mobile ? 'auto' : `repeat(${rows}, minmax(0,1fr))`,
       hasActive: !!activeRaw,
       active: activeRaw ? decorate(activeRaw) : {},
-      close: () => this.setState({ activeId: null }),
+      close: () => this.setState({ activeId: null, gal: 0 }),
+      gallery, galleryMulti: gallery.length > 1,
+      galKey, galAnim, galReadout,
+      galPrev: () => this.setState({ gal: (gi - 1 + gallery.length) % gallery.length, galDir: -1 }),
+      galNext: () => this.setState({ gal: (gi + 1) % gallery.length, galDir: 1 }),
       stop: e => e.stopPropagation(),
       coreTools: CORE,
       aiTools: AI,
