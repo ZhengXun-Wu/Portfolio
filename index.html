@@ -90,11 +90,12 @@ section[data-focus="0"]{opacity:.12;filter:grayscale(1);transform:scale(.94);poi
 [data-m="pfText"]>*{animation:pfRow .5s cubic-bezier(.2,.7,.2,1) both}
 [data-m="pfText"]>*:nth-child(1){animation-delay:.3s}[data-m="pfText"]>*:nth-child(2){animation-delay:.38s}[data-m="pfText"]>*:nth-child(3){animation-delay:.46s}[data-m="pfText"]>*:nth-child(4){animation-delay:.54s}[data-m="pfText"]>*:nth-child(5){animation-delay:.62s}
 [data-pf-panel]:hover [data-pf-img]{filter:saturate(1) brightness(1.05)!important}
+[data-pf-panel]:not([data-open="1"]):hover [data-pf-frost]{opacity:.35!important}
 html[data-night="1"] [data-pf-panel]:hover [data-pf-img]{filter:invert(1) hue-rotate(180deg) saturate(1) brightness(1.05)!important}
 [data-pf-panel][data-open="1"] [data-pf-imgcol]{min-width:200px}
 @media (max-width:1200px) and (min-width:861px){[data-pf-panel][data-open="1"]{flex-direction:column!important}[data-pf-panel][data-open="1"] [data-pf-imgcol]{flex:1 1 0!important;min-width:0!important;min-height:120px}[data-pf-panel][data-open="1"] [data-m="pfText"]{flex:0 1 55%!important;max-width:none!important;border-left:0!important;border-top:2px solid #0b0b0c;padding:12px 16px!important;gap:8px!important}[data-pf-panel][data-open="1"] [data-m="pfText"] h3{display:none}}
 html[data-night="1"] [data-pf-img]{filter:invert(1) hue-rotate(180deg) saturate(.85)!important}
-html[data-night="1"] [data-pf-base],html[data-night="1"] [data-pf-grad]{filter:invert(1) hue-rotate(180deg)}
+html[data-night="1"] [data-pf-base],html[data-night="1"] [data-pf-grad],html[data-night="1"] [data-pf-no],html[data-night="1"] [data-pf-vtitle],html[data-night="1"] [data-pf-ov]{filter:invert(1) hue-rotate(180deg)}
 @keyframes galBar{0%{transform:translateX(-101%)}100%{transform:translateX(101%)}}
 @keyframes galGlitch{0%{clip-path:inset(20% 0 70% 0);transform:translateX(-10px)}25%{clip-path:inset(60% 0 25% 0);transform:translateX(8px)}50%{clip-path:inset(5% 0 85% 0);transform:translateX(-5px)}75%{clip-path:inset(75% 0 10% 0);transform:translateX(6px)}100%{clip-path:inset(0 0 100% 0);transform:none}}
 [data-m="modalInfo"]>*{animation:mdRow .45s cubic-bezier(.2,.7,.2,1) both}
@@ -595,12 +596,13 @@ section[data-focus="0"]{opacity:1;filter:none;transform:none;pointer-events:auto
                   <sc-if value="{{ r.curIsImg }}" hint-placeholder-val="{{ false }}"><div data-pf-img="1" style="position:absolute;inset:0;background-size:contain;background-repeat:no-repeat;background-position:center;background-image:{{ r.curBg }}"></div></sc-if>
                 </div>
               </sc-if>
+              <div data-pf-frost="1" style="position:absolute;inset:0;pointer-events:none;background:rgba(128,128,128,.10);backdrop-filter:blur(10px) saturate(.75);-webkit-backdrop-filter:blur(10px) saturate(.75);border-left:1px solid rgba(128,128,128,.3);transition:opacity .45s cubic-bezier(.2,.7,.2,1);opacity:{{ r.frostOp }}"></div>
               <div data-pf-grad="1" style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,11,12,.55) 0%,transparent 28%,transparent 55%,rgba(11,11,12,.85) 100%);pointer-events:none"></div>
               <div data-pf-no="1" style="position:absolute;top:10px;left:0;right:0;display:flex;justify-content:center;font-family:'Chakra Petch',sans-serif;font-size:clamp(16px,1.4vw,24px);font-weight:700;line-height:1;color:#f2f2f2;letter-spacing:-.02em;text-shadow:0 1px 6px rgba(0,0,0,.5)">{{ r.no }}</div>
               <div data-pf-vtitle="1" style="position:absolute;left:0;right:0;bottom:14px;display:flex;justify-content:flex-end;writing-mode:vertical-rl;text-orientation:sideways;margin:0 auto;max-height:58%;overflow:hidden;font-family:'Chakra Petch','Noto Sans TC',sans-serif;font-size:clamp(11px,.95vw,15px);font-weight:700;letter-spacing:.04em;color:#f2f2f2;white-space:nowrap;text-overflow:ellipsis;text-shadow:0 1px 6px rgba(0,0,0,.6);transition:opacity .3s;opacity:{{ r.vOp }}">{{ r.title }}</div>
               <sc-if value="{{ r.isOpen }}" hint-placeholder-val="{{ false }}">
-                <div style="position:absolute;left:14px;bottom:14px;display:flex;gap:6px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;animation:pfRow .5s cubic-bezier(.2,.7,.2,1) .35s both"><div style="padding:4px 8px;background:#0b0b0c;color:#f2f2f2">{{ r.shortCat }}</div><div style="padding:4px 8px;background:#f2f2f2;color:#0b0b0c">{{ r.year }}</div></div>
-                <div style="position:absolute;right:14px;bottom:14px;display:flex;gap:6px;align-items:center;animation:pfRow .5s cubic-bezier(.2,.7,.2,1) .4s both">
+                <div data-pf-ov="1" style="position:absolute;left:14px;bottom:14px;display:flex;gap:6px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;animation:pfRow .5s cubic-bezier(.2,.7,.2,1) .35s both"><div style="padding:4px 8px;background:#0b0b0c;color:#f2f2f2">{{ r.shortCat }}</div><div style="padding:4px 8px;background:#f2f2f2;color:#0b0b0c">{{ r.year }}</div></div>
+                <div data-pf-ov="1" style="position:absolute;right:14px;bottom:14px;display:flex;gap:6px;align-items:center;animation:pfRow .5s cubic-bezier(.2,.7,.2,1) .4s both">
                   <sc-if value="{{ r.hasGal }}" hint-placeholder-val="{{ false }}">
                     <div onClick="{{ r.galPrev }}" style="cursor:pointer;padding:6px 9px;border:1px solid rgba(242,242,242,.7);color:#f2f2f2;font-family:'JetBrains Mono',monospace;font-size:10px;background:rgba(11,11,12,.55)">←</div>
                     <div style="display:flex;gap:3px"><sc-for list="{{ r.gal }}" as="g" hint-placeholder-count="0"><div onClick="{{ g.go }}" style="cursor:pointer;padding:6px 8px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.08em;border:1px solid rgba(242,242,242,.7);background:{{ g.bg }};color:{{ g.fg }}">{{ g.label }}</div></sc-for></div>
@@ -732,7 +734,7 @@ const PROJECTS = [
   { id: 'x1J6ukR3Qrs', cover: 'uploads/batch-1789405641968-h112-c-s.jpg', still: 'uploads/batch-1789405642001-mtwx-m.jpg', cat: 'MV', sub: 'MV', title: '半晴天', client: '陶喆 David Tao', year: '2025', desc: '製作 5 種不同類型的虛擬攝影棚環境，並負責現場即時渲染的效能優化。', role: '環境美術 / 效能優化', tools: ['Unreal', 'Maya', 'Perforce', 'Moonland', 'Flow'] },
   { id: 'lxmVTHLcQ84', cover: 'uploads/batch-1789405523716-mtnc-s.jpg', still: 'uploads/batch-1789405524203-f5yn-m.jpg', cat: 'AD', sub: 'AD', title: '光之呼吸', client: '新光保全', year: '2026', desc: '帶領新人共同建置大型城市場景，負責分工、訂定資產規格與最後的場景整合，過程中同步輔導。', role: '團隊管理 / 環境美術', tools: ['Unreal', 'Maya', 'Substance 3D Painter', 'Substance 3D Designer', 'RizomUV', 'Git Extensions', 'ChatGPT'] },
   { id: 'H1PGMDA6C6A', cover: 'uploads/thumbs-1789404941929-6wgf-s.jpg', still: 'uploads/thumbs-1789404941955-x8qb-m.jpg', cat: 'AD', sub: 'AD', title: 'Cyborg 15 A13V – Cyber-Up!', client: 'MSI', year: '2023', desc: '負責進度管理與材質開發，排除三個算圖問題：Alembic 算圖殘影，改 MRQ 取樣與抽格方式解決；毛髮閃爍，追到 Maya 輸出 cache 的流程問題，重測後將正確流程交付團隊；半透明排序，以 depth cull 調整深度。並在此案制定跨部門沿用的 Maya 與 Unreal 檔案交換標準。', role: '技術排除 / 材質開發 / 跨部門整合', tools: ['Unreal', 'Maya', 'Substance 3D Painter', 'RizomUV', 'Substance 3D Designer', 'Git Extensions'] },
-  { id: 'JjHpWTDkrCg', cover: 'uploads/thumbs-1789404942179-06zt-s.jpg', still: 'uploads/thumbs-1789404941897-gq91-m.jpg', images: ['uploads/files-1789656235315-gakn.jpg', 'uploads/files-1789656235853-ys8n.jpg', 'uploads/files-1789656235504-qfwu.jpg', 'uploads/files-1789656235710-8bn4.jpg', 'uploads/files-1789656235428-tr9y.jpg', 'uploads/files-1789656235375-bbir.jpg'], cat: 'AD', sub: 'AD', title: 'Cyborg 14 A13V – Cyber-Up!', client: 'MSI', year: '2024', desc: '該專案為跨部門協作案，由於動畫專案在多人同時製作一定會出現產品視覺不統一的狀況，在專案前期我建立標準化的產品 Blueprint，讓產品在每一卡的呈現一致，各部件材質與補光強度都能系統化調整。讓我在更新產品的時候，大家也不用擔心自己還需要重新調整產品細節，可以專心在場景設計上。另外我也負責材質開發、特效、場景製作、版本控制維護與技術排除。\n\n例如筆電上的透明質感是透過SpiralBlur去混合DepthCulling材質球所做出的塑膠質感；以及腳踩下去閃爍的效果都是透過UV結合物件位置去製作的動態效果。', role: '技術開發 / 材質開發 / 特效', tools: ['Unreal', 'Maya', 'Substance 3D Designer', 'Substance 3D Painter', 'After Effects', 'RizomUV', 'Git Extensions'] },
+  { id: 'JjHpWTDkrCg', cover: 'uploads/thumbs-1789404942179-06zt-s.jpg', still: 'uploads/thumbs-1789404941897-gq91-m.jpg', images: ['uploads/Cyborg 14_B.jpg', 'uploads/files-1789656235315-gakn.jpg', 'uploads/files-1789656235853-ys8n.jpg', 'uploads/files-1789656235504-qfwu.jpg', 'uploads/files-1789656235710-8bn4.jpg', 'uploads/files-1789656235428-tr9y.jpg', 'uploads/files-1789656235375-bbir.jpg'], cat: 'AD', sub: 'AD', title: 'Cyborg 14 A13V – Cyber-Up!', client: 'MSI', year: '2024', desc: '該專案為跨部門協作案，由於動畫專案在多人同時製作一定會出現產品視覺不統一的狀況，在專案前期我建立標準化的產品 Blueprint，讓產品在每一卡的呈現一致，各部件材質與補光強度都能系統化調整。讓我在更新產品的時候，大家也不用擔心自己還需要重新調整產品細節，可以專心在場景設計上。另外我也負責材質開發、特效、場景製作、版本控制維護與技術排除。\n\n例如筆電上的透明質感是透過SpiralBlur去混合DepthCulling材質球所做出的塑膠質感；以及腳踩下去閃爍的效果都是透過UV結合物件位置去製作的動態效果。', role: '技術開發 / 材質開發 / 特效', tools: ['Unreal', 'Maya', 'Substance 3D Designer', 'Substance 3D Painter', 'After Effects', 'RizomUV', 'Git Extensions'] },
   { id: 'td2f1qpJxLg', cover: 'uploads/batch-1789405523952-cqu8-s.jpg', still: 'uploads/batch-1789405523974-onn8-m.jpg', cat: 'AN', sub: 'ANIMATION', title: 'Voice of the Rebels – EP01 Heroes', client: 'ROG', year: '2023', desc: '跨部門協作的 3 集動畫，負責材質開發與 Blueprint 規劃。為了讓各部門集中管理場景資產，自建管理系統，使用者在 Details 面板選擇卡號 enum 即可切換 Level 資訊；另協同排除骨架資訊無法匯入的問題。', role: '技術開發 / 材質開發 / 跨部門整合', tools: ['Unreal', 'Maya', 'Git Extensions'] },
   { id: 'NuexSRa2x_s', cover: 'uploads/thumbs-1789404942062-sjz5-s.jpg', still: 'uploads/thumbs-1789404955750-tav9-m.jpg', cat: 'AN', sub: 'ANIMATION', title: 'Get TUF. Game Tough', client: 'ASUS TUF Gaming', year: '2022', desc: '製作 Unreal 場景，並協同排除 Alembic 無法匯入與材質修正等技術問題。', role: '環境美術 / 技術排除', tools: ['Unreal', 'Maya', 'Substance 3D Painter', 'Substance 3D Designer', 'Photoshop', 'RizomUV', 'Git Extensions'] },
   { id: 'P9WFkstVlZ4', images: ['uploads/batch-1789406989398-ntlx-m.jpg', 'uploads/batch-1789406991130-9dxi-m.jpg', 'uploads/batch-1789406991971-3spq-m.jpg'], cover: 'uploads/thumbs-1789404941979-am28-s.jpg', still: 'uploads/thumbs-1789404941992-er6l-m.jpg', cat: 'VR', sub: 'VR', title: '重返第一法庭．噍吧哖世紀大審判', client: '國立臺灣歷史博物館', year: '2024', desc: '主要負責材質開發與技術問題排除。包括動畫匯入後位置偏移與原先軟體不同，跨部門溝通、確認流程問題並修正，把方法交給其他部門去調整修正工具；協助開發 PPV 材質做筆觸式關卡轉換過場、用 Stencil 保留主角，並在各美術的角色材質統一加入 Material Function，確保在進行轉換時人物會視覺上看起來是無縫的進行切換，讓每段轉場平順可控；並且整合所有7大場景整合到相同Sequence，另將部分骨架動畫以 AnimToTexture 烘成 Bone Animation Texture，改由材質驅動靜態網格播放，減輕骨架運算壓力。\n\n同時也協助團隊排除Git Extensions遇到問題。', role: '材質開發 / 技術排除 / 跨部門整合', tools: ['Unreal', 'Maya', 'Substance 3D Painter', 'RizomUV', 'Git Extensions'] },
@@ -1178,13 +1180,14 @@ class Component extends DCLogic {
     const off = (ev) => { document.removeEventListener('click', off, true); this.khHide(); };
     setTimeout(() => document.addEventListener('click', off, true), 0);
   };
+  hi = (s) => s ? s.replace(/-s\.(jpg|png)$/, '.$1') : s;
   FEATURED = ['ykl3faOyhPo', 'Ev_9AEj4Ifw', 'P9WFkstVlZ4', 'gX3xJbY_U3U', '8lINMspqVDo', 'JjHpWTDkrCg', 'rTBCdeZGgkI', 'downcity', 'c7p3kj6PfvY', 'z2pjdyw7fKg'];
   pfKey = (dir) => {
     const key = p => p.id || p.bili || p.key;
     const list = this.FEATURED.map(k => PROJECTS.find(p => key(p) === k)).filter(Boolean);
     const n = list.length; if (!n) return;
     let i = this.state.pfOpen == null ? 0 : this.state.pfOpen, g = this.state.pfGal || 0;
-    const len = p => Math.max(1, new Set([p.still || p.cover, ...(p.images || [])].filter(Boolean)).size);
+    const len = p => Math.max(1, new Set([this.hi(p.cover), p.still, ...(p.images || [])].filter(Boolean)).size);
     if (this.state.pfOpen == null) { this.setState({ pfOpen: 0, pfGal: 0 }); return; }
     g += dir;
     if (g >= len(list[i])) { i = (i + 1) % n; g = 0; }
@@ -1445,7 +1448,7 @@ class Component extends DCLogic {
     const activeRaw = PROJECTS.find(p => key(p) === activeId);
     const activeHasVideo = !!(activeRaw && (activeRaw.id || activeRaw.bili));
     const activeDeco = activeRaw ? decorate(activeRaw) : null;
-    const imgs = activeRaw ? [...new Set([activeRaw.still || activeRaw.cover, ...(activeRaw.images || [])].filter(Boolean))] : [];
+    const imgs = activeRaw ? [...new Set([this.hi(activeRaw.cover), activeRaw.still, ...(activeRaw.images || [])].filter(Boolean))] : [];
     if (activeRaw && !imgs.length && activeDeco.thumb) imgs.push(activeDeco.thumb);
     const gi = imgs.length ? (((this.state.gal || 0) % imgs.length) + imgs.length) % imgs.length : 0;
     const cur = imgs[gi] || '';
@@ -1500,13 +1503,13 @@ class Component extends DCLogic {
       isFeat, gridDisplay: isFeat ? 'none' : 'grid', viewKey: 'view:' + (this.state.view || 'grid'),
       pfRows: sorted.map((p, i) => {
         const d = decorate(p), isOpen = this.state.pfOpen === i, anyOpen = this.state.pfOpen != null;
-        const gimgs = [...new Set([p.still || p.cover, ...(p.images || [])].filter(Boolean))];
+        const gimgs = [...new Set([this.hi(p.cover), p.still, ...(p.images || [])].filter(Boolean))];
         const gn = gimgs.length || 1, g = isOpen ? ((((this.state.pfGal || 0) % gn) + gn) % gn) : 0;
         const cur = gimgs[g] || d.thumb, curIsVideo = /\.(mp4|webm|mov)$/i.test(cur);
         const stopGo = (fn) => (e) => { e.stopPropagation(); fn(); };
-        return { ...d, bg2: isOpen && d.still ? 'url(' + d.still + ')' : d.bg, no: String(i + 1).padStart(2, '0'), year: p.year || '', client: p.client || '', role: p.role || '', toolList: p.tools || [], desc: (p.desc || '').replace(/\n+/g, ' '),
+        return { ...d, bg2: isOpen && d.still ? 'url(' + d.still + ')' : (p.cover ? 'url(' + this.hi(p.cover) + ')' : d.bg), no: String(i + 1).padStart(2, '0'), year: p.year || '', client: p.client || '', role: p.role || '', toolList: p.tools || [], desc: (p.desc || '').replace(/\n+/g, ' '),
           isOpen, openAttr: isOpen ? '1' : '0', flex: isOpen ? '1 1 0' : anyOpen ? '0 0 clamp(40px,4.2vw,64px)' : '1 1 0', vOp: isOpen ? 0 : 1,
-          imgFilter: isOpen ? 'saturate(.9)' : 'saturate(.55) brightness(.85)', imgScale: isOpen ? 'none' : 'scale(1.08)',
+          imgFilter: isOpen ? 'saturate(.9)' : 'saturate(.7) brightness(.9)', imgScale: isOpen ? 'none' : 'scale(1.08)', frostOp: isOpen ? 0 : 1,
           cur, curIsVideo, curIsImg: !curIsVideo, curBg: 'url(' + cur + ')', galKey: 'pfg:' + i + ':' + g, hasGal: gimgs.length > 1,
           gal: gimgs.map((src, k) => ({ label: String.fromCharCode(65 + k), bg: k === g ? '#f2f2f2' : 'rgba(11,11,12,.55)', fg: k === g ? '#0b0b0c' : '#f2f2f2', go: stopGo(() => this.setState({ pfGal: k })) })),
           galPrev: stopGo(() => this.setState(s => ({ pfGal: (s.pfGal || 0) - 1 }))), galNext: stopGo(() => this.setState(s => ({ pfGal: (s.pfGal || 0) + 1 }))),
