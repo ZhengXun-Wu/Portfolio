@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&amp;family=JetBrains+Mono:wght@400;500;700&amp;family=Noto+Sans+TC:wght@300;400;500;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#f4f4f4;color:#0b0b0c;font-family:-apple-system,"SF Pro Display","PingFang TC","Noto Sans TC",system-ui,sans-serif;-webkit-font-smoothing:antialiased;user-select:none}
+a{color:inherit;text-decoration:none}a:hover{color:var(--accent,#3d94bf)}
+button{font-family:inherit}
+html[data-night="1"]{filter:invert(1) hue-rotate(180deg);background:#f4f4f4}
+html[data-night="1"] body{background:transparent}
+html[data-night="1"] canvas,html[data-night="1"] img{filter:invert(1) hue-rotate(180deg)}
+@keyframes pgIn{0%{clip-path:inset(0 100% 0 0);transform:translateX(-10px)}60%{clip-path:inset(0)}100%{clip-path:inset(0);transform:none}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+@media (max-width:860px){
+[data-m="hide"]{display:none!important}
+[data-m="topbar"]{padding:0 12px!important}
+[data-m="viewer"]{grid-template-columns:minmax(0,1fr)!important}
+[data-m="rail"]{display:none!important}
+[data-m="stage"]{padding:12px!important}
+[data-m="ctrl"]{padding:10px 12px!important;gap:8px!important}
+}
+</style>
+</helmet>
+<div ref="{{ rootRef }}" style="min-height:100vh;display:flex;flex-direction:column;background:#f4f4f4;background-image:linear-gradient(rgba(11,11,12,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(11,11,12,.06) 1px,transparent 1px);background-size:48px 48px">
+  <nav data-m="topbar" style="position:sticky;top:0;z-index:10;height:64px;display:flex;align-items:stretch;justify-content:space-between;background:#0b0b0c;color:#f2f2f2;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;border-bottom:2px solid #0b0b0c">
+    <div style="display:flex;align-items:stretch">
+      <a href="index.html" style="display:flex;align-items:center;gap:12px;padding:0 20px;border-right:1px solid rgba(255,255,255,.18);font-family:'Chakra Petch',sans-serif;font-size:16px;font-weight:700;letter-spacing:.04em;color:#f2f2f2" style-hover="background:#f2f2f2;color:#0b0b0c"><span>WU ZHENG XUN</span></a>
+      <a href="index.html" style="display:flex;align-items:center;padding:0 18px;border-right:1px solid rgba(255,255,255,.18);color:#f2f2f2" style-hover="background:#f2f2f2;color:#0b0b0c">← BACK</a>
+      <div style="display:flex;align-items:center;padding:0 18px;color:rgba(242,242,242,.6)"><span style="color:var(--accent,#3d94bf)">04</span><span style="margin-left:.6em">PORTFOLIO — 作品集 2026</span></div>
+    </div>
+    <div style="display:flex;align-items:stretch">
+      <button onClick="{{ toggleNight }}" style="cursor:pointer;display:flex;align-items:center;gap:8px;padding:0 16px;border:0;border-left:1px solid rgba(255,255,255,.18);background:transparent;color:#f2f2f2;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em" style-hover="background:#f2f2f2;color:#0b0b0c"><span style="font-size:14px;line-height:1">◐</span><span data-m="hide">{{ nightLabel }}</span></button>
+      <a href="uploads/portfolio-2026.pdf" download="WuZhengXun_Portfolio_2026.pdf" style="display:flex;align-items:center;padding:0 20px;background:var(--accent,#3d94bf);color:#f2f2f2;font-weight:700" style-hover="background:#f2f2f2;color:#0b0b0c">PDF ↓</a>
+    </div>
+  </nav>
+
+  <div data-m="viewer" style="flex:1 1 auto;display:grid;grid-template-columns:120px minmax(0,1fr);min-height:0">
+    <div data-m="rail" style="border-right:2px solid #0b0b0c;background:#ececec;position:sticky;top:64px;height:calc(100vh - 64px);overflow:auto;scrollbar-width:none;display:flex;flex-direction:column;gap:8px;padding:12px 10px;box-sizing:border-box">
+      <sc-for list="{{ thumbs }}" as="t" hint-placeholder-count="0">
+        <div onClick="{{ t.go }}" style="cursor:pointer;position:relative;border:2px solid {{ t.border }};background:#0b0b0c;aspect-ratio:16/9;overflow:hidden;flex:none;transition:border-color .15s,opacity .15s;opacity:{{ t.op }}">
+          <img src="{{ t.src }}" alt="" style="display:block;width:100%;height:100%;object-fit:cover">
+          <div style="position:absolute;left:4px;bottom:4px;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.1em;padding:2px 5px;background:#0b0b0c;color:#f2f2f2">{{ t.no }}</div>
+        </div>
+      </sc-for>
+    </div>
+
+    <div style="display:flex;flex-direction:column;min-width:0;min-height:0">
+      <div data-m="stage" onClick="{{ stageClick }}" style="flex:1 1 auto;min-height:0;display:grid;place-items:center;padding:clamp(12px,3vh,32px) clamp(12px,4vw,56px);box-sizing:border-box;cursor:pointer">
+        <div key="{{ pageKey }}" style="position:relative;width:min(100%,calc((100vh - 64px - 70px - 2 * clamp(12px,3vh,32px)) * {{ ratio }}));aspect-ratio:{{ ratioCss }};border:2px solid #0b0b0c;background:#0b0b0c;box-shadow:10px 10px 0 rgba(11,11,12,.18);overflow:hidden;animation:pgIn .55s cubic-bezier(.2,.7,.2,1) both">
+          <canvas ref="{{ canvasRef }}" style="position:absolute;inset:0;width:100%;height:100%;display:block"></canvas>
+          <sc-if value="{{ loading }}" hint-placeholder-val="{{ true }}">
+            <div style="position:absolute;inset:0;display:grid;place-items:center;color:#f2f2f2;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.2em;background:#0b0b0c"><span style="animation:blink 1s steps(1) infinite">▮ LOADING {{ status }}</span></div>
+          </sc-if>
+          <div style="position:absolute;top:0;left:0;width:18px;height:18px;border-left:2px solid #f2f2f2;border-top:2px solid #f2f2f2;mix-blend-mode:difference;pointer-events:none"></div>
+          <div style="position:absolute;top:0;right:0;width:18px;height:18px;border-right:2px solid #f2f2f2;border-top:2px solid #f2f2f2;mix-blend-mode:difference;pointer-events:none"></div>
+          <div style="position:absolute;bottom:0;left:0;width:18px;height:18px;border-left:2px solid #f2f2f2;border-bottom:2px solid #f2f2f2;mix-blend-mode:difference;pointer-events:none"></div>
+          <div style="position:absolute;bottom:0;right:0;width:18px;height:18px;border-right:2px solid #f2f2f2;border-bottom:2px solid #f2f2f2;mix-blend-mode:difference;pointer-events:none"></div>
+        </div>
+      </div>
+      <div data-m="ctrl" style="flex:none;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px clamp(12px,4vw,56px);border-top:2px solid #0b0b0c;background:#ececec;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em">
+        <button onClick="{{ prev }}" style="cursor:pointer;border:2px solid #0b0b0c;background:#f4f4f4;color:#0b0b0c;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;padding:10px 16px;transition:all .15s" style-hover="background:#0b0b0c;color:#f2f2f2">← PREV</button>
+        <div style="display:flex;align-items:center;gap:14px;min-width:0">
+          <div style="font-family:'Chakra Petch',sans-serif;font-size:20px;font-weight:700;letter-spacing:.02em">{{ pageNo }}<span style="opacity:.4"> / {{ total }}</span></div>
+          <div data-m="hide" style="width:160px;height:4px;background:rgba(11,11,12,.2);position:relative"><div style="position:absolute;left:0;top:0;bottom:0;background:#0b0b0c;transition:width .3s;width:{{ progress }}"></div></div>
+          <div data-m="hide" style="opacity:.5">← → · CLICK PAGE</div>
+        </div>
+        <button onClick="{{ next }}" style="cursor:pointer;border:2px solid #0b0b0c;background:#0b0b0c;color:#f2f2f2;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;padding:10px 16px;transition:all .15s" style-hover="background:var(--accent,#3d94bf);color:#0b0b0c">NEXT →</button>
+      </div>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { page: 1, total: 0, loading: true, status: 'PDF', night: false, ratio: 16 / 9, thumbs: [] };
+  rootRef = React.createRef();
+  canvasRef = React.createRef();
+  async componentDidMount() {
+    let night = false; try { night = localStorage.getItem('wzx-night') === '1'; } catch (e) {}
+    if (night) { this.setState({ night: true }); document.documentElement.setAttribute('data-night', '1'); }
+    let page = 1; try { page = parseInt(localStorage.getItem('wzx-pf-page') || '1') || 1; } catch (e) {}
+    this._onKey = e => { if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') { e.preventDefault(); this.go(this.state.page + 1); } if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); this.go(this.state.page - 1); } };
+    window.addEventListener('keydown', this._onKey);
+    this._onResize = () => this.render(this.state.page);
+    window.addEventListener('resize', this._onResize);
+    try {
+      const pdfjs = await import('https://cdn.jsdelivr.net/npm/pdfjs-dist@4.10.38/build/pdf.min.mjs');
+      pdfjs.GlobalWorkerOptions.workerSrc = 'https://cdn.jsdelivr.net/npm/pdfjs-dist@4.10.38/build/pdf.worker.min.mjs';
+      this.pdf = await pdfjs.getDocument('uploads/portfolio-2026.pdf').promise;
+      const p1 = await this.pdf.getPage(1); const vp = p1.getViewport({ scale: 1 });
+      this.setState({ total: this.pdf.numPages, ratio: vp.width / vp.height, page: Math.min(Math.max(1, page), this.pdf.numPages) }, () => { this.render(this.state.page); this.buildThumbs(); });
+    } catch (err) { this.setState({ status: 'FAILED — ' + (err && err.message || '') }); }
+  }
+  componentWillUnmount() { window.removeEventListener('keydown', this._onKey); window.removeEventListener('resize', this._onResize); }
+  go = (n) => { if (!this.pdf) return; const t = this.pdf.numPages; n = ((n - 1 + t) % t) + 1; if (n === this.state.page) return; this.setState({ page: n, loading: true }, () => this.render(n)); try { localStorage.setItem('wzx-pf-page', String(n)); } catch (e) {} };
+  async render(n) {
+    if (!this.pdf) return; const c = this.canvasRef.current; if (!c) return;
+    const seq = this._seq = (this._seq || 0) + 1;
+    const page = await this.pdf.getPage(n);
+    const box = c.getBoundingClientRect(); const dpr = Math.min(2.5, window.devicePixelRatio || 1);
+    const base = page.getViewport({ scale: 1 }); const scale = Math.max(1, (box.width || 1200) / base.width) * dpr;
+    const vp = page.getViewport({ scale });
+    const off = document.createElement('canvas'); off.width = vp.width; off.height = vp.height;
+    await page.render({ canvasContext: off.getContext('2d'), viewport: vp }).promise;
+    if (seq !== this._seq) return;
+    c.width = off.width; c.height = off.height; c.getContext('2d').drawImage(off, 0, 0);
+    this.setState({ loading: false });
+  }
+  async buildThumbs() {
+    const t = this.pdf.numPages, out = [];
+    for (let i = 1; i <= t; i++) {
+      const page = await this.pdf.getPage(i); const vp = page.getViewport({ scale: 220 / page.getViewport({ scale: 1 }).width });
+      const cv = document.createElement('canvas'); cv.width = vp.width; cv.height = vp.height;
+      await page.render({ canvasContext: cv.getContext('2d'), viewport: vp }).promise;
+      out.push(cv.toDataURL('image/jpeg', .7)); this.setState({ thumbs: out.slice() });
+    }
+  }
+  toggleNight = () => { const on = !this.state.night; this.setState({ night: on }); document.documentElement.setAttribute('data-night', on ? '1' : '0'); try { localStorage.setItem('wzx-night', on ? '1' : '0'); } catch (e) {} };
+  renderVals() {
+    const { page, total, loading, status, ratio, thumbs, night } = this.state;
+    const r = ratio || 16 / 9;
+    return {
+      rootRef: this.rootRef, canvasRef: this.canvasRef,
+      pageNo: String(page).padStart(2, '0'), total: String(total || 0).padStart(2, '0'), loading, status,
+      ratio: r.toFixed(4), ratioCss: r.toFixed(4) + ' / 1', pageKey: 'p' + page,
+      progress: total ? (page / total * 100).toFixed(1) + '%' : '0%',
+      nightLabel: night ? 'DAY' : 'NIGHT', toggleNight: this.toggleNight,
+      prev: (e) => { e.stopPropagation(); this.go(page - 1); }, next: (e) => { e.stopPropagation(); this.go(page + 1); },
+      stageClick: (e) => { const w = e.currentTarget.getBoundingClientRect(); this.go(e.clientX - w.left < w.width * .3 ? page - 1 : page + 1); },
+      thumbs: thumbs.map((src, i) => ({ src, no: String(i + 1).padStart(2, '0'), go: () => this.go(i + 1), border: i + 1 === page ? 'var(--accent,#3d94bf)' : '#0b0b0c', op: i + 1 === page ? 1 : .55 })),
+    };
+  }
+}
+</script>
+</body>
+</html>
