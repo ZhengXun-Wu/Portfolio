@@ -24,6 +24,7 @@ html[data-night="1"] body{background:transparent}
 html[data-night="1"] #contact canvas,html[data-night="1"] [data-bg-canvas]{filter:none}
 html[data-night="1"] [data-m="workGrid"]{filter:invert(1) hue-rotate(180deg)}
 html[data-night="1"] #top{filter:invert(1) hue-rotate(180deg)}
+html[data-night="1"] [data-intro]{filter:invert(1) hue-rotate(180deg)}
 html[data-night="1"] [data-intro] img{filter:none}
 html[data-night="1"] #top video,html[data-night="1"] #top canvas,html[data-night="1"] #top iframe,html[data-night="1"] #top img:not([data-keep]),html[data-night="1"] #top [data-keep]:not(img){filter:none}
 html[data-night="1"] [data-m="workGrid"] [data-card]:hover{box-shadow:0 18px 40px rgba(242,242,242,.35)}
@@ -93,6 +94,7 @@ html[data-night="1"] [data-pf-panel]:hover [data-pf-img]{filter:invert(1) hue-ro
 [data-pf-panel][data-open="1"] [data-pf-imgcol]{min-width:200px}
 @media (max-width:1200px) and (min-width:861px){[data-pf-panel][data-open="1"]{flex-direction:column!important}[data-pf-panel][data-open="1"] [data-pf-imgcol]{flex:1 1 0!important;min-width:0!important;min-height:120px}[data-pf-panel][data-open="1"] [data-m="pfText"]{flex:0 1 55%!important;max-width:none!important;border-left:0!important;border-top:2px solid #0b0b0c;padding:12px 16px!important;gap:8px!important}[data-pf-panel][data-open="1"] [data-m="pfText"] h3{display:none}}
 html[data-night="1"] [data-pf-img]{filter:invert(1) hue-rotate(180deg) saturate(.85)!important}
+html[data-night="1"] [data-pf-base],html[data-night="1"] [data-pf-grad]{filter:invert(1) hue-rotate(180deg)}
 @keyframes galBar{0%{transform:translateX(-101%)}100%{transform:translateX(101%)}}
 @keyframes galGlitch{0%{clip-path:inset(20% 0 70% 0);transform:translateX(-10px)}25%{clip-path:inset(60% 0 25% 0);transform:translateX(8px)}50%{clip-path:inset(5% 0 85% 0);transform:translateX(-5px)}75%{clip-path:inset(75% 0 10% 0);transform:translateX(6px)}100%{clip-path:inset(0 0 100% 0);transform:none}}
 [data-m="modalInfo"]>*{animation:mdRow .45s cubic-bezier(.2,.7,.2,1) both}
@@ -116,7 +118,7 @@ section[data-focus="0"]{opacity:1;filter:none;transform:none;pointer-events:auto
 [data-m="brand"]{display:none!important}
 [data-m="navLinks"]>a{flex:1 1 0!important;justify-content:center!important;padding:0 6px!important}
 [data-m="hero"]{height:100svh!important;min-height:600px!important}
-[data-m="heroPad"]{padding:76px 20px 28px!important}
+[data-m="heroPad"]{padding:112px 32px 56px!important}
 [data-m="heroTop"]{flex-direction:column!important;gap:14px!important}
 [data-m="tagline"]{text-align:left!important;font-size:16px!important;max-width:none!important}
 [data-m="heroBottom"]{flex-direction:column!important;align-items:stretch!important;gap:22px!important}
@@ -150,6 +152,7 @@ section[data-focus="0"]{opacity:1;filter:none;transform:none;pointer-events:auto
 [data-pf-panel][data-open="1"]>[data-pf-imgcol],[data-pf-panel][data-open="1"]>div:first-child{flex:none!important;width:100%!important;height:56.25vw!important;max-height:none!important;min-height:0!important}
 [data-pf-vtitle]{writing-mode:horizontal-tb!important;transform:none!important;justify-content:flex-start!important;left:52px!important;right:12px!important;bottom:auto!important;top:50%!important;translate:0 -50%;max-height:none!important;font-size:14px!important;text-overflow:ellipsis;overflow:hidden}
 [data-pf-panel][data-open="1"] [data-pf-vtitle]{display:none!important}
+[data-pf-panel]:not([data-open="1"]) [data-pf-grad]{background:linear-gradient(90deg,rgba(11,11,12,.92) 0%,rgba(11,11,12,.75) 45%,rgba(11,11,12,.25) 100%)!important}
 [data-pf-no]{left:12px!important;right:auto!important;top:50%!important;translate:0 -50%;font-size:18px!important}
 [data-pf-panel][data-open="1"] [data-pf-no]{top:10px!important;translate:0 0;left:12px!important}
 [data-m="pfText"]{width:auto!important;max-width:none!important;flex:none!important;max-height:none!important;overflow:visible!important;border-left:0!important;border-top:2px solid #0b0b0c;padding:16px!important}
@@ -162,9 +165,13 @@ section[data-focus="0"]{opacity:1;filter:none;transform:none;pointer-events:auto
 [data-m="links"]{align-self:stretch!important;flex-direction:column!important}
 [data-m="links"]>a{border-right:0!important;border-bottom:2px solid #0b0b0c!important;padding:14px 18px!important}
 [data-m="links"]>a:last-child{border-bottom:0!important}
-[data-m="introPad"]{padding:72px 20px 56px!important}
-[data-m="introGrid"]{grid-template-columns:repeat(2,minmax(0,1fr))!important}
-[data-m="introTop"]{left:20px!important;right:20px!important;top:24px!important;font-size:9px!important}
+[data-m="introPad"]{padding:84px 32px 56px!important;place-items:start center!important;overflow:auto!important}
+[data-m="introPad"]>div{gap:18px!important}
+[data-m="introPad"] [style*="font-size:clamp(40px,6vw,92px)"]{font-size:clamp(30px,9vw,44px)!important}
+[data-m="introGrid"]{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:8px!important}
+[data-m="introGrid"]>div{padding:8px 10px!important;gap:6px!important}
+[data-m="introGrid"]>div>div:nth-child(3){font-size:13px!important}
+[data-m="introTop"]{left:60px!important;right:60px!important;top:30px!important;font-size:9px!important}
 [data-m="introFoot"]{flex-direction:column!important;align-items:stretch!important}
 [data-m="introFoot"]>div:last-child{width:100%!important}
 [data-m="modal"]{grid-template-columns:minmax(0,1fr)!important}
@@ -190,7 +197,7 @@ section[data-focus="0"]{opacity:1;filter:none;transform:none;pointer-events:auto
 
 <section id="top" data-screen-label="Hero" data-m="hero" style="position:relative;height:min(max(560px,56.25vw),100vh);overflow:hidden;background:#0b0b0c;color:#f2f2f2;scroll-snap-align:start">
   <div style="position:absolute;inset:0;overflow:hidden;pointer-events:none">
-    <img src="https://i.ytimg.com/vi/-WRZggrQ5Ks/maxresdefault.jpg" alt="" data-keep="1" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(.8)">
+    <img src="https://i.ytimg.com/vi/qaYGEp49yvs/maxresdefault.jpg" alt="" data-keep="1" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(.8)">
     <div ref="{{ heroVidWrapRef }}" style="position:absolute;inset:0;background:#0b0b0c;opacity:0;transition:opacity .6s;filter:saturate(.6) contrast(1.05)">
       <video ref="{{ heroVideoRef }}" src="uploads/files-1789830850526-454i.mp4" autoPlay="{{ true }}" muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" preload="auto" onPlaying="{{ heroVideoReady }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;pointer-events:none"></video>
     </div>
@@ -448,7 +455,7 @@ section[data-focus="0"]{opacity:1;filter:none;transform:none;pointer-events:auto
     <div style="position:absolute;bottom:28px;left:28px;width:22px;height:22px;border-left:2px solid #f2f2f2;border-bottom:2px solid #f2f2f2;animation:introIn .4s ease .2s both"></div>
     <div style="position:absolute;bottom:28px;right:28px;width:22px;height:22px;border-right:2px solid #f2f2f2;border-bottom:2px solid #f2f2f2;animation:introIn .4s ease .25s both"></div>
     <div data-m="introTop" style="position:absolute;top:32px;left:64px;right:64px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.16em;color:rgba(242,242,242,.7);animation:introIn .4s ease .3s both">
-      <span style="display:flex;align-items:center;gap:12px"><span data-logo="1" data-pos="below"><img src="uploads/logo2.png" alt="WU ZHENG XUN" data-keep="1" draggable="{{ false }}" style="height:22px;width:auto;display:block;pointer-events:none"><span data-hello="1" style="background:#0b0b0c;color:#f2f2f2;border:1px solid #f2f2f2;box-shadow:0 0 0 1px #0b0b0c;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;font-weight:700;padding:5px 8px;line-height:1">HELLO!!!!</span></span><span style="display:inline-block;width:7px;height:7px;background:var(--accent,#f2f2f2);animation:introTick 1s steps(1) infinite"></span>SYSTEM · PORTFOLIO v2026</span><span data-m="hide">WU ZHENG XUN / UNREAL TECHNICAL ARTIST</span>
+      <span style="display:flex;align-items:center;gap:12px"><span style="display:inline-block;width:7px;height:7px;background:var(--accent,#f2f2f2);animation:introTick 1s steps(1) infinite"></span>SYSTEM · PORTFOLIO v2026</span><span style="display:flex;align-items:center;gap:14px"><span data-m="hide">WU ZHENG XUN / UNREAL TECHNICAL ARTIST</span><span data-logo="1" data-pos="below"><img src="uploads/logo2.png" alt="WU ZHENG XUN" data-keep="1" draggable="{{ false }}" style="height:22px;width:auto;display:block;pointer-events:none"><span data-hello="1" style="background:#0b0b0c;color:#f2f2f2;border:1px solid #f2f2f2;box-shadow:0 0 0 1px #0b0b0c;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;font-weight:700;padding:5px 8px;line-height:1">HELLO!!!!</span></span></span>
     </div>
     <div data-m="introPad" style="position:absolute;inset:0;display:grid;place-items:center;padding:80px 64px;box-sizing:border-box">
       <div style="width:min(100%,1080px);display:flex;flex-direction:column;gap:28px">
@@ -582,13 +589,13 @@ section[data-focus="0"]{opacity:1;filter:none;transform:none;pointer-events:auto
             <div style="position:relative;flex:1 1 0;min-width:0;overflow:hidden" data-pf-imgcol="1">
               <div data-pf-img="1" style="position:absolute;inset:0;background-size:cover;background-position:center;background-image:{{ r.bg2 }};transition:filter .4s,transform .6s cubic-bezier(.2,.7,.2,1);filter:{{ r.imgFilter }};transform:{{ r.imgScale }}"></div>
               <sc-if value="{{ r.isOpen }}" hint-placeholder-val="{{ false }}">
-                <div style="position:absolute;inset:0;background:#0b0b0c"></div>
+                <div data-pf-base="1" style="position:absolute;inset:0;background:#0b0b0c"></div>
                 <div key="{{ r.galKey }}" style="position:absolute;inset:0;animation:pfImgR .55s cubic-bezier(.2,.7,.2,1) both">
                   <sc-if value="{{ r.curIsVideo }}" hint-placeholder-val="{{ false }}"><video data-pf-img="1" src="{{ r.cur }}" autoPlay="{{ true }}" muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block"></video></sc-if>
                   <sc-if value="{{ r.curIsImg }}" hint-placeholder-val="{{ false }}"><div data-pf-img="1" style="position:absolute;inset:0;background-size:contain;background-repeat:no-repeat;background-position:center;background-image:{{ r.curBg }}"></div></sc-if>
                 </div>
               </sc-if>
-              <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,11,12,.55) 0%,transparent 28%,transparent 55%,rgba(11,11,12,.85) 100%);pointer-events:none"></div>
+              <div data-pf-grad="1" style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,11,12,.55) 0%,transparent 28%,transparent 55%,rgba(11,11,12,.85) 100%);pointer-events:none"></div>
               <div data-pf-no="1" style="position:absolute;top:10px;left:0;right:0;display:flex;justify-content:center;font-family:'Chakra Petch',sans-serif;font-size:clamp(16px,1.4vw,24px);font-weight:700;line-height:1;color:#f2f2f2;letter-spacing:-.02em;text-shadow:0 1px 6px rgba(0,0,0,.5)">{{ r.no }}</div>
               <div data-pf-vtitle="1" style="position:absolute;left:0;right:0;bottom:14px;display:flex;justify-content:flex-end;writing-mode:vertical-rl;text-orientation:sideways;margin:0 auto;max-height:58%;overflow:hidden;font-family:'Chakra Petch','Noto Sans TC',sans-serif;font-size:clamp(11px,.95vw,15px);font-weight:700;letter-spacing:.04em;color:#f2f2f2;white-space:nowrap;text-overflow:ellipsis;text-shadow:0 1px 6px rgba(0,0,0,.6);transition:opacity .3s;opacity:{{ r.vOp }}">{{ r.title }}</div>
               <sc-if value="{{ r.isOpen }}" hint-placeholder-val="{{ false }}">
@@ -650,10 +657,10 @@ section[data-focus="0"]{opacity:1;filter:none;transform:none;pointer-events:auto
       <a href="mailto:ming590616@gmail.com" style="font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.1em;font-weight:700;padding:18px 26px;background:#0b0b0c;color:#f2f2f2;border-right:2px solid #0b0b0c" style-hover="background:#6f6f72;color:#f2f2f2">MING590616@GMAIL.COM</a>
       <a href="https://www.linkedin.com/in/zheng-xun-wu-207ba5238/" target="_blank" rel="noreferrer" style="font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.1em;padding:18px 22px;border-right:2px solid #0b0b0c" style-hover="background:#0b0b0c;color:#f2f2f2">LINKEDIN ↗</a>
       <a href="https://www.artstation.com/zhengxun_wu" target="_blank" rel="noreferrer" style="font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.1em;padding:18px 22px;border-right:2px solid #0b0b0c" style-hover="background:#0b0b0c;color:#f2f2f2">ARTSTATION ↗</a>
-      <a href="https://youtu.be/-WRZggrQ5Ks" target="_blank" rel="noreferrer" style="font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.1em;padding:18px 22px" style-hover="background:#0b0b0c;color:#f2f2f2">SHOWREEL ↗</a>
+      <a href="https://youtu.be/qaYGEp49yvs" target="_blank" rel="noreferrer" style="font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.1em;padding:18px 22px" style-hover="background:#0b0b0c;color:#f2f2f2">SHOWREEL ↗</a>
     </div>
     <div style="display:flex;align-items:center;gap:14px;padding-top:24px;border-top:2px solid #0b0b0c;font-family:'Chakra Petch',sans-serif;font-size:16px;font-weight:700;letter-spacing:.06em">
-      <span data-logo="1" onClick="{{ sayHello }}"><img src="uploads/logo2.png" alt="logo" style="height:22px;width:auto;display:block;filter:invert(1)"><span data-hello="1" style="background:#0b0b0c;color:#f2f2f2;border:1px solid #f2f2f2;box-shadow:0 0 0 1px #0b0b0c;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;font-weight:700;padding:5px 8px;line-height:1">HELLO!!!!</span></span>WU ZHENG XUN
+      WU ZHENG XUN
     </div>
   </div>
 </section>
