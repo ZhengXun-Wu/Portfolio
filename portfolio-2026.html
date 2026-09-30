@@ -1,15 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-SBQJQKZJ2C"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-SBQJQKZJ2C');
-</script>
+<!-- Shared GA4 bootstrap; ?analytics=test captures locally without Google requests. -->
+<script src="./analytics.js"></script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="./support.js"></script>
@@ -63,7 +56,7 @@ html[data-night="1"] canvas,html[data-night="1"] img{filter:invert(1) hue-rotate
     <div style="display:flex;flex-direction:column;min-width:0;min-height:0">
       <div data-m="stage" onClick="{{ stageClick }}" style="flex:1 1 auto;min-height:0;display:grid;place-items:center;padding:clamp(12px,3vh,32px) clamp(12px,4vw,56px);box-sizing:border-box;cursor:pointer">
         <div key="{{ pageKey }}" style="position:relative;width:min(100%,calc((100vh - 64px - 70px - 2 * clamp(12px,3vh,32px)) * {{ ratio }}));aspect-ratio:{{ ratioCss }};border:2px solid #0b0b0c;background:#0b0b0c;box-shadow:10px 10px 0 rgba(11,11,12,.18);overflow:hidden;animation:pgIn .55s cubic-bezier(.2,.7,.2,1) both">
-          <canvas ref="{{ canvasRef }}" style="position:absolute;inset:0;width:100%;height:100%;display:block"></canvas>
+          <canvas data-analytics-document-id="portfolio-2026" ref="{{ canvasRef }}" style="position:absolute;inset:0;width:100%;height:100%;display:block"></canvas>
           <sc-if value="{{ loading }}" hint-placeholder-val="{{ true }}">
             <div style="position:absolute;inset:0;display:grid;place-items:center;color:#f2f2f2;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.2em;background:#0b0b0c"><span style="animation:blink 1s steps(1) infinite">▮ LOADING {{ status }}</span></div>
           </sc-if>
@@ -107,8 +100,8 @@ class Component extends DCLogic {
       this.setState({ total: this.pdf.numPages, ratio: vp.width / vp.height, page: Math.min(Math.max(1, page), this.pdf.numPages) }, () => { this.render(this.state.page); this.buildThumbs(); });
     } catch (err) { this.setState({ status: 'FAILED — ' + (err && err.message || '') }); }
   }
-  componentWillUnmount() { window.removeEventListener('keydown', this._onKey); window.removeEventListener('resize', this._onResize); }
-  go = (n) => { if (!this.pdf) return; const t = this.pdf.numPages; n = ((n - 1 + t) % t) + 1; if (n === this.state.page) return; this.setState({ page: n, loading: true }, () => this.render(n)); try { localStorage.setItem('wzx-pf-page', String(n)); } catch (e) {} };
+  componentWillUnmount() { if (this._analyticsPdfStop) this._analyticsPdfStop(); window.removeEventListener('keydown', this._onKey); window.removeEventListener('resize', this._onResize); }
+  go = (n) => { if (!this.pdf) return; const t = this.pdf.numPages; n = ((n - 1 + t) % t) + 1; if (n === this.state.page) return; if (this._analyticsPdfStop) this._analyticsPdfStop(); this.setState({ page: n, loading: true }, () => this.render(n)); try { localStorage.setItem('wzx-pf-page', String(n)); } catch (e) {} };
   async render(n) {
     if (!this.pdf) return; const c = this.canvasRef.current; if (!c) return;
     const seq = this._seq = (this._seq || 0) + 1;
@@ -118,9 +111,11 @@ class Component extends DCLogic {
     const vp = page.getViewport({ scale });
     const off = document.createElement('canvas'); off.width = vp.width; off.height = vp.height;
     await page.render({ canvasContext: off.getContext('2d'), viewport: vp }).promise;
-    if (seq !== this._seq) return;
+    if (seq !== this._seq || n !== this.state.page || c !== this.canvasRef.current) return;
     c.width = off.width; c.height = off.height; c.getContext('2d').drawImage(off, 0, 0);
-    this.setState({ loading: false });
+    this.setState({ loading: false }, () => {
+      if (seq === this._seq && n === this.state.page && window.PortfolioAnalytics) this._analyticsPdfStop = window.PortfolioAnalytics.pdfPage(c, n, this.pdf.numPages);
+    });
   }
   async buildThumbs() {
     const t = this.pdf.numPages, out = [];

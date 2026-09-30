@@ -1,15 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-SBQJQKZJ2C"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-SBQJQKZJ2C');
-</script>
+<!-- Shared GA4 bootstrap; ?analytics=test captures locally without Google requests. -->
+<script src="./analytics.js"></script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="./support.js"></script>
@@ -209,7 +202,7 @@ section[data-focus="0"]{opacity:1;filter:none;transform:none;pointer-events:auto
   <div style="position:absolute;inset:0;overflow:hidden;pointer-events:none">
     <img src="https://i.ytimg.com/vi/qaYGEp49yvs/maxresdefault.jpg" alt="" data-keep="1" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(.8)">
     <div ref="{{ heroVidWrapRef }}" style="position:absolute;inset:0;background:#0b0b0c;opacity:0;transition:opacity .6s;filter:saturate(.6) contrast(1.05)">
-      <video ref="{{ heroVideoRef }}" src="uploads/files-1789830850526-454i.mp4" autoPlay="{{ true }}" muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" preload="auto" onPlaying="{{ heroVideoReady }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;pointer-events:none"></video>
+      <video data-analytics-media-id="hero-showreel" ref="{{ heroVideoRef }}" src="uploads/files-1789830850526-454i.mp4" autoPlay="{{ true }}" muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" preload="auto" onPlaying="{{ heroVideoReady }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;pointer-events:none"></video>
     </div>
     <div data-keep="1" style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,11,12,.55) 0%,rgba(11,11,12,0) 22%,rgba(11,11,12,0) 70%,rgba(11,11,12,.75) 100%)"></div>
   </div>
@@ -595,13 +588,13 @@ section[data-focus="0"]{opacity:1;filter:none;transform:none;pointer-events:auto
       <div data-m="pfWrap" key="{{ viewKey }}" style="flex:1 1 0;min-height:0;display:flex;border:2px solid #0b0b0c;background:#0b0b0c;position:relative;overflow:hidden;animation:pfViewIn .6s cubic-bezier(.2,.7,.2,1) both">
         <div aria-hidden="true" style="position:absolute;inset:0;z-index:3;background:var(--accent,#3d94bf);mix-blend-mode:multiply;pointer-events:none;animation:pfViewBar .7s cubic-bezier(.2,.7,.2,1) both"></div>
         <sc-for list="{{ pfRows }}" as="r" hint-placeholder-count="10">
-          <div onClick="{{ r.toggle }}" onMouseEnter="{{ r.warm }}" data-pf-panel="1" data-open="{{ r.openAttr }}" style="position:relative;min-width:0;min-height:0;display:flex;overflow:hidden;cursor:pointer;border-right:2px solid #0b0b0c;transition:flex .55s cubic-bezier(.2,.7,.2,1);flex:{{ r.flex }}">
+          <div onClick="{{ r.toggle }}" onMouseEnter="{{ r.warm }}" data-pf-panel="1" data-analytics-project-id="{{ r.analyticsId }}" data-analytics-project-title="{{ r.title }}" data-analytics-entry="selected_panel" data-open="{{ r.openAttr }}" style="position:relative;min-width:0;min-height:0;display:flex;overflow:hidden;cursor:pointer;border-right:2px solid #0b0b0c;transition:flex .55s cubic-bezier(.2,.7,.2,1);flex:{{ r.flex }}">
             <div style="position:relative;flex:1 1 0;min-width:0;overflow:hidden" data-pf-imgcol="1">
               <div data-pf-img="1" style="position:absolute;inset:0;background-size:cover;background-position:center;background-image:{{ r.bg2 }};transition:filter .4s,transform .6s cubic-bezier(.2,.7,.2,1);filter:{{ r.imgFilter }};transform:{{ r.imgScale }}"></div>
               <sc-if value="{{ r.isOpen }}" hint-placeholder-val="{{ false }}">
                 <div data-pf-base="1" style="position:absolute;inset:0;background:#0b0b0c"></div>
                 <div key="{{ r.galKey }}" style="position:absolute;inset:0;animation:pfImgR .55s cubic-bezier(.2,.7,.2,1) both">
-                  <sc-if value="{{ r.curIsVideo }}" hint-placeholder-val="{{ false }}"><video data-pf-img="1" src="{{ r.cur }}" autoPlay="{{ true }}" muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block"></video></sc-if>
+                  <sc-if value="{{ r.curIsVideo }}" hint-placeholder-val="{{ false }}"><video data-analytics-media-id="{{ r.mediaId }}" data-pf-img="1" src="{{ r.cur }}" autoPlay="{{ true }}" muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block"></video></sc-if>
                   <sc-if value="{{ r.curIsImg }}" hint-placeholder-val="{{ false }}"><div data-pf-img="1" style="position:absolute;inset:0;background-size:contain;background-repeat:no-repeat;background-position:center;background-image:{{ r.curBg }}"></div></sc-if>
                 </div>
               </sc-if>
@@ -629,7 +622,7 @@ section[data-focus="0"]{opacity:1;filter:none;transform:none;pointer-events:auto
                   <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.16em;color:rgba(11,11,12,.55);padding-top:2px">ROLE</div><div style="font-weight:600">{{ r.role }}</div>
                   <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.16em;color:rgba(11,11,12,.55);padding-top:2px">SOFTWARE</div><div style="display:flex;flex-wrap:wrap;gap:4px"><sc-for list="{{ r.toolList }}" as="t" hint-placeholder-count="3"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.06em;padding:2px 6px;border:1px solid rgba(11,11,12,.35)">{{ t }}</span></sc-for></div>
                 </div>
-                <p data-m="pfDesc" style="margin:0;font-size:clamp(12px,.9vw,13.5px);line-height:1.75;color:rgba(11,11,12,.85);text-wrap:pretty">{{ r.desc }}</p>
+                <p data-analytics-description="1" data-m="pfDesc" style="margin:0;font-size:clamp(12px,.9vw,13.5px);line-height:1.75;color:rgba(11,11,12,.85);text-wrap:pretty">{{ r.desc }}<span data-analytics-description-end="1" aria-hidden="true" style="display:block;height:1px"></span></p>
               </div>
             </sc-if>
           </div>
@@ -679,9 +672,9 @@ section[data-focus="0"]{opacity:1;filter:none;transform:none;pointer-events:auto
 <sc-if value="{{ hasActive }}" hint-placeholder-val="{{ false }}">
   <div onClick="{{ close }}" style="position:fixed;inset:0;z-index:100;display:grid;place-items:center;padding:24px;background:rgba(11,11,12,.86);animation:mdBack .25s ease both">
     <div aria-hidden="true" style="position:absolute;inset:0;pointer-events:none;overflow:hidden"><div style="position:absolute;left:0;right:0;top:0;height:100%;background:linear-gradient(180deg,transparent 0%,rgba(242,242,242,.06) 48%,var(--accent,#3d94bf) 50%,rgba(242,242,242,.06) 52%,transparent 100%);animation:mdScan .6s cubic-bezier(.2,.7,.2,1) both"></div></div>
-    <div onClick="{{ stop }}" data-m="modal" style="position:relative;width:100%;max-width:1534px;max-height:calc(100vh - 48px);overflow:hidden;background:#f4f4f4;color:#0b0b0c;border:2px solid #0b0b0c;box-shadow:12px 12px 0 rgba(242,242,242,.25);display:grid;grid-template-columns:minmax(0,1.6fr) minmax(280px,1fr);width:min(100%,calc((100vh - 48px) * 2.89));animation:mdPanel .55s cubic-bezier(.2,.7,.2,1) both">
+    <div onClick="{{ stop }}" data-m="modal" data-analytics-project-id="{{ active.analyticsId }}" data-analytics-project-title="{{ active.title }}" data-analytics-entry="{{ activeEntry }}" style="position:relative;width:100%;max-width:1534px;max-height:calc(100vh - 48px);overflow:hidden;background:#f4f4f4;color:#0b0b0c;border:2px solid #0b0b0c;box-shadow:12px 12px 0 rgba(242,242,242,.25);display:grid;grid-template-columns:minmax(0,1.6fr) minmax(280px,1fr);width:min(100%,calc((100vh - 48px) * 2.89));animation:mdPanel .55s cubic-bezier(.2,.7,.2,1) both">
       <div data-m="modalMedia" style="position:relative;aspect-ratio:16/9;background:#0b0b0c;min-width:0;border-right:2px solid #0b0b0c;overflow:hidden">
-        <sc-if value="{{ activeVideoOn }}" hint-placeholder-val="{{ false }}"><video src="{{ activeVideoSrc }}" autoPlay="{{ true }}" muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" controls="{{ true }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block;background:#000"></video></sc-if>
+        <sc-if value="{{ activeVideoOn }}" hint-placeholder-val="{{ false }}"><video data-analytics-media-id="{{ activeVideoId }}" src="{{ activeVideoSrc }}" autoPlay="{{ true }}" muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" controls="{{ true }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block;background:#000"></video></sc-if>
         <sc-if value="{{ activeStillOn }}" hint-placeholder-val="{{ false }}"><div key="{{ galKey }}" style="position:absolute;inset:0">
           <div role="img" aria-label="{{ active.title }}" style="position:absolute;inset:0;background-size:contain;background-repeat:no-repeat;background-position:center;background-image:{{ activeStillBg }};animation:{{ galAnim }} .5s cubic-bezier(.2,.7,.2,1) both"></div>
           <div aria-hidden="true" style="position:absolute;inset:0;background-size:contain;background-repeat:no-repeat;background-position:center;background-image:{{ activeStillBg }};filter:invert(1) hue-rotate(180deg);mix-blend-mode:screen;opacity:.7;animation:galGlitch .32s steps(1) both;pointer-events:none"></div>
@@ -706,7 +699,7 @@ section[data-focus="0"]{opacity:1;filter:none;transform:none;pointer-events:auto
           <div style="font-family:'Chakra Petch','Noto Sans TC',sans-serif;font-size:clamp(18px,1.6vw,24px);font-weight:700;letter-spacing:.02em;line-height:1.25;text-wrap:pretty">{{ active.title }}</div>
           <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;color:rgba(11,11,12,.6)">{{ active.client }} · {{ active.year }}</div>
         </div>
-        <div style="padding:16px 18px;border-bottom:1px solid rgba(11,11,12,.25);font-size:14px;line-height:1.7;color:#0b0b0c;text-wrap:pretty;flex:1 1 auto;display:flex;flex-direction:column;gap:10px"><div>{{ activeDesc }}</div></div>
+        <div style="padding:16px 18px;border-bottom:1px solid rgba(11,11,12,.25);font-size:14px;line-height:1.7;color:#0b0b0c;text-wrap:pretty;flex:1 1 auto;display:flex;flex-direction:column;gap:10px"><div data-analytics-description="1">{{ activeDesc }}<span data-analytics-description-end="1" aria-hidden="true" style="display:block;height:1px"></span></div></div>
         <div style="display:grid;grid-template-columns:52px minmax(0,1fr);gap:8px 12px;padding:14px 18px;border-bottom:1px solid rgba(11,11,12,.25);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.08em;line-height:1.5">
           <span style="opacity:.5">ROLE</span><span>{{ active.role }}</span>
           <span style="opacity:.5">TOOLS</span><span>{{ activeTools }}</span>
@@ -1224,7 +1217,29 @@ class Component extends DCLogic {
       if (!this.state.activeId && this.state.view === 'list' && ['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'].includes(e.key)) { const s = document.getElementById('projects'), r = s && s.getBoundingClientRect(); if (r && r.top < window.innerHeight * .6 && r.bottom > window.innerHeight * .4) { e.preventDefault(); if (e.key === 'ArrowUp' || e.key === 'ArrowDown') { const n = this.FEATURED.length, i = this.state.pfOpen == null ? 0 : this.state.pfOpen; this.setState({ pfOpen: (i + (e.key === 'ArrowDown' ? 1 : -1) + n) % n, pfGal: 0 }); } else this.pfKey(e.key === 'ArrowRight' ? 1 : -1); return; } } if (this.state.activeId && (e.key === 'ArrowLeft' || e.key === 'ArrowRight')) this.setState(s => ({ gal: (s.gal || 0) + (e.key === 'ArrowRight' ? 1 : -1), galDir: e.key === 'ArrowRight' ? 1 : -1 })); };
     window.addEventListener('keydown', this._onKey);
   }
+  syncAnalytics() {
+    const analytics = window.PortfolioAnalytics;
+    if (!analytics) return;
+    const modal = document.querySelector('[data-m="modal"]');
+    const selected = this.state.view === 'list' && document.querySelector('[data-pf-panel][data-open="1"]');
+    const root = modal || selected || null;
+    const id = root && root.getAttribute('data-analytics-project-id');
+    const entry = root && root.getAttribute('data-analytics-entry');
+    const signature = id ? entry + ':' + id : '';
+    if (signature === this._analyticsSignature && root === this._analyticsRoot) return;
+    if (this._analyticsStop) this._analyticsStop();
+    this._analyticsStop = null;
+    this._analyticsSignature = signature;
+    this._analyticsRoot = root;
+    if (!root || !id) { if (!selected) this._analyticsSelected = null; return; }
+    const meta = { project_id: id, project_title: root.getAttribute('data-analytics-project-title'), entry_point: entry };
+    // Closing a modal resumes the same selected panel without another open event.
+    if (modal || id !== this._analyticsSelected) analytics.track('project_open', meta);
+    if (!modal) this._analyticsSelected = id;
+    this._analyticsStop = analytics.watchProject(root, meta);
+  }
   componentDidUpdate(prev) {
+    this.syncAnalytics();
     if (prev.accent !== this.props.accent) this.applyAccent();
     if (prev.particleDensity !== this.props.particleDensity && this._reseed) this._reseed();
     this.fitAbout();
@@ -1362,6 +1377,7 @@ class Component extends DCLogic {
     this._io = io;
   }
   componentWillUnmount() {
+    if (this._analyticsStop) this._analyticsStop();
     cancelAnimationFrame(this._raf);
     if (this._io) this._io.disconnect(); clearTimeout(this._revealTimer);
     if (this._aboutRO) this._aboutRO.disconnect();
@@ -1440,6 +1456,7 @@ class Component extends DCLogic {
     const rows = Math.ceil(n / cols);
     const decorate = p => ({
       ...p,
+      analyticsId: key(p),
       catLabel: p.sub,
       shortCat: ({ MV: 'MV', AD: 'AD', AN: 'ANIM', VR: 'VR', EXH: p.sub === 'CONCERT' ? 'LIVE' : 'EXH' })[p.cat] || p.cat,
       thumb: p.cover || (p.id ? `https://i.ytimg.com/vi/${p.id}/hqdefault.jpg` : ''),
@@ -1452,7 +1469,7 @@ class Component extends DCLogic {
       embed: p.bili ? `https://player.bilibili.com/player.html?bvid=${p.bili}&high_quality=1&autoplay=1` : `https://www.youtube-nocookie.com/embed/${p.id}?autoplay=1&rel=0${p.start ? '&start=' + p.start : ''}`,
       platform: p.bili ? 'OPEN ON BILIBILI ↗' : p.id ? 'OPEN ON YOUTUBE ↗' : '',
       warm: () => this.preload(p),
-      open: () => { this.preload(p); this.setState({ activeId: key(p), gal: 0 }); },
+      open: () => { this.preload(p); this.setState({ activeId: key(p), gal: 0, analyticsEntry: isFeat ? 'selected_modal' : 'work_grid' }); },
     });
     const activeRaw = PROJECTS.find(p => key(p) === activeId);
     const activeHasVideo = !!(activeRaw && (activeRaw.id || activeRaw.bili));
@@ -1471,7 +1488,7 @@ class Component extends DCLogic {
       activeHasVideo,
       activeStillBg: cur && !curIsVideo ? `url(${cur})` : 'none',
       activeStillOn: !!cur && !curIsVideo,
-      activeVideoOn: curIsVideo, activeVideoSrc: curIsVideo ? cur : '',
+      activeVideoOn: curIsVideo, activeVideoSrc: curIsVideo ? cur : '', activeVideoId: curIsVideo ? cur.split('/').pop() : '',
       activeEmpty: !!activeRaw && !cur,
       activeDesc: (activeRaw && activeRaw.desc) || '作品說明待補。',
       activeTools: activeRaw ? (activeRaw.tools || []).join(' · ') : '',
@@ -1519,7 +1536,7 @@ class Component extends DCLogic {
         return { ...d, bg2: isOpen && d.still ? 'url(' + d.still + ')' : (p.cover ? 'url(' + this.hi(p.cover) + ')' : d.bg), no: String(i + 1).padStart(2, '0'), year: p.year || '', client: p.client || '', role: p.role || '', toolList: p.tools || [], desc: (p.desc || '').replace(/\n+/g, ' '),
           isOpen, openAttr: isOpen ? '1' : '0', flex: isOpen ? '1 1 0' : anyOpen ? '0 0 clamp(40px,4.2vw,64px)' : '1 1 0', vOp: isOpen ? 0 : 1,
           imgFilter: isOpen ? 'saturate(.9)' : 'saturate(.7) brightness(.9)', imgScale: isOpen ? 'none' : 'scale(1.08)', frostOp: isOpen ? 0 : 1,
-          cur, curIsVideo, curIsImg: !curIsVideo, curBg: 'url(' + cur + ')', galKey: 'pfg:' + i + ':' + g, hasGal: gimgs.length > 1,
+          cur, mediaId: curIsVideo ? cur.split('/').pop() : '', curIsVideo, curIsImg: !curIsVideo, curBg: 'url(' + cur + ')', galKey: 'pfg:' + i + ':' + g, hasGal: gimgs.length > 1,
           gal: gimgs.map((src, k) => ({ label: String.fromCharCode(65 + k), bg: k === g ? '#f2f2f2' : 'rgba(11,11,12,.55)', fg: k === g ? '#0b0b0c' : '#f2f2f2', go: stopGo(() => this.setState({ pfGal: k })) })),
           galPrev: stopGo(() => this.setState(s => ({ pfGal: (s.pfGal || 0) - 1 }))), galNext: stopGo(() => this.setState(s => ({ pfGal: (s.pfGal || 0) + 1 }))),
           open: stopGo(d.open),
@@ -1532,6 +1549,7 @@ class Component extends DCLogic {
       gridCols: `repeat(${cols}, minmax(0,1fr))`,
       gridRows: mobile ? 'auto' : `repeat(${rows}, minmax(0,1fr))`,
       hasActive: !!activeRaw,
+      activeEntry: this.state.analyticsEntry || 'work_grid',
       active: activeRaw ? decorate(activeRaw) : {},
       close: () => this.setState({ activeId: null, gal: 0 }),
       gallery, galleryMulti: gallery.length > 1,

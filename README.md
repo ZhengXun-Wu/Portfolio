@@ -7,3 +7,9 @@
 - `uploads/`：圖片與影片素材
 
 網站透過 GitHub Pages 發佈：https://zhengxun-wu.github.io/Portfolio/
+
+## Interaction analytics
+
+See [ANALYTICS.md](ANALYTICS.md) for event meanings, privacy limits, safe test mode,
+opt-out, and GA4 report setup. Run `node --test tests/*.test.cjs` for the
+no-network analytics tests.
